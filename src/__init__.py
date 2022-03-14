@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 ### Link database to sqlalchemy to use classes and orm
-engine = create_engine()
+engine = create_engine('')
 Session = sessionmaker(bind=engine)
 
 def create_app():
