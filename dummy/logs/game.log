@@ -1,0 +1,51 @@
+
+SQL*Loader: Release 11.2.0.2.0 - Production on Fri Mar 18 06:44:06 2022
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   control/game.ctl
+Data File:      ./data/games.csv
+  Bad File:     ./logs/game.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table GAME, loaded from every logical record.
+Insert option in effect for this table: INSERT
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+GAME_ID                             FIRST     *   ,  O(") CHARACTER            
+SPORT                                NEXT     *   ,  O(") CHARACTER            
+DATE_PLAYING                         NEXT     *   ,  O(") CHARACTER            
+PLAYERS_NEEDED                       NEXT     *   ,  O(") CHARACTER            
+LOCATION_ID                          NEXT     *   ,  O(") CHARACTER            
+
+
+Table GAME:
+  50 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                  82560 bytes(64 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:            50
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Fri Mar 18 06:44:06 2022
+Run ended on Fri Mar 18 06:44:06 2022
+
+Elapsed time was:     00:00:00.03
+CPU time was:         00:00:00.01
