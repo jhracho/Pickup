@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request, jsonify
 
 endpoint = Blueprint('endpoint', __name__)
 
@@ -6,3 +6,4 @@ endpoint = Blueprint('endpoint', __name__)
 @endpoint.route('/test', methods=['GET'])
 def test():
     return {'result':'success'}
+
