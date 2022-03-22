@@ -8,8 +8,8 @@ def create_app():
     cors = CORS()
     
     app = Flask(__name__)
-    app.register_blueprint(endpoint, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(endpoint, url_prefix='/api')
+    app.register_blueprint(auth, url_prefix='/api')
     cors.init_app(app, support_credentials=True)
 
     return app
