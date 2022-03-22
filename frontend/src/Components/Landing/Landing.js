@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-const Components = () =>{
+const Landing = () =>{
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -23,4 +23,4 @@ const Components = () =>{
     );
 };
 
-export default Components;
+export default Landing;

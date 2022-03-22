@@ -1,5 +1,4 @@
 from flask import Blueprint, request
-
 from . import Session, engine
 from .models import User
 from sqlalchemy import insert
@@ -42,6 +41,7 @@ def signup():
     session = Session()
     newUser = User(put in column data here)
     session.add(newUser)
+    session.commit()
     session.close()
     '''
     return 
