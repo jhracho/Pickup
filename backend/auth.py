@@ -15,6 +15,6 @@ def login():
     dP = 'test'
 
     if (dU == user and dP == pswd):
-        return {'auth':'success'}  
+        return {'auth':True}  
     else:
-         return {'auth':'failure'}
+         return {'auth':False}

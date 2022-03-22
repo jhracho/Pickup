@@ -1,17 +1,17 @@
 import React from 'react';
 import Home from './Home/Home.js';
 import Login from './Auth/Login.js';
-import{BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 const Components = () =>{
     return(
-        <Router>
+        <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={Home} />
                 <Route path='/login' exact component={Login} />
                 <Redirect to='/' />
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 };
 

@@ -6,7 +6,7 @@ const Components = () =>{
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/test').then(res =>{
+        axios.get('http://127.0.0.1:5000/api/test').then(res =>{
             const data = res.data['result'];
             console.log(data);
             setData(data);

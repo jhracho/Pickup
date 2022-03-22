@@ -13,15 +13,25 @@ const LoginForm = () =>{
         // Axios Method to our api
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/authenticate-login',
+            url: 'http://127.0.0.1:5000/api/authenticate-login',
             data: {
               username: creds.username,
               password: creds.password
             }
           }).then((res) =>{
             const isAuth = res.data['auth'];
-            //TODO: Handle Result
+            if (isAuth){ window.location.href = '/'; }
+            else{ alert('Incorrect username and/or password...'); }
+          }).catch((error) =>{
+              if (error.response){
+                  alert(error.response.status)
+              }
           });
+
+        setCreds({
+            email: "",
+            password: ""
+        });
     }
 
     function handleChange(e){
