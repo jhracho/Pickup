@@ -13,7 +13,6 @@ const Landing = () =>{
         });
     }, []);
     
-    //<h2>{data}</h2>
     return(
         <div id='test'>
             <h1>Hellooo :D</h1>
