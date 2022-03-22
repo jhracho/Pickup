@@ -13,7 +13,7 @@ const LoginForm = () =>{
         // Axios Method to our api
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/authenticate-login',
+            url: 'http://127.0.0.1:5000/api/login',
             data: {
               username: creds.username,
               password: creds.password
@@ -21,7 +21,7 @@ const LoginForm = () =>{
           }).then((res) =>{
             const isAuth = res.data['auth'];
             if (isAuth){ window.location.href = '/'; }
-            else{ alert('Incorrect username and/or password...'); }
+            else{ alert(res.data['msg']); }
           }).catch((error) =>{
               if (error.response){
                   alert(error.response.status)
