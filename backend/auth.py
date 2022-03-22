@@ -1,5 +1,4 @@
 from flask import Blueprint, request
-from . import Session, engine
 from .models import User
 from sqlalchemy import insert
 from werkzeug.security import generate_password_hash, check_password_hash

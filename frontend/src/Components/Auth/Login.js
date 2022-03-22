@@ -29,7 +29,7 @@ const LoginForm = () =>{
           });
 
         setCreds({
-            email: "",
+            username: "",
             password: ""
         });
     }
