@@ -6,11 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from .endpoints import endpoint
 from .auth import auth
 
-'''
-engine = create_engine()
-Session = sessionmaker(bind=engine)
-'''
-
 def create_app():
     cors = CORS()
     
