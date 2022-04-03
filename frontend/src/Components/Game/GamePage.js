@@ -14,6 +14,7 @@ const GamePage = () =>{
     const [result, setResult] = useState("");
     const [game, setGame]   = useState([{
         id: 0,
+        name: "",
         sport: "",
         date: "",
         time: "",

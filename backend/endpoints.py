@@ -22,13 +22,14 @@ def singleGame(game_id):
             for row in csv_reader:
                 if row[0] == game_id:
                     id = row[0]
-                    sport = row[1]
-                    dt = row[2].split(' ')
+                    name = row[1]
+                    sport = row[2]
+                    dt = row[3].split(' ')
                     date = dt[0]
                     time = dt[1]
-                    location = row[3]
-                    needed = row[4]
-                    payload['data'] = {'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed}
+                    location = row[4]
+                    needed = row[5]
+                    payload['data'] = {'id':id, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed}
                     found = True
         if not found:
             payload['result'] = 'error'
@@ -52,12 +53,13 @@ def getGames():
             csv_reader = reader(f)
             for row in csv_reader:
                 id = row[0]
-                sport = row[1]
-                dt = row[2].split(' ')
+                name = row[1]
+                sport = row[2]
+                dt = row[3].split(' ')
                 date = dt[0]
                 time = dt[1]
-                location = row[3]
-                needed = row[4]
+                location = row[4]
+                needed = row[5]
                 payload['data'].append({'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
     else:
         payload['result'] = 'error'

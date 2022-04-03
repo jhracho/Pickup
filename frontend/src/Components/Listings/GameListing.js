@@ -5,8 +5,8 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import SportsGolfIcon from '@mui/icons-material/SportsGolf';
 
-const GameListing = (game) =>{
-    const sport = game.game['sport'];
+const GameListing = (props) =>{
+    const sport = props.game['sport'];
 
     let icon;
     switch (sport){
@@ -26,7 +26,7 @@ const GameListing = (game) =>{
 
     return(
         <Fragment>
-            {icon}<a href={'/game/' + game.game['id']}><h3>Game Link</h3></a>
+            <a href={'/game/' + props.game['id']}><h3>Game Link</h3></a>
         </Fragment>
     );
 };
