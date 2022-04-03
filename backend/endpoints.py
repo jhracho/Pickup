@@ -13,10 +13,31 @@ def test():
 @endpoint.route('/game/<game_id>', methods=['GET', 'POST'])
 def singleGame(game_id):
     if request.method == 'GET':
-        pass
+        payload = {'result':''}
+        # TODO: sqlalchemy Request Goes Here
+        payload['result'] = 'success'
+        found = False
+        with open('dummy/data/games.csv') as f:
+            csv_reader = reader(f)
+            for row in csv_reader:
+                if row[0] == game_id:
+                    id = row[0]
+                    sport = row[1]
+                    dt = row[2].split(' ')
+                    date = dt[0]
+                    time = dt[1]
+                    location = row[3]
+                    needed = row[4]
+                    payload['data'] = {'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed}
+                    found = True
+        if not found:
+            payload['result'] = 'error'
+            payload['data'] = 'Game ID Not Found'
 
     elif request.method == 'POST':
         pass
+
+    return payload
 
 
 @endpoint.route('/games', methods=['GET'])
@@ -29,17 +50,16 @@ def getGames():
         payload['data'] = list()
         with open('dummy/data/games.csv') as f:
             csv_reader = reader(f)
-            if request.method == 'GET':
-                for row in csv_reader:
-                    id = row[0]
-                    sport = row[1]
-                    dt = row[2].split(' ')
-                    date = dt[0]
-                    time = dt[1]
-                    location = row[3]
-                    needed = row[4]
-                    payload['data'].append({'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            for row in csv_reader:
+                id = row[0]
+                sport = row[1]
+                dt = row[2].split(' ')
+                date = dt[0]
+                time = dt[1]
+                location = row[3]
+                needed = row[4]
+                payload['data'].append({'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
     else:
         payload['result'] = 'error'
-        payload['message'] = 'ERROR >:('
+        payload['data'] = 'ERROR >:('
     return payload

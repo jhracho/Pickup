@@ -3,7 +3,7 @@ import NavBar from '../Nav/NavBar';
 
 const HomePage = () =>{
     return(
-        <NavBar page='Home' />
+        <NavBar active='Home' />
     );
 };
 
