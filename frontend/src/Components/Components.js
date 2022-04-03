@@ -1,7 +1,7 @@
 import React from 'react';
 import HomePage from './Home/HomePage.js';
 import ListingsPage from './Listings/ListingsPage.js';
-import TeamsPage from './Teams/TeansPage.js';
+import TeamsPage from './Teams/TeamsPage.js';
 import Login from './Auth/Login.js';
 import GamePage from './Game/GamePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
