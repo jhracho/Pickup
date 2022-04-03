@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from .models import User
 from sqlalchemy import insert
+from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
@@ -44,3 +45,7 @@ def signup():
     session.close()
     '''
     return 
+
+@auth.route('/isAuthed', methods=['GET'])
+def isAuthed():
+    return {'isAuthed':0}

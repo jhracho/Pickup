@@ -35,6 +35,7 @@ class Game(Base):
     __tablename__ = 'game'
 
     game_id = Column(Integer, primary_key=True)
+    game_name = Column(String)
     sport = Column(String)
     date = Column(DateTime)
     players_needed = Column(Integer)

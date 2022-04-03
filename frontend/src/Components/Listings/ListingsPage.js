@@ -9,6 +9,7 @@ const ListingsPage = () =>{
     const [result, setResult] = useState("");
     const [games, setGames]   = useState([{
         id: 0,
+        name: "",
         sport: "",
         date: "",
         time: "",
