@@ -25,7 +25,7 @@ const ListingsPage = () =>{
     
     return(
         <div id='pageDiv'>
-            <NavBar page="Games"/>
+            <NavBar active="Games"/>
             <div id='test'>
                 <Typography variant='h3'>Tinder For Sports</Typography>
                 <h1>Hellooo :D</h1>

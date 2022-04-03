@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const NavBar = (page) =>{
     const pagesLeft = ['Home', 'Games', 'Teams'];
-    const curPage = page.page;
+    const curPage = page.active;
   
     return(
         <div id='navBar'>
             <ul>
                 {pagesLeft.map((page) => (
                     page===curPage ? 
-                    (<li className='active'>{page}</li>) : 
-                    (<li><Link to={'/'+page.toLowerCase()}>{page}</Link></li>)
+                    (<li key={page} className='active'>{page}</li>) : 
+                    (<li key={page}><Link to={'/'+page.toLowerCase()}>{page}</Link></li>)
                 ))}
                 <li className="li-right">Logout</li>
                 <li className="li-right">My Profile</li>
