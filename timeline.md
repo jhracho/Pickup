@@ -3,12 +3,12 @@
 
 | Milestone | Date | Status  | Notes |
 | --------- | ---- | ------- | ----- |
-| Planning  | 4/06 | Complete |       |
-|  | 4/06 | Pending | |
-|  | 4/06 | Pending | |
-|  | 4/08 | Pending | |
-|  | 4/14 | Pending | |
-|  | 4/15 | Pending | |
-|  | 4/18 | Pending | |
-|  | 4/20 | Pending | |
-|  | 4/20 | Pending | |
+| Project Plan  | 4/05 | Complete |       |
+| Site Navigation Map | 4/12 | Pending | |
+| Progress Report | 4/21 | Pending | |
+| Final Design | 4/24 | Pending | |
+| Presentation | 4/26 | Pending | |
+| Final Report | 4/28 | Pending | |
+| Final Code Release | 5/03 | Pending | |
+| Reference/User's Guide | 5/03 | Pending | |
+| Project Video | 5/03 | Pending | |
