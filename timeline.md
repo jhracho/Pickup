@@ -1,6 +1,6 @@
 # Project Milestones
-## Julia Buckley, Stuart Hayden, Jake Hracho
-## Group 2
+### Julia Buckley, Stuart Hayden, Jake Hracho
+### Group 2
 ### Milestone Document to Track Completion and Progress of Project Goals
 
 | Milestone | Date | Status | Lead |
