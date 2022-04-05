@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import GameListing from './GameListing';
 import axios from 'axios';
 import NavBar from '../Nav/NavBar';
-import {Typography} from '@mui/material';
+
+
 
 const ListingsPage = () =>{
     const [result, setResult] = useState("");
@@ -24,10 +25,8 @@ const ListingsPage = () =>{
         });
     }, []);
     
-    return(
-        <div id='pageDiv'>
-            <NavBar active="Games"/>
-            <div id='test'>
+    /*
+     <div id='test'>
                 <Typography variant='h3'>Tinder For Sports</Typography>
                 <h1>Hellooo :D</h1>
                 <button><Link to='/login'>Login</Link></button>
@@ -39,7 +38,25 @@ const ListingsPage = () =>{
                     ))}
                     </Fragment>
                 )}
+    </div>
+    */
+
+    return(
+        <div id='pageDiv'>
+            <NavBar active="Games"/>
+            <h2>Games</h2>
+            <div className = 'table'>
+                <div className = 'table-body'>
+                {games.length > 0 && (
+                    <Fragment>
+                    {games.map((game) => (
+                        <GameListing key={game.id} game={game}></GameListing>
+                    ))}
+                    </Fragment>
+                )}  
+                </div>
             </div>
+           
         </div>
     );
 };

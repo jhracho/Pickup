@@ -16,7 +16,9 @@ const HomePage = () =>{
     return(
         <div>
             <NavBar active='Home' />
-            <h1>Hello</h1> 
+            
+            <h1>Hello</h1>
+            
             <h1>Also Hello</h1>
         </div>
     );
