@@ -1,5 +1,6 @@
 create table game
        (game_id number(3),
+	   game_name varchar(100),
         sport varchar(20),
 	date_playing timestamp,
 	players_needed number(2),
