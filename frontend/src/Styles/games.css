@@ -1,0 +1,28 @@
+.table{
+    position: absolute;
+    top: 6em;
+    left: 50%;
+    margin: auto;
+    transform: translateX(-50%);
+    height: auto;
+    width: 10vw;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+}
+
+.table-body{
+    display: block; 
+}
+
+.info-field{
+    background-color: green;
+    white-space: nowrap;
+}
+
+.info-field h5{
+    display: inline-block;
+}
+
+.game-card{
+    margin-bottom: 0.25em;
+}
