@@ -64,4 +64,5 @@ def getGames():
     else:
         payload['result'] = 'error'
         payload['data'] = 'ERROR >:('
+    
     return payload
