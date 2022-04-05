@@ -60,7 +60,7 @@ def getGames():
                 time = dt[1]
                 location = row[4]
                 needed = row[5]
-                payload['data'].append({'id':id, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+                payload['data'].append({'id':id, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
     else:
         payload['result'] = 'error'
         payload['data'] = 'ERROR >:('
