@@ -4,6 +4,7 @@ import ListingsPage from './Listings/ListingsPage.js';
 import TeamsPage from './Teams/TeamsPage.js';
 import Login from './Auth/Login.js';
 import GamePage from './Game/GamePage.js';
+import CreateGamePage from './CreateGame/CreateGamePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 const Components = () =>{
@@ -14,6 +15,7 @@ const Components = () =>{
                 <Route path='/games' exact component={ListingsPage} />
                 <Route path='/game/:id' exact component={GamePage} />
                 <Route path='/teams' exact component={TeamsPage} />
+                <Route path='/createGame' exact component={CreateGamePage} />
                 <Route path='/login' exact component={Login} />
                 <Redirect to='/' />
             </Switch>

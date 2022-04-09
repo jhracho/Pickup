@@ -38,7 +38,7 @@ const GameListing = (props) =>{
                 <h5><FontAwesomeIcon icon={faPerson} /> : {game['needed']}</h5> 
                 <h5><FontAwesomeIcon icon={faCalendar} /> : {game['date']} 00:00</h5>
                 <Button variant="success" className = 'game-link-button'><a href={'/game/' + game['id']}><h3>Join Game</h3></a></Button>
-                <Button variant="primary" className = 'game-link-button'><a href={'/game/' + game['id']}><h3>More Info</h3></a></Button>
+                <Button variant="info" className = 'game-link-button'><a href={'/game/' + game['id']}><h3>More Info</h3></a></Button>
                 </div>
             </Card.Body>
         </Card>
