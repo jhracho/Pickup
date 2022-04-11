@@ -7,6 +7,8 @@ from sqlalchemy.orm import sessionmaker
 from .endpoints import endpoint
 from .auth import auth
 
+import cx_Oracle
+
 def create_app():
     # login_manager = LoginManager()
     cors = CORS()

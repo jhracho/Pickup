@@ -1,8 +1,14 @@
 import React from 'react';
+import NavBar from '../Nav/NavBar';
+import CreateGameForm from './Form';
 
 const CreateGamePage = () =>{
     return(
-        <h1>Create Games Here!</h1>
+        <div id='pageDiv'>
+            <NavBar page='' />
+            <h1>Create Games Here!</h1>
+            <CreateGameForm />
+        </div>
     );
 };
 
