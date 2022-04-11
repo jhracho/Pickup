@@ -7,8 +7,8 @@
 | --------- | ---- | ------ | ---- |
 | Project Plan  | 4/05 | Complete | N/A |
 | Site Navigation Map | 4/12 | Pending | N/A |
-| Database Connections[^1] | 4/15 | Pending | Stuart |
-| Authorization[^2] | 4/15 | Pending | Jake |
+| Database Connections[^1] | 4/15 | Pending | Jake |
+| Authorization[^2] | 4/15 | Pending | Stuart |
 | Progress Report | 4/21 | Pending | N/A |
 | Front End Design[^3] | 4/22 | Pending | Julia |
 | Responsitivity Check[^4] | 4/23 | Pending | N/A |
