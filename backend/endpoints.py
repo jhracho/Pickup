@@ -18,14 +18,15 @@ def singleGame(game_id):
         if row:
             payload['result'] = 'success'
             id = row[0]
-            name = row[1]
-            sport = row[2]
-            dt = row[3].split(' ')
+            user = row[1]
+            name = row[2]
+            sport = row[3]
+            dt = row[4].split(' ')
             date = dt[0]
             time = dt[1]
-            location = row[4]
-            needed = row[5]
-            payload['data'] = {'id':id, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed}
+            location = row[5]
+            needed = row[6]
+            payload['data'] = {'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed}
         
         else:
             payload['result'] = 'error'
