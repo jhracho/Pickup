@@ -1,16 +1,13 @@
 import React, {useState, useEffect} from 'react';
-
-import Info from './Info';
-import Error from './Error';
+import {useParams} from "react-router-dom";
+import axios from 'axios';
+import EditForm from './EditForm';
 import NavBar from '../Nav/NavBar';
 
-import {useParams, Link} from "react-router-dom";
-import axios from 'axios';
-
-const GamePage = () =>{
+const EditGamePage = () =>{
     const params = useParams()
     const game_id = params.id;
-
+    
     const [result, setResult] = useState("");
     const [game, setGame]   = useState([{
         id: 0,
@@ -28,23 +25,18 @@ const GamePage = () =>{
             setResult(res.data['result']);
             setGame(res.data['data']);
         });
-    }, [game_id]);
+    }, []);
 
-    // game.owner == current id
-    const test = game.owner === 10;
+    // game.owner != current id
     
+
     return(
-        <div>
-            <NavBar active='' />
-            {test &&
-                <button><Link to={'/editGame/'+game.id}>Edit</Link></button>
-            }
-            {result==='success' ?
-                (<Info game={game}/>) :
-                (<Error />)
-            }
+        <div id='pageDiv'>
+            <NavBar page='' />
+            <h2>{game_id}</h2>
+            <EditForm game={game} />
         </div>
     );
-};
+}
 
-export default GamePage;
+export default EditGamePage;

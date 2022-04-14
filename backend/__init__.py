@@ -4,7 +4,7 @@ from flask_login import LoginManager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from .endpoints import endpoint
+from .gameapi import gameapi
 from .auth import auth
 
 import cx_Oracle
@@ -17,7 +17,7 @@ def create_app():
     # login_manager.login_view = 'auth.login'
     # login_manager.init_app(app)
 
-    app.register_blueprint(endpoint, url_prefix='/api')
+    app.register_blueprint(gameapi, url_prefix='/api')
     app.register_blueprint(auth, url_prefix='/api')
     cors.init_app(app, support_credentials=True)
 

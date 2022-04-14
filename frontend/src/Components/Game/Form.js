@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const CreateGameForm = () =>{
+const GameForm = (props) =>{
     const [info, setInfo] = useState({
-        game: "",
+        name: "",
+        owner: 0,
         sport: "",
         date: "",
         time: "",
@@ -24,12 +25,14 @@ const CreateGameForm = () =>{
     };
 
     function submitGame(e){
+        console.log(info.time);
         e.preventDefault();
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/addGame',
             data: {
-              game: info.game,
+              name: info.name,
+              owner: 10,
               sport: info.sport,
               date: info.date,
               time: info.time,
@@ -37,7 +40,8 @@ const CreateGameForm = () =>{
               loc: info.loc
             }
           }).then((res) =>{
-            window.location.href = '/game/'+res.data['id'];
+              alert('Game Created!')
+              window.location.href = '/game/'+res.data['id'];
           }).catch((error) =>{
               if (error.response){
                   alert(error.response.status)
@@ -45,7 +49,7 @@ const CreateGameForm = () =>{
           });
 
         setInfo({
-            game: "",
+            name: "",
             sport: "",
             date: "",
             time: "",
@@ -53,10 +57,10 @@ const CreateGameForm = () =>{
             loc: "" 
         });
     }
-
+    
     return(
         <div id='form-div'>
-            <input onChange={handleChange} type='text' text={info.game} name='game' placeholoder='Game Name' maxLength='25' required />
+            <input onChange={handleChange} type='text' text={info.name} name='name' placeholoder='Game Name' maxLength='25' required />
             <select required onChange={handleChange} name='sport'>
                 <option value="" selected disabled hidden>Sport</option>
                 <option value='Football'>Football</option>
@@ -73,4 +77,4 @@ const CreateGameForm = () =>{
     );
 };
 
-export default CreateGameForm;
+export default GameForm;
