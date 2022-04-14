@@ -7,6 +7,6 @@ create table game
 	players_needed number(2),
 	location_id number(3),
 	constraint game_pk primary key (game_id),
-	foreign key (location_id) references location(location_id)
-	foreign key (user_id) reference location(user_id)
+	foreign key (location_id) references location(location_id),
+	foreign key (user_id) references athlete(user_id)
 );
