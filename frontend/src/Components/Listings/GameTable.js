@@ -6,20 +6,23 @@ const GameTable = () =>{
     const [result, setResult] = useState("");
     const [games, setGames]   = useState([{
         id: 0,
+        owner: "",
         name: "",
         sport: "",
         date: "",
         time: "",
         players: 0,
-        loc: ""    
+        loc: "",
+        attending: 0   
     }]);
 
+    const user_id = 10;
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/games').then(res =>{
+        axios.get('http://127.0.0.1:5000/api/games?user='+user_id).then(res =>{
             setResult(res.data['result']);
             setGames(res.data['data']);
         });
-    }, []);
+    }, [user_id]);
 
     return(
         <div className = 'table'>
