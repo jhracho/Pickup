@@ -25,6 +25,7 @@ const LoginAuth = () => {
               }).then((res) =>{
                 const isAuth = res.data['auth'];
                 if (isAuth){
+                    localStorage.setItem("athlete_id", res.data['athlete_id']);
                     window.location.href = '/';
                 }
                 else{ alert(res.data['msg']); }

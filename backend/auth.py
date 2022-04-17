@@ -8,19 +8,27 @@ from .gameapi import get_next_id
 
 auth = Blueprint('auth', __name__)
 
-# class Athlete(UserMixin):
-#     def __init__(self, vals):
-#         self.athlete_id = vals[1]
-#         self.first_name = vals[2]
-#         self.last_name = vals[3]
-#         self.football_select = vals[4]
-#         self.golf_select = vals[5]
-#         self.basketball_select = vals[6]
-#         self.soccer_select = vals[7]
-#         self.other_select = vals[8]
-
-#     def get_id(self):
-#         return str(self.athlete_id)
+@auth.route('/get-athlete-from-id', methods=['GET'])
+def get_athlete_from_id():
+    athlete_id = request.args.get('athlete_id')
+    cursor = conn.cursor()
+    sql = f'SELECT first_name, last_name, username, football_select, golf_select, basketball_select, soccer_select, other_select FROM athlete WHERE athlete_id = {athlete_id}'
+    row = cursor.execute(sql).fetchone()
+    if row:
+        return {
+            'result': 'success',
+            'athlete': {
+                'first_name': row[0],
+                'last_name': row[1],
+                'username': row[2],
+                'football': row[3],
+                'golf': row[4],
+                'basketball': row[5],
+                'soccer': row[6],
+                'other': row[7]
+            }
+        }
+    return {'result': 'error'}
 
 # Log in a user based on supplied credentials
 @auth.route('/login', methods=['POST'])
@@ -33,7 +41,7 @@ def login():
         return {'auth':False, 'msg':'One or more fields is left empty...'}
 
     cursor = conn.cursor()
-    sql = f'SELECT password_hash, athlete_id, first_name, last_name, football_select, golf_select, basketball_select, soccer_select, other_select FROM athlete WHERE username = :username'
+    sql = f'SELECT password_hash, athlete_id FROM athlete WHERE username = :username'
     cursor.execute(sql, [username])
     row = cursor.fetchone()
     if not row:
@@ -42,14 +50,12 @@ def login():
     if pass_hash == pswd:
         # athlete = Athlete(row)
         # login_user(athlete, remember=True)
-        return {'auth': True}
+        return {'auth': True, 'athlete_id': row[1]}
     else:
         return {'auth': False, 'msg': 'Incorrect username and/or password...'}
 
 @auth.route('/logout', methods=['GET'])
 def logout():
-    # if current_user:
-    #     logout_user()
     return {'result': 'success'}
 
 @auth.route('/signup', methods=['POST'])
@@ -81,10 +87,25 @@ def signup():
     sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{password1}', 1, 1, 1, 1, 1)"
     cursor.execute(sql)
     conn.commit()
-    return {'auth': True}
+    return {'auth': True, 'athlete_id': id}
 
 @auth.route('/isAuthed', methods=['GET'])
 def isAuthed():
     if current_user:
         return {'isAuthed': 1, 'user': current_user}
     return {'isAuthed': 0}
+
+@auth.route('/toggle-select', methods=['POST'])
+def toggle_select():
+    athlete_id = request.json.get('athlete_id')
+    sport = request.json.get('select')
+    cursor = conn.cursor()
+    sql = f'SELECT {sport}_select FROM athlete WHERE athlete_id = {athlete_id}'
+    cursor.execute(sql)
+    select = cursor.fetchone()[0]
+    select = (select + 1) % 2
+    sql = f'UPDATE athlete SET {sport}_select = {select} WHERE athlete_id = {athlete_id}'
+    cursor.execute(sql)
+    conn.commit()
+
+    return {'result': 'success'}

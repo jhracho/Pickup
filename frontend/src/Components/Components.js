@@ -10,19 +10,28 @@ import EditGamePage from './Edit/EditGamePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 const Components = () =>{
-    
+    if(localStorage.athlete_id != null) {
+        return(
+            <BrowserRouter>
+                <Switch>
+                    <Route path='/' exact component={HomePage} />
+                    <Route path='/games' exact component={ListingsPage} />
+                    <Route path='/game/:id' exact component={GamePage} />
+                    <Route path='/teams' exact component={TeamsPage} />
+                    <Route path='/createGame' exact component={CreateGamePage} />
+                    <Route path='/editGame/:id' exact component={EditGamePage} />
+                    <Redirect to='/' />
+                </Switch>
+            </BrowserRouter>
+        )
+    }
+
     return(
         <BrowserRouter>
             <Switch>
-                <Route path='/' exact component={HomePage} />
-                <Route path='/games' exact component={ListingsPage} />
-                <Route path='/game/:id' exact component={GamePage} />
-                <Route path='/teams' exact component={TeamsPage} />
-                <Route path='/createGame' exact component={CreateGamePage} />
-                <Route path='/editGame/:id' exact component={EditGamePage} />
                 <Route path='/login' exact component={Login} />
                 <Route path='/signup' exact component={Signup} />
-                <Redirect to='/' />
+                <Redirect to='/login' />
             </Switch>
         </BrowserRouter>
     );

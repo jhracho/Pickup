@@ -6,6 +6,7 @@ const Logout = () => {
         method: 'GET',
         url: 'http://127.0.0.1:5000/api/logout'
     }).then((res) => {
+        localStorage.removeItem('athlete_id');
         window.location.href = '/login';
     }).catch((error) => {
         if(error.response) {
