@@ -11,10 +11,10 @@ created_game = Table('attending_game', Base.metadata, Column('user_id', ForeignK
 team_comprised_of = Table('team_comprised_of', Base.metadata, Column('user_id', ForeignKey('user.user_id')), Column('team_id', ForeignKey('team.team_id')))
 signs_up_for = Table('signs_up_for', Base.metadata, Column('user_id', ForeignKey('user.user_id')), Column('game_id', ForeignKey('game.game_id')))
 
-class User(Base, UserMixin):
+class Athlete(Base, UserMixin):
     __tablename__ = 'user'
 
-    user_id = Column(Integer, primary_key=True)
+    athlete_id = Column(Integer, primary_key=True)
     email = Column(String, unique=True)
     username = Column(String, unique=True)
     first_name = Column(String)
