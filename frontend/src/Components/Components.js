@@ -7,6 +7,7 @@ import Signup from './Auth/Signup/Signup.js';
 import GamePage from './Game/GamePage.js';
 import CreateGamePage from './Game/CreateGamePage.js';
 import EditGamePage from './Edit/EditGamePage.js';
+import ProfilePage from './Profile/ProfilePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 const Components = () =>{
@@ -20,6 +21,7 @@ const Components = () =>{
                     <Route path='/teams' exact component={TeamsPage} />
                     <Route path='/createGame' exact component={CreateGamePage} />
                     <Route path='/editGame/:id' exact component={EditGamePage} />
+                    <Route path='/profile' exact component={ProfilePage} />
                     <Redirect to='/' />
                 </Switch>
             </BrowserRouter>
