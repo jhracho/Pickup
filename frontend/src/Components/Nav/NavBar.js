@@ -15,7 +15,7 @@ const NavBar = (page) =>{
                     (<li key={page}><Link to={'/'+page.toLowerCase()}>{page}</Link></li>)
                 ))}
                 <li className="li-right" onClick={Logout}>Logout</li>
-                <li className="li-right">My Profile</li>
+                <li className="li-right"><Link to={'/profile'}>Profile</Link></li>
             </ul>
         </div>
     );

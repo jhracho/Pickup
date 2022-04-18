@@ -22,7 +22,7 @@ def singleGame(game_id):
         payload = {'result':'', 'data':dict()}
         # TODO: sqlalchemy Request Goes Here
         cursor = conn.cursor()
-        cursor.execute("""SELECT game.game_id, game.user_id, game.game_name, game.sport, game.date_playing, game.players_needed, location.name 
+        cursor.execute("""SELECT game.game_id, game.athlete_id, game.game_name, game.sport, game.date_playing, game.players_needed, location.name 
                           FROM game NATURAL JOIN location 
                           WHERE game_id = :id""", [game_id])
         row = cursor.fetchone()
