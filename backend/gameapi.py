@@ -61,7 +61,7 @@ def getGames():
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
