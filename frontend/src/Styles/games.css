@@ -1,6 +1,23 @@
+#page-header{
+    position: absolute;
+    margin-left: 1.25em;
+    margin-top: 0.6em;
+}
+
+#add-game-button{
+    float: right;
+    margin-right: 2.75em;
+    margin-top: 0.6em;
+}
+
+#add-game-button a{
+    text-decoration: none;
+    color: white;
+}
+
 .table{
     position: absolute;
-    top: 6em;
+    top: 8em;
     left: 50%;
     margin: auto;
     transform: translateX(-50%);
