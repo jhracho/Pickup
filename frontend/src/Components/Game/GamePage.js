@@ -39,6 +39,7 @@ const GamePage = () =>{
             {test &&
                 <button><Link to={'/editGame/'+game.id}>Edit</Link></button>
             }
+            
             {result==='success' ?
                 (<Info game={game}/>) :
                 (<Error />)
