@@ -82,7 +82,7 @@ const GameListing = (props) =>{
             <Card.Header as='h5'>{icon} {game['sport']} - <cite>{game['name']}</cite></Card.Header>
             <Card.Body>
                 <div className = 'info-field'>
-                    <h5><FontAwesomeIcon icon={faPerson} /> : {game['needed']}</h5> 
+                    <h5><FontAwesomeIcon icon={faPerson} /> : {game['players']}</h5> 
                     <h5><FontAwesomeIcon icon={faCalendar} /> : {game['date']} {game['time']}</h5>
                     {listingButton}
                     <Button variant="info" className ="game-link-button" id={game['id']}><a href={'/game/' + game['id']}><h3>More Info</h3></a></Button>
