@@ -1,4 +1,5 @@
 import React from 'react';
+import IndexPage from './Index/IndexPage.js';
 import HomePage from './Home/HomePage.js';
 import ListingsPage from './Listings/ListingsPage.js';
 import TeamsPage from './Teams/TeamsPage.js';
@@ -15,7 +16,8 @@ const Components = () =>{
         return(
             <BrowserRouter>
                 <Switch>
-                    <Route path='/' exact component={HomePage} />
+                    <Route path='/' exact component={IndexPage} />
+                    <Route path='/home' exact component={HomePage} />
                     <Route path='/games' exact component={ListingsPage} />
                     <Route path='/game/:id' exact component={GamePage} />
                     <Route path='/teams' exact component={TeamsPage} />

@@ -1,44 +1,68 @@
-#navBar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+.navbar{
+    margin-left: 4.5em;
+    margin-right: 4.5em;
+    display: flex;
+    flex-direction: row;
 }
-  
-#navBar li {
-    float: left;
+
+.navbar ul{
+    display: flex;
+    flex-direction: row;
 }
-  
-#navBar a{
-    color: white;
+
+.navbar li{
+    text-decoration: none;
+    display: inline;
+    list-style: none;
+    padding-top: 2vw;
+    padding-bottom: 0.5vw;
+}
+
+.navbar .links{
+    flex: 1 1 0%;
+    justify-content: flex-end;
+    margin: 0 0.85em;
+}
+
+.navbar .links li{
+    margin: 0 0.8em;
+}
+
+
+
+.navbar a{
+    color: var(--black);
+    font-weight: 600;
     text-decoration: none;
 }
 
-#navBar li {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-
-#navBar .li-right{
-    float: right;
-}
-
-/* Change the link color to #111 (black) on hover */
-#navBar li:hover {
-    background-color: #111;
+.navbar a:hover{
     cursor: pointer;
+    color: rgba(17, 17, 17, 0.648);
 }
 
-#navBar .active {
-    background-color: #0470aa;
+.active{
+    text-decoration: underline !important;
+    text-decoration-color: red !important;
+    text-decoration-thickness: 5vw;
 }
 
-#navBar .active:hover {
-    cursor: default;
-    background-color: #0470aa;
+.navbar .logo{
+    width: 4vw;
+    height: 4vw;
+}
+
+.navbar .logo-text{
+    color: var(--black);
+    font-size: 1vw;
+}
+
+.line{
+    display: fixed;
+    border-bottom: 1px solid #565a5c;
+    position: absolute;
+    top: 4.75vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
 }

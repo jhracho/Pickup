@@ -1,0 +1,102 @@
+:root{
+    --red: #F55353;
+    --dark-red: #ac3b3b;
+    --white: rgb(220, 220, 220);
+    --black: #111;
+}
+
+body{
+    background-color: var(--white);
+    font-family: 'Fira sans', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.background{
+    position: absolute;
+    z-index: -100;
+    top: 4vw;
+    opacity: 0.5;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: grayscale(100%);
+   -webkit-filter: grayscale(100%);
+   -webkit-mask-image:-webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+   mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.title-text{
+    text-align: center;
+    font-size: 2vw;
+}
+
+.paragraph{
+    position: absolute;
+    left: 10vw;
+    top: 15vw;
+    width: 40%;
+    font-size: 1.75vw;
+}
+
+.button-area{
+    position: absolute;
+    left: 10vw;
+    top: 40vw;
+}
+
+.bottom-button{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.25vw;
+    padding: 0.75vw 1.25vw;
+    border-radius: 10px;
+}
+
+.bottom-button:hover{
+    cursor: pointer;
+}
+
+.learn{
+    background-color: var(--black);
+}
+
+.learn:hover{
+    background-color: black;
+}
+
+.create{
+    background-color: var(--red);
+}
+
+.create:hover{
+    background-color: #c34646;
+}
+
+.stats-area{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 47vw;
+    transform: translateX(-50%);
+}
+
+.stat{
+    text-align: center;
+    margin: 0 5em;
+}
+
+.stat h1{
+    font-size: 3.5vw;
+    margin-bottom: -0.1em;
+}
+
+.stat h3{
+    font-size: 2vw;
+}
+
+@media all and (max-width: 800px){
+}

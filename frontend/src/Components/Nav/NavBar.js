@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Link } from "react-router-dom";
 import Logout from '../Auth/Logout';
 
 const NavBar = (page) =>{
-    const pagesLeft = ['Home', 'Games', 'Teams'];
+    const pages = ['Home', 'Games', 'Teams', 'Login', 'Signup'];
     const curPage = page.active;
   
     return(
-        <div id='navBar'>
-            <ul>
-                {pagesLeft.map((page) => (
+        <Fragment>
+        <img class="background" src={require('../../Assets/basketball4.jpg')}/>
+        <div class='navbar'>
+            <div class="logo">
+                <img src={require("../../Assets/logo-final.png")} class='logo' alt='Logo' title='Pickup Logo'/>
+            </div>
+            <div class="logo-text">
+                <h2>Pickup</h2>
+            </div>
+            <ul class='links'>
+                {pages.map((page) => (
                     page===curPage ? 
                     (<li key={page} className='active'>{page}</li>) : 
                     (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>)
@@ -22,6 +30,9 @@ const NavBar = (page) =>{
                 
             </ul>
         </div>
+
+        <div class="line"></div>
+        </Fragment>
     );
 };
 
