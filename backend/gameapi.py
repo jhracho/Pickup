@@ -59,6 +59,7 @@ def getGames():
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
+            print((row[6], row[7]))
             id = row[0]
             user = row[1]
             name = row[2]
@@ -66,8 +67,8 @@ def getGames():
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
             date = dt[0]
             time = dt[1]
-            location = row[5]
-            needed = row[6]
+            needed = row[5]
+            location = row[6]
             attending = row[7]
             payload['data'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players':needed, 'loc':location, 'attending':attending})
 
@@ -110,6 +111,7 @@ def joinGame():
     
     cursor = conn.cursor()
     cursor.execute("""INSERT INTO attending_game(athlete_id, game_id) VALUES(:1, :2)""", [user_id, game_id])
+    conn.commit()
     return {'result':'success'}
 
 @gameapi.route('/leaveGame', methods=['POST'])
@@ -119,6 +121,7 @@ def leaveGame():
     
     cursor = conn.cursor()
     cursor.execute("""DELETE FROM attending_game WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
+    conn.commit()
     return {'result':'success'}
 
 
