@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from .db import Conn as conn
 import datetime
+from hashlib import md5
 
 userapi = Blueprint('userapi', __name__)
 
@@ -79,8 +80,37 @@ def get_profile_page_info():
             begin_period = datetime.datetime.today().date().strftime("%m/%d/%Y")
             end_period = (datetime.datetime.today().date() + datetime.timedelta(days=5)).strftime("%m/%d/%Y")
             dt = row[3].strftime("%m/%d/%Y %H:%M:%S").split(' ')
-            print(dt[0])
             if dt[0] > begin_period and dt[0] < end_period:
                 payload['games'].append({'game_id': row[0], 'game_name': row[1], 'sport': row[2], 'date': dt[0], 'time': dt[1], 'location': row[4]})
     
     return payload
+
+@userapi.route('/change-password', methods=['POST'])
+def change_password():
+    old_password = md5(request.json.get('old_password').encode()).hexdigest()
+    password1 = md5(request.json.get('password1').encode()).hexdigest()
+    password2 = md5(request.json.get('password2').encode()).hexdigest()
+    athlete_id = request.json.get('athlete_id')
+
+    if len(old_password) == 0 or len(password1) == 0 or len(password2) == 0:
+        return {'result': 'error', 'msg': 'One or more fields left blank.'}
+    
+    cursor = conn.cursor()
+    sql = f'SELECT password_hash FROM athlete WHERE athlete_id = {athlete_id}'
+    cursor.execute(sql)
+    row = cursor.fetchone()
+    if not row:
+        return {'result': 'error', 'msg': 'Something went wrong.'}
+    if old_password != row[0]:
+        return {'result': 'error', 'msg': 'Password incorrect.'}
+    if password1 != password2:
+        return {'result': 'error', 'msg': 'Passwords do not match.'}
+    if old_password == password1:
+        return {'result': 'error', 'msg': 'New password cannot be the same as old password.'}
+    
+    cursor = conn.cursor()
+    sql = f"UPDATE athlete SET password_hash = '{password1}' WHERE athlete_id = {athlete_id}"
+    cursor.execute(sql)
+    conn.commit()
+
+    return {'result': 'success'}

@@ -46,7 +46,7 @@ def signup():
     password2 = md5(request.json.get('password2').encode()).hexdigest()
 
     if len(email) == 0 or len(username) == 0 or password1 == 'd41d8cd98f00b204e9800998ecf8427e' or password2 == 'd41d8cd98f00b204e9800998ecf8427e':
-        return {'result': 'error', 'msg': 'One of more fields left blank.'}
+        return {'result': 'error', 'msg': 'One or more fields left blank.'}
     cursor = conn.cursor()
     sql = f'SELECT athlete_id FROM athlete WHERE username = :username'
     cursor.execute(sql, [username])
@@ -55,8 +55,6 @@ def signup():
         return {'result': 'error', 'msg': 'Username is taken.'}
     if len(username) > 25:
         return {'result': 'error', 'msg': 'Username must be 25 characters or less.'}
-    if len(password1) < 7:
-        return {'result': 'error', 'msg': 'Password must be 7 or more characters.'}
     if password1 != password2:
         return {'result': 'error', 'msg': 'Passwords do not match.'}
 

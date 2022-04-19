@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import Team from "./Team";
 
 const TeamSection = ({teams}) => {
-    console.log(teams)
     if(teams.length == 0) {
         return(
             <div>

@@ -12,10 +12,14 @@ const NavBar = (page) =>{
                 {pagesLeft.map((page) => (
                     page===curPage ? 
                     (<li key={page} className='active'>{page}</li>) : 
-                    (<li key={page}><Link to={'/'+page.toLowerCase()}>{page}</Link></li>)
+                    (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>)
                 ))}
                 <li className="li-right" onClick={Logout}>Logout</li>
-                <li className="li-right"><Link to={'/profile'}>Profile</Link></li>
+                {curPage === undefined ?
+                    <li className="li-right active">Profile</li> :
+                    <Link to={'/profile'}><li className="li-right">Profile</li></Link>
+                }
+                
             </ul>
         </div>
     );
