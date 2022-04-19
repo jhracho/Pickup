@@ -20,8 +20,14 @@ const NavBar = (page) =>{
                 {pages.map((page) => (
                     page===curPage ? 
                     (<li key={page} className='active'>{page}</li>) : 
-                    (<li><Link to={'/'+page.toLowerCase()} key={page}>{page}</Link></li>)
+                    (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>)
                 ))}
+                <li className="li-right" onClick={Logout}>Logout</li>
+                {curPage === undefined ?
+                    <li className="li-right active">Profile</li> :
+                    <Link to={'/profile'}><li className="li-right">Profile</li></Link>
+                }
+                
             </ul>
         </div>
 

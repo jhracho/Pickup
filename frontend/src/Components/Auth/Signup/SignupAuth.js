@@ -23,6 +23,7 @@ const SignupAuth = () => {
     // on update flag, run this useEffect
     useEffect(() => {
         if (newUser && add) {
+            setAdd(false);
             axios({
                 method: 'POST',
                 url: 'http://127.0.0.1:5000/api/signup',
