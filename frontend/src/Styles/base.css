@@ -1,3 +1,9 @@
+/*
+    red: #F55353
+    white: #
+*/
+
 body{
-    background-color: red;
+    background-color: whitesmoke !important;
+    background-size: cover;
 }

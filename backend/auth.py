@@ -8,28 +8,6 @@ from .gameapi import get_next_id
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/get-athlete-from-id', methods=['GET'])
-def get_athlete_from_id():
-    athlete_id = request.args.get('athlete_id')
-    cursor = conn.cursor()
-    sql = f'SELECT first_name, last_name, username, football_select, golf_select, basketball_select, soccer_select, other_select FROM athlete WHERE athlete_id = {athlete_id}'
-    row = cursor.execute(sql).fetchone()
-    if row:
-        return {
-            'result': 'success',
-            'athlete': {
-                'first_name': row[0],
-                'last_name': row[1],
-                'username': row[2],
-                'football': row[3],
-                'golf': row[4],
-                'basketball': row[5],
-                'soccer': row[6],
-                'other': row[7]
-            }
-        }
-    return {'result': 'error'}
-
 # Log in a user based on supplied credentials
 @auth.route('/login', methods=['POST'])
 def login():
@@ -68,7 +46,7 @@ def signup():
     password2 = md5(request.json.get('password2').encode()).hexdigest()
 
     if len(email) == 0 or len(username) == 0 or password1 == 'd41d8cd98f00b204e9800998ecf8427e' or password2 == 'd41d8cd98f00b204e9800998ecf8427e':
-        return {'result': 'error', 'msg': 'One of more fields left blank.'}
+        return {'result': 'error', 'msg': 'One or more fields left blank.'}
     cursor = conn.cursor()
     sql = f'SELECT athlete_id FROM athlete WHERE username = :username'
     cursor.execute(sql, [username])
@@ -77,8 +55,6 @@ def signup():
         return {'result': 'error', 'msg': 'Username is taken.'}
     if len(username) > 25:
         return {'result': 'error', 'msg': 'Username must be 25 characters or less.'}
-    if len(password1) < 7:
-        return {'result': 'error', 'msg': 'Password must be 7 or more characters.'}
     if password1 != password2:
         return {'result': 'error', 'msg': 'Passwords do not match.'}
 
@@ -94,18 +70,3 @@ def isAuthed():
     if current_user:
         return {'isAuthed': 1, 'user': current_user}
     return {'isAuthed': 0}
-
-@auth.route('/toggle-select', methods=['POST'])
-def toggle_select():
-    athlete_id = request.json.get('athlete_id')
-    sport = request.json.get('select')
-    cursor = conn.cursor()
-    sql = f'SELECT {sport}_select FROM athlete WHERE athlete_id = {athlete_id}'
-    cursor.execute(sql)
-    select = cursor.fetchone()[0]
-    select = (select + 1) % 2
-    sql = f'UPDATE athlete SET {sport}_select = {select} WHERE athlete_id = {athlete_id}'
-    cursor.execute(sql)
-    conn.commit()
-
-    return {'result': 'success'}

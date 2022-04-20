@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from .gameapi import gameapi
 from .auth import auth
+from .userapi import userapi
 
 from .db import Conn as conn
 
@@ -20,6 +21,7 @@ def create_app():
 
     app.register_blueprint(gameapi, url_prefix='/api')
     app.register_blueprint(auth, url_prefix='/api')
+    app.register_blueprint(userapi, url_prefix='/api')
     cors.init_app(app, support_credentials=True)
 
     @login_manager.user_loader
