@@ -260,3 +260,49 @@ def get_home_page_info():
     }
 
     return payload
+
+# Get all teams
+@gameapi.route('/teams', methods=['GET'])
+def getTeams():
+    payload = {'result':'', 'data':list()}
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT * 
+        FROM team
+        """
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'].append({'id':id, 'sport':sport, 'name':name, 'spots':spots})
+
+    return payload
+
+# Get data for team by ID
+@gameapi.route('/team/<team_id>', methods=['GET'])
+def singleTeam(team_id):
+    if request.method == 'GET':
+        payload = {'result':'', 'data':dict()}
+        cursor = conn.cursor()
+        cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots
+                          FROM team
+                          WHERE team_id = :id""", [team_id])
+        row = cursor.fetchone()
+        if row:
+            payload['result'] = 'success'
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'] = {'id':id, 'sport':sport, 'name':name, 'spots':spots}
+        
+        else:
+            payload['result'] = 'error'
+            payload['data'] = 'Team ID Not Found'
+
+    return payload
