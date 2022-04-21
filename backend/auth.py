@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from sqlalchemy import insert, null
+from sqlalchemy import insert
 from flask_login import login_required, current_user, login_user, logout_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from .db import Conn as conn
