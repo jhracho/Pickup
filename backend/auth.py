@@ -42,6 +42,8 @@ def logout():
 def signup():
     email = request.json.get('email').lower()
     phone = request.json.get('phone')
+    print(f'phone: -{phone}-')
+    print(f'type {type(phone)}')
     username = request.json.get('username').lower()
     first_name = request.json.get('first_name').title()
     last_name = request.json.get('last_name').title()
@@ -60,10 +62,14 @@ def signup():
         return {'result': 'error', 'msg': 'Username must be 25 characters or less.'}
     if password1 != password2:
         return {'result': 'error', 'msg': 'Passwords do not match.'}
-
+    
     id = get_next_id('athlete')
     cursor = conn.cursor()
-    sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{password1}', 1, 1, 1, 1, 1)"
+    if phone == '':
+        print('here')
+        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{password1}', 1, 1, 1, 1, 1)"
+    else:
+        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, phone, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{phone}', '{password1}', 1, 1, 1, 1, 1)"
     cursor.execute(sql)
     conn.commit()
     return {'auth': True, 'athlete_id': id}
