@@ -35,10 +35,9 @@ const NavBar = (page) =>{
   
     return(
         <Fragment>
-        <img className="background" src={require('../../Assets/basketball4.jpg')}/>
-        <div className='navbar'>
-            <div className="logo">
-                <img src={require("../../Assets/logo-final.png")} className='logo' alt='Logo' title='Pickup Logo'/>
+        <div class='navbar'>
+            <div class="logo">
+                <img src={require("../../Assets/logo-final.png")} class='logo' alt='Logo' title='Pickup Logo'/>
             </div>
             <div className="logo-text">
                 <h2>Pickup</h2>

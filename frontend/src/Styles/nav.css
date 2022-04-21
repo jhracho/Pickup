@@ -54,7 +54,10 @@
 
 .navbar .logo-text{
     color: var(--black);
-    font-size: 1vw;
+    font-size: 4.5vw;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+    transform: scale(1, 0.8);
 }
 
 .line{

@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
 import NavBar from '../Nav/NavBar';
+import SitewideStats from './SiteStats';
 
 const IndexPage = () =>{
     return(
         <Fragment>
+        <img class="background" src={require('../../Assets/basketball4.jpg')}/>
         <NavBar active='' />
         <div className="title-text">
             <h1>Welcome to Pickup</h1>
@@ -18,20 +20,8 @@ const IndexPage = () =>{
             <button className="bottom-button learn">Learn More</button>
             <button className="bottom-button create">Get Started</button>
         </div>
-        <div className="stats-area">
-            <div className="stat" id="users">
-                <h1>0</h1>
-                <h3>Users</h3>
-            </div>
-            <div className="stat" id="games">
-                <h1>0</h1>
-                <h3>Games</h3>
-            </div>
-            <div className="stat" id="teams">
-                <h1>0</h1>
-                <h3>Teams</h3>
-            </div>
-        </div>
+            <SitewideStats />
+
         </Fragment>
     );
 };
