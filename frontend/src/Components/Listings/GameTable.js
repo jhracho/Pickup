@@ -2,18 +2,22 @@ import React, {useState, useEffect, Fragment} from 'react';
 import GameListing from './GameListing';
 import axios from 'axios';
 
+import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
 const GameTable = () =>{
     const [result, setResult] = useState("");
     const [games, setGames]   = useState([{
         id: 0,
-        owner: "",
+        user: "",
         name: "",
         sport: "",
         date: "",
         time: "",
         players: 0,
         loc: "",
-        attending: 0   
+        attending: 0,
+        owner: ""   
     }]);
 
     const user_id = 10;
@@ -26,6 +30,7 @@ const GameTable = () =>{
 
     return(
         <div className = 'table'>
+            <Button variant='info' id='add-game-button'><Link to='/createGame'>Add Game</Link></Button>
             <div className = 'table-body'>
             {games.length > 0 && (
                 <Fragment>

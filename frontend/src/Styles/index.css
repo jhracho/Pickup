@@ -7,7 +7,7 @@
 
 body{
     background-color: var(--white);
-    font-family: 'Fira sans', sans-serif;
+    font-family: 'Akshar', sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -28,7 +28,15 @@ body{
 
 .title-text{
     text-align: center;
-    font-size: 2vw;
+    margin-top: 2.5vw;
+}
+
+.title-text h1{
+    font-size: 5vw;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+    transform: scale(1, 0.8);
+    color: var(--black);
 }
 
 .paragraph{
@@ -42,7 +50,7 @@ body{
 .button-area{
     position: absolute;
     left: 10vw;
-    top: 40vw;
+    top: 39vw;
 }
 
 .bottom-button{
@@ -51,7 +59,7 @@ body{
     text-decoration: none;
     color: white;
     font-size: 1.25vw;
-    padding: 0.75vw 1.25vw;
+    padding: 0.5vw 1vw;
     border-radius: 10px;
 }
 
@@ -69,6 +77,7 @@ body{
 
 .create{
     background-color: var(--red);
+    margin-left: 0.5em;
 }
 
 .create:hover{

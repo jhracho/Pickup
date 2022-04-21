@@ -52,14 +52,14 @@ def getGames():
     cursor = conn.cursor()
     cursor.execute(
         """
-        SELECT game.*, CASE WHEN a.game_id IS null then 0 else 1 end as attending
-        FROM game LEFT OUTER JOIN (select game_id from attending_game where athlete_id=:1) a on game.game_id = a.game_id
+        SELECT a.*, athlete.username as owner from athlete, (select game.*, CASE WHEN a.game_id IS null then 0 else 1 end as attending
+        FROM game LEFT OUTER JOIN (select game_id from attending_game where athlete_id=:1) a on game.game_id = a.game_id) a
+        where a.athlete_id = athlete.athlete_id
         """, [user]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
-            print((row[6], row[7]))
             id = row[0]
             user = row[1]
             name = row[2]
@@ -70,7 +70,8 @@ def getGames():
             needed = row[5]
             location = row[6]
             attending = row[7]
-            payload['data'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players':needed, 'loc':location, 'attending':attending})
+            owner = row[8]
+            payload['data'].append({'id':id, 'user':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players':needed, 'loc':location, 'attending':attending, 'owner':owner})
 
     return payload
 
