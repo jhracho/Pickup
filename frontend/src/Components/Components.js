@@ -16,7 +16,6 @@ const Components = () =>{
         return(
             <BrowserRouter>
                 <Switch>
-                    <Route path='/' exact component={IndexPage} />
                     <Route path='/home' exact component={HomePage} />
                     <Route path='/games' exact component={ListingsPage} />
                     <Route path='/game/:id' exact component={GamePage} />
@@ -24,7 +23,7 @@ const Components = () =>{
                     <Route path='/createGame' exact component={CreateGamePage} />
                     <Route path='/editGame/:id' exact component={EditGamePage} />
                     <Route path='/profile' exact component={ProfilePage} />
-                    <Redirect to='/' />
+                    <Redirect to='/home' />
                 </Switch>
             </BrowserRouter>
         )
@@ -33,9 +32,10 @@ const Components = () =>{
     return(
         <BrowserRouter>
             <Switch>
+                <Route path='/' exact component={IndexPage} />
                 <Route path='/login' exact component={Login} />
                 <Route path='/signup' exact component={Signup} />
-                <Redirect to='/login' />
+                <Redirect to='/' />
             </Switch>
         </BrowserRouter>
     );

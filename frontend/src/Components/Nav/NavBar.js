@@ -3,8 +3,35 @@ import { Link } from "react-router-dom";
 import Logout from '../Auth/Logout';
 
 const NavBar = (page) =>{
-    const pages = ['Home', 'Games', 'Teams', 'Login', 'Signup'];
+    const pages = ['Home', 'Games', 'Teams'];
+    const authPages = ['Login', 'Signup'];
     const curPage = page.active;
+
+    if(localStorage.getItem('athlete_id') === null) {
+        return(
+            <Fragment>
+            <img className="background" src={require('../../Assets/basketball4.jpg')}/>
+            <div className='navbar'>
+                <div className="logo">
+                    <img src={require("../../Assets/logo-final.png")} className='logo' alt='Logo' title='Pickup Logo'/>
+                </div>
+                <div className="logo-text">
+                    <h2>Pickup</h2>
+                </div>
+                <ul className='links'>
+                    {authPages.map((page) => (
+                        (page===curPage ? 
+                        (<li key={page} className='active'>{page}</li>) : 
+                        (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
+                        )
+                    )}                    
+                </ul>
+            </div>
+
+            <div className="line"></div>
+            </Fragment>
+        );
+    }
   
     return(
         <Fragment>
@@ -12,15 +39,16 @@ const NavBar = (page) =>{
             <div class="logo">
                 <img src={require("../../Assets/logo-final.png")} class='logo' alt='Logo' title='Pickup Logo'/>
             </div>
-            <div class="logo-text">
+            <div className="logo-text">
                 <h2>Pickup</h2>
             </div>
-            <ul class='links'>
+            <ul className='links'>
                 {pages.map((page) => (
-                    page===curPage ? 
+                    (page===curPage ? 
                     (<li key={page} className='active'>{page}</li>) : 
-                    (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>)
-                ))}
+                    (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
+                    )
+                )}
                 <li className="li-right" onClick={Logout}>Logout</li>
                 {curPage === undefined ?
                     <li className="li-right active">Profile</li> :
@@ -30,7 +58,7 @@ const NavBar = (page) =>{
             </ul>
         </div>
 
-        <div class="line"></div>
+        <div className="line"></div>
         </Fragment>
     );
 };

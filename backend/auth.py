@@ -8,15 +8,15 @@ from .gameapi import get_next_id
 
 auth = Blueprint('auth', __name__)
 
-# Log in a user based on supplied credentials
+
 @auth.route('/login', methods=['POST'])
 def login():
-    # Get request data  
+    # Get request data
     username = request.json.get('username').lower()
     pswd = md5(request.json.get('password').encode()).hexdigest()
 
     if username is None or pswd is None:
-        return {'auth':False, 'msg':'One or more fields is left empty...'}
+        return {'auth': False, 'msg': 'One or more fields is left empty...'}
 
     cursor = conn.cursor()
     sql = f'SELECT password_hash, athlete_id FROM athlete WHERE username = :username'
@@ -32,13 +32,16 @@ def login():
     else:
         return {'auth': False, 'msg': 'Incorrect username and/or password...'}
 
+
 @auth.route('/logout', methods=['GET'])
 def logout():
     return {'result': 'success'}
 
+
 @auth.route('/signup', methods=['POST'])
 def signup():
     email = request.json.get('email').lower()
+    phone = request.json.get('phone')
     username = request.json.get('username').lower()
     first_name = request.json.get('first_name').title()
     last_name = request.json.get('last_name').title()
@@ -64,6 +67,7 @@ def signup():
     cursor.execute(sql)
     conn.commit()
     return {'auth': True, 'athlete_id': id}
+
 
 @auth.route('/isAuthed', methods=['GET'])
 def isAuthed():
