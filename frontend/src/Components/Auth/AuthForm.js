@@ -29,6 +29,10 @@ const AuthForm = ({user, onChange, onSubmit, signUp}) => {
                                 <small id="signup-email-hint" className="form-text text-muted">Please sign up with your student email.</small>
                             </div>
                             <div className="form-group">
+                                <input type="tel" pattern="([0-9]{3}) [0-9]{3}-[0-9]{4}" id="signup-phone-input" className="form-control" placeholder="Phone Number" name="phone" value={user.phone} onChange={onChange} />
+                                <small id="signup-phone-hint" className="form-text text-muted">Optional</small>
+                            </div>
+                            <div className="form-group">
                                 <input type="password" id="signup-password-input" className="form-control" placeholder="Password" min="0" name="password" value={user.password}  onChange={onChange} required/>
                             </div>
                             <div className="form-group">
