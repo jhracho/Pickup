@@ -10,7 +10,7 @@ const TeamCard = (team) => {
                 <h5 className="card-title">{team.team["name"]}</h5>
                 <p className="card-text">{team.team["sport"]}</p>
                 <p className="card-text">Spots open: {team.team["spots"]}</p>
-                <a href="#" className="btn btn-primary stretched-link">Team Page</a>
+                <a href={'/team/' + team.team['id']} className="btn btn-primary stretched-link">Team Page</a>
             </div>
             {/* <div className="card-footer text-muted">
                 <p className="card-text">This event will be held on {event.get("Date").toLocaleDateString("en-US")}</p>
