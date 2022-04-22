@@ -118,13 +118,12 @@ def change_password():
 @userapi.route('/get-home-page-info', methods=['GET'])
 def get_home_page_info():
     athlete_id = request.args.get('athlete_id')
+    payload = {'result': 'success', 'games': [], 'selects': {}, 'upcoming': [], 'teams': []}
     cursor = conn.cursor()
     sql = f'SELECT football_select, golf_select, basketball_select, soccer_select, other_select FROM athlete WHERE athlete_id = {athlete_id}'
     row = cursor.execute(sql).fetchone()
     if not row:
         return {'result': 'error'}
-    
-    payload = {'result': 'success', 'games': [], 'selects': {}}
     
     football = row[0]
     golf = row[1]
@@ -135,17 +134,17 @@ def get_home_page_info():
     if football:
         cursor.execute(
         """
-        SELECT * 
-        FROM game
+        SELECT game.game_id, athlete.username, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
+        FROM game NATURAL JOIN athlete NATURAL JOIN location
         WHERE players_needed != 0
-        AND sport = 'Football'
-        """
+        AND sport = 'Football' AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :athlete_id)
+        """, [athlete_id]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
@@ -153,21 +152,21 @@ def get_home_page_info():
             time = dt[1]
             location = row[5]
             needed = row[6]
-            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'players':needed})
     if golf:
         cursor.execute(
         """
-        SELECT * 
-        FROM game
-        WHERE players_needed != 0
-        AND sport = 'Golf'
-        """
+        SELECT game.game_id, athlete.username, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
+        FROM game NATURAL JOIN athlete NATURAL JOIN location
+        WHERE game.players_needed != 0
+        AND game.sport = 'Golf' AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :athlete_id)
+        """, [athlete_id]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
@@ -175,21 +174,21 @@ def get_home_page_info():
             time = dt[1]
             location = row[5]
             needed = row[6]
-            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'players':needed})
     if basketball:
         cursor.execute(
         """
-        SELECT * 
-        FROM game
+        SELECT game.game_id, athlete.username, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
+        FROM game NATURAL JOIN athlete NATURAL JOIN location
         WHERE players_needed != 0
-        AND sport = 'Basketball'
-        """
+        AND sport = 'Basketball' AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :athlete_id)
+        """, [athlete_id]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
@@ -197,21 +196,21 @@ def get_home_page_info():
             time = dt[1]
             location = row[5]
             needed = row[6]
-            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'players':needed})
     if soccer:
         cursor.execute(
         """
-        SELECT * 
-        FROM game
+        SELECT game.game_id, athlete.username, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
+        FROM game NATURAL JOIN athlete NATURAL JOIN location
         WHERE players_needed != 0
-        AND sport = 'Soccer'
-        """
+        AND sport = 'Soccer' AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :athlete_id)
+        """, [athlete_id]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
@@ -219,21 +218,21 @@ def get_home_page_info():
             time = dt[1]
             location = row[5]
             needed = row[6]
-            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'players':needed})
     if other:
         cursor.execute(
         """
-        SELECT * 
-        FROM game
+        SELECT game.game_id, athlete.username, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
+        FROM game NATURAL JOIN athlete NATURAL JOIN location
         WHERE players_needed != 0
-        AND (sport != 'Football' AND sport != 'Golf' AND sport != 'Basketball' AND sport != 'Soccer')
-        """
+        AND (sport != 'Football' AND sport != 'Golf' AND sport != 'Basketball' AND sport != 'Soccer') AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :athlete_id)
+        """, [athlete_id]
     )
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
             id = row[0]
-            user = [1]
+            user = row[1]
             name = row[2]
             sport = row[3]
             dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
@@ -241,9 +240,11 @@ def get_home_page_info():
             time = dt[1]
             location = row[5]
             needed = row[6]
-            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'needed':needed})
+            payload['games'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'location':location, 'players':needed})
     
     payload['games'].sort(key=lambda x: x['id'])
+    payload['games'].sort(key=lambda x: x['time'])
+    payload['games'].sort(key=lambda x: x['date'])
 
     cursor.execute(
         """
@@ -260,5 +261,32 @@ def get_home_page_info():
         'soccer': row[3],
         'other': row[4]
     }
+
+    cursor.execute(
+        """
+        SELECT a.game_id, athlete.username, a.game_name, a.sport, a.date_playing, location.name, a.players_needed
+        FROM athlete, location,
+            (SELECT game.*, CASE WHEN a.game_id IS null then 0 else 1 end as attending
+            FROM game LEFT OUTER JOIN
+                (SELECT game_id
+                FROM attending_game
+                WHERE athlete_id=:1) a 
+            ON game.game_id = a.game_id) a
+        WHERE a.athlete_id = athlete.athlete_id AND a.location_id = location.location_id AND a.attending = 1
+        """, [athlete_id]
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            user = row[1]
+            name = row[2]
+            sport = row[3]
+            dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
+            date = dt[0]
+            time = dt[1]
+            location = row[5]
+            needed = row[6]
+            payload['upcoming'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players': needed, 'location':location})
 
     return payload
