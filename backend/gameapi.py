@@ -119,8 +119,54 @@ def joinGame():
 def leaveGame():
     user_id = request.json.get('user')
     game_id = request.json.get('game')
-    
+
     cursor = conn.cursor()
     cursor.execute("""DELETE FROM attending_game WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
     conn.commit()
-    return {'result':'success'}
+    return {'result':'success'} 
+
+# Get all teams
+@gameapi.route('/teams', methods=['GET'])
+def getTeams():
+    payload = {'result':'', 'data':list()}
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT * 
+        FROM team
+        """
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'].append({'id':id, 'sport':sport, 'name':name, 'spots':spots})
+
+    return payload
+
+# Get data for team by ID
+@gameapi.route('/team/<team_id>', methods=['GET'])
+def singleTeam(team_id):
+    if request.method == 'GET':
+        payload = {'result':'', 'data':dict()}
+        cursor = conn.cursor()
+        cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots
+                          FROM team
+                          WHERE team_id = :id""", [team_id])
+        row = cursor.fetchone()
+        if row:
+            payload['result'] = 'success'
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'] = {'id':id, 'sport':sport, 'name':name, 'spots':spots}
+        
+        else:
+            payload['result'] = 'error'
+            payload['data'] = 'Team ID Not Found'
+
+    return payload
