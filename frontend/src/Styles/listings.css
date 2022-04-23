@@ -1,0 +1,97 @@
+/* Listings Page */
+#page-header{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.table{
+    position: absolute;
+    top: 20vw;
+    left: 50%;
+    margin: auto;
+    transform: translateX(-50%);
+    height: auto;
+    width: 10vw;
+    padding: 0 4.5vw;
+}
+
+.table-body{
+    display: block; 
+}
+
+.info-field{
+    white-space: nowrap;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.game-poster{
+    padding-left: 1em;
+}
+
+.game-header{
+    padding-left: 1em !important;
+}
+
+.info-field h5{
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.game-card{
+    margin-bottom: 0.25em;
+    background-color: var(--white) !important;
+}
+
+.info-field button{
+    float: right;
+    height: 2em;
+    width: 7em;
+    margin-left: 1em;
+}
+
+.game-link-button a{
+    text-decoration: none;
+    color: white;
+}
+
+.game-link-button h3{
+    font-size: 1.15em;
+    color: white;
+    text-decoration: none;
+}
+
+.game-edit-button{
+    color: white !important;
+    font-size: 1em !important;
+}
+
+.listings-header{
+    position: absolute;
+    top: 5vw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ais-SearchBox{
+    position: absolute;
+    top: 10vw;
+    left: 50%;
+    max-width: none;
+    transform: translateX(-50%);
+}
+
+.ais-Hits{
+    position: absolute;
+    top: 15vw;
+    left: 50%;
+    width: 80%;
+    transform: translateX(-50%);
+}
+
+.ais-Hits-list{
+    list-style-type: none !important;
+    display: block;
+    padding-left: 0;
+}

@@ -69,18 +69,24 @@ const GameListing = (props) =>{
           });
     };
 
+    const athlete_id = Number(localStorage.getItem('athlete_id'));
     let listingButton;
-    if (game['owner'] === 10)
-        listingButton = <Button variant="warning" className = 'game-link-button' id={game['id']}><Link to={'/editGame/'+game['id']}>Edi Game</Link></Button>
+    if (game['user'] === athlete_id)
+        listingButton = <Link to={'/editGame/'+game['id']}><Button variant="warning" className = 'game-edit-button' id={game['id']}>Edit Game</Button></Link>
     else if (game['attending'] === 1)
         listingButton = <Button variant="danger" className = 'game-link-button' id={game['id']} onClick={leaveGame}>Leave Game</Button>
+    else if (game['players'] === 0)
+        listingButton = <Button variant="secondary" className = 'game-link-button' id={game['id']}>Full</Button>
     else
         listingButton = <Button variant="success" className = 'game-link-button' id={game['id']} onClick={joinGame}>Join Game</Button>
 
     return(    
         <Card className='game-card'>
-            <Card.Header as='h5'>{icon} {game['sport']} - <cite>{game['name']}</cite></Card.Header>
+            <Card.Header as='h5' className='game-header'>{icon} {game['sport']} - <cite>{game['name']}</cite></Card.Header>
             <Card.Body>
+                <div className = 'game-poster'>
+                    <h5>Posted by: {game['owner']}</h5>
+                </div>
                 <div className = 'info-field'>
                     <h5><FontAwesomeIcon icon={faPerson} /> : {game['players']}</h5> 
                     <h5><FontAwesomeIcon icon={faCalendar} /> : {game['date']} {game['time']}</h5>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AuthForm = ({user, onChange, onSubmit, signUp}) => {
+const AuthForm = ({user, onChange, onSubmit, phoneKeyDown, phoneKeyUp, signUp}) => {
     
     return(
         // <Fragment>
@@ -27,6 +27,10 @@ const AuthForm = ({user, onChange, onSubmit, signUp}) => {
                             <div className="form-group">
                                 <input type="email" id="signup-email-input" className="form-control" placeholder="Email address" name="email" value={user.email}  onChange={onChange} required/>
                                 <small id="signup-email-hint" className="form-text text-muted">Please sign up with your student email.</small>
+                            </div>
+                            <div className="form-group" id="phone-form-group">
+                                <input type="tel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" id="signup-phone-input" className="form-control" placeholder="Phone Number" name="phone" value={user.phone} onChange={onChange} onKeyDown={phoneKeyDown} onKeyUp={phoneKeyUp} maxLength="14" />
+                                <small id="signup-phone-hint" className="form-text text-muted">Optional</small>
                             </div>
                             <div className="form-group">
                                 <input type="password" id="signup-password-input" className="form-control" placeholder="Password" min="0" name="password" value={user.password}  onChange={onChange} required/>

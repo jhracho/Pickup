@@ -2,16 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+
 import './Styles/base.css';
 import './Styles/nav.css';
 import './Styles/games.css';
 import './Styles/index.css';
+import './Styles/listings.css';
 import './Styles/teams.css'
+
+
+import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <React.StrictMode>
