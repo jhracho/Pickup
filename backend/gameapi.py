@@ -60,7 +60,6 @@ def getGames():
     result = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in result:
-            print(row)
             id = row[0]
             user = row[1]
             name = row[2]
