@@ -8,7 +8,9 @@ import './Styles/base.css';
 import './Styles/nav.css';
 import './Styles/games.css';
 import './Styles/index.css';
+import './Styles/listings.css';
 import './Styles/teams.css'
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 

@@ -69,8 +69,9 @@ const GameListing = (props) =>{
           });
     };
 
+    const athlete_id = Number(localStorage.getItem('athlete_id'));
     let listingButton;
-    if (game['user'] === 10)
+    if (game['user'] === athlete_id)
         listingButton = <Link to={'/editGame/'+game['id']}><Button variant="warning" className = 'game-edit-button' id={game['id']}>Edit Game</Button></Link>
     else if (game['attending'] === 1)
         listingButton = <Button variant="danger" className = 'game-link-button' id={game['id']} onClick={leaveGame}>Leave Game</Button>
