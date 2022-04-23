@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from .gameapi import gameapi
 from .auth import auth
 from .userapi import userapi
+#from .teamapi import teamapi
 
 from .db import Conn as conn
 
