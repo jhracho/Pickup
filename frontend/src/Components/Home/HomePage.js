@@ -21,6 +21,16 @@ const HomePage = () =>{
         loc: ""
     }]);
 
+    const [upcoming, setUpcoming] = useState([{
+        id: 0,
+        name: "",
+        sport: "",
+        date: "",
+        time: "",
+        players: 0,
+        loc: ""
+    }]);
+
     const onChangeSelect = (e) => {
         var sport = e.target.value;
         axios({
@@ -38,6 +48,7 @@ const HomePage = () =>{
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
             setGames(res.data['games']);
+            setUpcoming(res.data['upcoming']);
             setFootball(res.data['selects']['football']);
             setGolf(res.data['selects']['golf']);
             setBasketball(res.data['selects']['basketball']);
@@ -54,12 +65,26 @@ const HomePage = () =>{
         <div>
             <NavBar active='Home' />
             <Toggles football={football} golf={golf} basketball={basketball} soccer={soccer} other={other} onChange={onChangeSelect}/>
-            <h1>Games</h1>
+            <p>the vision for this is to have the teams on the left and upcoming games signed up for on the right, with game suggestions below as like an "explore" feature. make it happen rake</p>
+            {upcoming.length > 0 && (
+                <Fragment>
+                    <h1>My Upcoming Games</h1>
+                    {upcoming.map((game) => (
+                        <GameListing key={game.id} game={game} />
+                    ))}
+                </Fragment>
+            )}
             {games.length > 0 && (
                 <Fragment>
+                    <h2>Explore Games</h2>
                     {games.map((game) => (
-                        <GameListing key={game.id} game={game}></GameListing>
+                        <GameListing key={game.id} game={game} />
                     ))}
+                </Fragment>
+            )}
+            {games.length == 0 && (
+                <Fragment>
+                    <h1>There are no games.</h1>
                 </Fragment>
             )}
         </div>
