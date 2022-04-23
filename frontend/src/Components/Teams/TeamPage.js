@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 
 import Team from './Team';
+import TeamHeader from './TeamHeader'
 import NavBar from '../Nav/NavBar';
 
 import {useParams} from "react-router-dom";
@@ -29,9 +30,15 @@ const TeamPage = () =>{
         <div>
             <NavBar active='' />
             {result==='success' ?
-                (<Team team={team}/>) :
+                (
+                <Fragment>
+                    <TeamHeader team={team}> </TeamHeader>
+                    <Team team={team}/>
+                </Fragment>
+                ) :
+
                 (<div>
-                    <h2>Error: Game not found</h2>
+                    <h2>Error: Team not found</h2>
                 </div>)
             }
         </div>
