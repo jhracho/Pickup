@@ -9,7 +9,8 @@ import './Styles/nav.css';
 import './Styles/games.css';
 import './Styles/index.css';
 import './Styles/listings.css';
-import './Styles/teams.css'
+import './Styles/teams.css';
+import './Styles/home.css';
 
 
 import 'bootstrap/dist/css/bootstrap.css';

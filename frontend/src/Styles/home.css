@@ -1,0 +1,44 @@
+.home-page-body{
+    margin-top: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.home-cols{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.homeCol{
+    flex: 10%;
+    width: 40vw;
+    padding: 0.5em;
+    padding-top: 0.25em;
+    margin-left: 1em;
+    margin-right: 1em;
+    background: green;
+    border: 3px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toggle-title{
+    margin-top: 2vw;
+    margin-bottom: -1vw;
+}
+.preference-toggles{
+    margin: 1vw 0;
+}
+
+.preference-toggles input{
+    margin: 0 0.25vw 0 1vw;
+}
+
+.explore-games{
+    width: 80vw;
+}

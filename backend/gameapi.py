@@ -21,9 +21,12 @@ def singleGame(game_id):
         payload = {'result':'', 'data':dict()}
         # TODO: sqlalchemy Request Goes Here
         cursor = conn.cursor()
+        '''
         cursor.execute("""SELECT game.game_id, game.athlete_id, game.game_name, game.sport, game.date_playing, game.players_needed, location.name 
                           FROM game NATURAL JOIN location 
                           WHERE game_id = :id""", [game_id])
+        '''
+        cursor.execute("""SELECT * from game WHERE game_id = :id""", [game_id])
         row = cursor.fetchone()
         if row:
             payload['result'] = 'success'
@@ -31,7 +34,7 @@ def singleGame(game_id):
             user = row[1]
             name = row[2]
             sport = row[3]
-            dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
+            dt = row[4].strftime("%m/%d/%Y %H:%M%p").split(' ')
             date = dt[0]
             time = dt[1]
             needed = row[5]
@@ -64,7 +67,7 @@ def getGames():
             user = row[1]
             name = row[2]
             sport = row[3]
-            dt = row[4].strftime("%m/%d/%Y %H:%M:%S").split(' ')
+            dt = row[4].strftime("%m/%d/%Y %H:%M%p").split(' ')
             date = dt[0]
             time = dt[1]
             needed = row[5]
@@ -124,6 +127,26 @@ def leaveGame():
     cursor.execute("""DELETE FROM attending_game WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
     conn.commit()
     return {'result':'success'} 
+
+# Get Location Data for a Location
+@gameapi.route('/location/<loc_id>', methods=['GET'])
+def getLocation(loc_id):
+    payload = {'result':'success', 'data':dict()}
+    cursor = conn.cursor()
+    cursor.execute("""SELECT * FROM location WHERE location_id = :id""", [loc_id])
+    row = cursor.fetchone()
+    payload['data'] = {'id':row[0], 'name':row[1], 'addy':row[2], 'sports':row[3], 'openHour':row[4].strftime('%H:%M%p'), 'closeHour':row[5].strftime('%H:%M%p')}
+    return payload
+
+# Get Roster of people signed up for a game
+@gameapi.route('/roster/<game_id>', methods=['GET'])
+def getRoster(game_id):
+    payload = {'result':'success', 'data':[]}
+    cursor = conn.cursor()
+    cursor.execute("""SELECT athlete.username FROM athlete NATURAL JOIN attending_game WHERE attending_game.game_id = :id """, [game_id])
+    for row in cursor:
+        payload['data'].append(row[0])
+    return payload
 
 # Get all teams
 @gameapi.route('/teams', methods=['GET'])

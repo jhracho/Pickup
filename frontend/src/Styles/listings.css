@@ -95,3 +95,31 @@
     display: block;
     padding-left: 0;
 }
+
+/* Listings Filter Area */
+.game-filter{
+    position: absolute;
+    left: 50%;
+    top: 10vw;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-content: center;
+}
+
+#add-game-button{
+   margin-bottom: 1em; 
+}
+
+#add-game-button a{
+    text-decoration: none;
+    color: white;
+}
+
+.search-field {
+    width: 40vw;
+    border: none;
+    border-radius: 100vw;
+    padding: 0.5em 1em;
+    outline: none;
+}

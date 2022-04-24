@@ -24,7 +24,7 @@ const GameTable = () =>{
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/games?user='+user_id).then(res =>{
             setResult(res.data['result']);
-            setGames(res.data['data']);
+            setGames(res.data['data']['game']);
         });
     }, [user_id]);
 

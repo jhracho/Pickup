@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 const Toggles = ({football, golf, basketball, soccer, other, onChange}) => {
     return (
-        <div>
+        <div className='preference-toggles'>
             <input type="checkbox" id="football-checkbox" name="football-checkbox" value="football" checked={football} onChange={onChange}/>
             <label htmlFor="football-checkbox">Football</label>
             <input type="checkbox" id="golf-checkbox" name="golf-checkbox" value="golf" checked={golf} onChange={onChange}/>
