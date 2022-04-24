@@ -21,7 +21,7 @@ const NavBar = (page) =>{
                 <ul className='links'>
                     {authPages.map((page) => (
                         (page===curPage ? 
-                        (<li key={page} className='active'>{page}</li>) : 
+                        (<a><li key={page} className='active'>{page}</li></a>) : 
                         (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
                         )
                     )}                    
@@ -45,13 +45,13 @@ const NavBar = (page) =>{
             <ul className='links'>
                 {pages.map((page) => (
                     (page===curPage ? 
-                    (<li key={page} className='active'>{page}</li>) : 
+                    (<a><li key={page} className='active'>{page}</li></a>) : 
                     (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
                     )
                 )}
-                <li className="li-right" onClick={Logout}>Logout</li>
+                <a><li className="li-right" onClick={Logout}>Logout</li></a>
                 {curPage === undefined ?
-                    <li className="li-right active">Profile</li> :
+                    <a><li className="li-right active">Profile</li></a> :
                     <Link to={'/profile'}><li className="li-right">Profile</li></Link>
                 }
                 

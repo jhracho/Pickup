@@ -30,16 +30,10 @@ const GamePage = () =>{
         });
     }, [game_id]);
 
-    // game.owner == current id
-    const test = game.owner === 10;
     
     return(
         <div>
-            <NavBar active='' />
-            {test &&
-                <button><Link to={'/editGame/'+game.id}>Edit</Link></button>
-            }
-            
+            <NavBar active='' />           
             {result==='success' ?
                 (<Info game={game}/>) :
                 (<Error />)

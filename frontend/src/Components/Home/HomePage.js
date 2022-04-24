@@ -2,7 +2,10 @@ import React, {useState, useEffect, Fragment} from 'react';
 import NavBar from '../Nav/NavBar';
 import Toggles from './Toggles';
 import axios from 'axios';
-import GameListing from '../Listings/GameListing';
+
+import ExploreGames from './ExploreGames';
+import UpcomingGames from './UpcomingGames';
+import YourTeams from './YourTeams';
 
 const HomePage = () =>{
     const [football, setFootball] = useState(-1)
@@ -64,29 +67,15 @@ const HomePage = () =>{
     return(
         <div>
             <NavBar active='Home' />
-            <Toggles football={football} golf={golf} basketball={basketball} soccer={soccer} other={other} onChange={onChangeSelect}/>
-            <p>the vision for this is to have the teams on the left and upcoming games signed up for on the right, with game suggestions below as like an "explore" feature. make it happen rake</p>
-            {upcoming.length > 0 && (
-                <Fragment>
-                    <h1>My Upcoming Games</h1>
-                    {upcoming.map((game) => (
-                        <GameListing key={game.id} game={game} />
-                    ))}
-                </Fragment>
-            )}
-            {games.length > 0 && (
-                <Fragment>
-                    <h2>Explore Games</h2>
-                    {games.map((game) => (
-                        <GameListing key={game.id} game={game} />
-                    ))}
-                </Fragment>
-            )}
-            {games.length == 0 && (
-                <Fragment>
-                    <h1>There are no games.</h1>
-                </Fragment>
-            )}
+            <div className='home-page-body'>
+                <div className='home-cols'>
+                    <UpcomingGames upcoming={upcoming} />
+                    <YourTeams />
+                </div>
+                <h4 className='toggle-title'>Preferences:</h4>
+                <Toggles football={football} golf={golf} basketball={basketball} soccer={soccer} other={other} onChange={onChangeSelect}/>
+                <ExploreGames games={games} />
+            </div>
         </div>
     );
 };

@@ -16,6 +16,7 @@
     list-style: none;
     padding-top: 2vw;
     padding-bottom: 0.5vw;
+    margin: 0 0.8em;
 }
 
 .navbar .links{
@@ -23,12 +24,6 @@
     justify-content: flex-end;
     margin: 0 0.85em;
 }
-
-.navbar .links li{
-    margin: 0 0.8em;
-}
-
-
 
 .navbar a{
     color: var(--black);
@@ -45,6 +40,11 @@
     text-decoration: underline !important;
     text-decoration-color: red !important;
     text-decoration-thickness: 5vw;
+    pointer-events: none;
+}
+
+.active:hover{
+    cursor: default !important;
 }
 
 .navbar .logo{
