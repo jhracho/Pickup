@@ -289,4 +289,20 @@ def get_home_page_info():
             needed = row[6]
             payload['upcoming'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players': needed, 'location':location})
 
+    cursor.execute(
+        """
+        SELECT team_id, sport, team_name, roster_spots
+        FROM team NATURAL JOIN team_comprised_of
+        WHERE athlete_id = :athlete_id
+        """, [athlete_id]
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['teams'].append({'id': id, 'sport': sport, 'name': name, 'spots': spots})
+
     return payload
