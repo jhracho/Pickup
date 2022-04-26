@@ -17,7 +17,7 @@ def toggle_select():
     sql = f'UPDATE athlete SET {sport}_select = {select} WHERE athlete_id = {athlete_id}'
     cursor.execute(sql)
     conn.commit()
-
+    cursor.close()
     return {'result': 'success'}
 
 @userapi.route('/get-athlete-from-id', methods=['GET'])
@@ -41,6 +41,7 @@ def get_athlete_from_id():
                 'other': row[7]
             }
         }
+    cursor.close()
     return {'result': 'error'}
 
 @userapi.route('/get-profile-page-info', methods=['GET'])
@@ -63,6 +64,7 @@ def get_profile_page_info():
             'username': row[2]
         }
     else:
+        cursor.close()
         return {'result': 'error'}
 
     cursor.execute(
@@ -82,7 +84,7 @@ def get_profile_page_info():
             dt = row[3].strftime("%m/%d/%Y %H:%M:%S").split(' ')
             if dt[0] > begin_period and dt[0] < end_period:
                 payload['games'].append({'game_id': row[0], 'game_name': row[1], 'sport': row[2], 'date': dt[0], 'time': dt[1], 'location': row[4]})
-    
+    cursor.close()
     return payload
 
 @userapi.route('/change-password', methods=['POST'])
@@ -112,7 +114,7 @@ def change_password():
     sql = f"UPDATE athlete SET password_hash = '{password1}' WHERE athlete_id = {athlete_id}"
     cursor.execute(sql)
     conn.commit()
-
+    cursor.close()
     return {'result': 'success'}
 
 @userapi.route('/get-home-page-info', methods=['GET'])
@@ -288,5 +290,5 @@ def get_home_page_info():
             location = row[5]
             needed = row[6]
             payload['upcoming'].append({'id':id, 'owner':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players': needed, 'location':location})
-
+    cursor.close()
     return payload

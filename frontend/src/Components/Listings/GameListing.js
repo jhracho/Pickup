@@ -2,14 +2,16 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import button from 'react-bootstrap/button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFootball, faFutbol, faBasketball, faGolfBallTee, faPerson, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 const GameListing = (props) =>{
     const game = props.game;
+    const type = props.type;
     const sport = game['sport'];
+
     let icon;
     switch(sport){
         case 'Football':
@@ -36,7 +38,7 @@ const GameListing = (props) =>{
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/joinGame',
             data: {
-              user: 10,
+              user: localStorage.getItem('athlete_id'),
               game: gameId
             }
           }).then((res) =>{
@@ -50,18 +52,19 @@ const GameListing = (props) =>{
     };
 
     function leaveGame(e) {
+        alert('leaving game...');
         e.preventDefault();
         const gameId = e.target.id;
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/leaveGame',
             data: {
-              user: 10,
+              user: localStorage.getItem('athlete_id'),
               game: gameId
             }
           }).then((res) =>{
-              alert('Joined game!')
-              window.location.href = '/game/'+gameId;
+              alert('Left game...')
+              window.location.href = '/games';
           }).catch((error) =>{
               if (error.response){
                   alert(error.response.status)
@@ -70,28 +73,41 @@ const GameListing = (props) =>{
     };
 
     const athlete_id = Number(localStorage.getItem('athlete_id'));
-    let listingButton;
-    if (game['user'] === athlete_id)
-        listingButton = <Link to={'/editGame/'+game['id']}><Button variant="warning" className = 'game-edit-button' id={game['id']}>Edit Game</Button></Link>
-    else if (game['attending'] === 1)
-        listingButton = <Button variant="danger" className = 'game-link-button' id={game['id']} onClick={leaveGame}>Leave Game</Button>
-    else if (game['players'] === 0)
-        listingButton = <Button variant="secondary" className = 'game-link-button' id={game['id']}>Full</Button>
-    else
-        listingButton = <Button variant="success" className = 'game-link-button' id={game['id']} onClick={joinGame}>Join Game</Button>
+    
+    let listingbutton;
+    switch(type){
+        case 'Owner':
+            listingbutton = <Link to={'/editGame/'+game['id']}><button variant="warning" className = 'game-edit-button' id={game['id']}>Edit Game</button></Link>
+            break;
+
+        case 'Upcoming':
+            listingbutton = <button className = 'game-link-button leave-button' id={game['id']} onClick={leaveGame}>Leave Game</button>
+            break;
+        
+        case 'Join':
+            if (game['players'] === 0)
+                listingbutton = <button className = 'game-link-button full-button' id={game['id']}>Full</button>
+            else
+                listingbutton = <button className = 'game-link-button join-button' id={game['id']} onClick={joinGame}>Join Game</button>
+            break;
+
+        default:
+            break;
+    }
+    
 
     return(    
         <Card className='game-card'>
             <Card.Header as='h5' className='game-header'>{icon} {game['sport']} - <cite>{game['name']}</cite></Card.Header>
-            <Card.Body>
+            <Card.Body className='game-body'>
                 <div className = 'game-poster'>
                     <h5>Posted by: {game['owner']}</h5>
                 </div>
                 <div className = 'info-field'>
                     <h5><FontAwesomeIcon icon={faPerson} /> : {game['players']}</h5> 
                     <h5><FontAwesomeIcon icon={faCalendar} /> : {game['date']} {game['time']}</h5>
-                    {listingButton}
-                    <Button variant="info" className ="game-link-button" id={game['id']}><a href={'/game/' + game['id']}><h3>More Info</h3></a></Button>
+                    {listingbutton}
+                    <a href={'/game/' + game['id']}><button className ="game-link-button info-button" id={game['id']}>More Info</button></a>
                 </div>
             </Card.Body>
         </Card>

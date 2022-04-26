@@ -17,4 +17,5 @@ def landingStats():
     teamsTotal = cursor.fetchone()[0]
 
     payload = {'result':'success', 'data': {'game':gameTotal, 'athlete':athleteTotal, 'teams':teamsTotal}}
+    cursor.close()
     return payload
