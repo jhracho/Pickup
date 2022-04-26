@@ -10,7 +10,6 @@ import Teams from './Teams/Teams.js';
 import Login from './Auth/Login/Login.js';
 import Signup from './Auth/Signup/Signup.js'
 import GamePage from './Game/GamePage.js';
-import CreateGamePage from './Game/CreateGamePage.js';
 import EditGamePage from './Edit/EditGamePage.js';
 import ProfilePage from './Profile/ProfilePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
@@ -25,7 +24,6 @@ const Components = () =>{
                     <Route path='/game/:id' exact component={GamePage} />
                     <Route path='/teams' exact component={Teams} />
                     <Route path='/team/:id' exact component={TeamPage} /> 
-                    <Route path='/createGame' exact component={CreateGamePage} />
                     <Route path='/editGame/:id' exact component={EditGamePage} />
                     <Route path='/profile' exact component={ProfilePage} />
                     <Redirect to='/home' />

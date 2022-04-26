@@ -26,12 +26,53 @@
     padding-right: 1em;
 }
 
+.game-link-button{
+    border: none;
+    color: white;
+    float: right;
+    height: 2em;
+    width: 7em;
+    margin-left: 1em;
+    margin-top: -0.75vw;
+    border-radius: 0.8vw;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.info-button{
+    background-color: rgb(19, 133, 179);
+}
+
+.join-button{
+    background-color: rgb(9, 152, 9);
+}
+
+.leave-button{
+    background-color: var(--red);
+}
+
+.full-button{
+    background-color: gray;
+}
+
+.add-button{
+    background: skyblue;
+    position: absolute;
+    top: 13vw;
+    left: 8.85vw;
+}
 .game-poster{
     padding-left: 1em;
 }
 
 .game-header{
+    font-family: 'Bebas Neue', cursive;
     padding-left: 1em !important;
+}
+
+.game-body{
+    font-family: 'Akshar', sans-serif;
 }
 
 .info-field h5{
@@ -44,13 +85,6 @@
     background-color: var(--white) !important;
 }
 
-.info-field button{
-    float: right;
-    height: 2em;
-    width: 7em;
-    margin-left: 1em;
-}
-
 .game-link-button a{
     text-decoration: none;
     color: white;
@@ -60,11 +94,6 @@
     font-size: 1.15em;
     color: white;
     text-decoration: none;
-}
-
-.game-edit-button{
-    color: white !important;
-    font-size: 1em !important;
 }
 
 .listings-header{

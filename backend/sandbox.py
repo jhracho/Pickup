@@ -23,10 +23,15 @@ def main():
     print(gid('game'))
     '''
     cursor = conn.cursor()
-    payload = {'result':'success', 'data':[]}
-    cursor = conn.cursor()
-    cursor.execute("""SELECT * from athlete where """, [1])
-    row = cursor.fetchone()
+    cursor.execute("""
+        SELECT a.joinee, b.username, b.email, b.game_notif, b.game_name
+        FROM (select username as joinee from athlete where athlete_id = :1) a,
+        (select * from athlete, game where athlete.athlete_id=game.athlete_id AND game.game_id = :2) b
+    """, [201, 45])
+    for row in cursor.fetchall():
+        print(row)
+    
+    conn.close()
     
 
 if __name__ == '__main__':

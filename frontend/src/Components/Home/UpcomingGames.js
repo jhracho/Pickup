@@ -9,7 +9,7 @@ const UpcomingGames = (props) =>{
             {upcoming.length > 0 && (
                 <Fragment>
                     {upcoming.map((game) => (
-                        <GameListing key={game.id} game={game} />
+                        <GameListing key={game.id} game={game} type='Upcoming'/>
                     ))}
                 </Fragment>
             )}

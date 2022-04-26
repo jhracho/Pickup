@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
 
 const GameForm = (props) =>{
+    const handleClose = props.handleClose;
+
     const [info, setInfo] = useState({
         name: "",
         owner: 0,
@@ -58,21 +61,31 @@ const GameForm = (props) =>{
         });
     }
     
+    // <div className='form-group'><button onClick={submitGame}>Submit</button></div>
+
     return(
         <div id='form-div'>
-            <input onChange={handleChange} type='text' text={info.name} name='name' placeholoder='Game Name' maxLength='25' required />
-            <select required onChange={handleChange} name='sport'>
-                <option value="" selected disabled hidden>Sport</option>
-                <option value='Football'>Football</option>
-                <option value='Soccer'>Soccer</option>
-                <option value='Golf'>Golf</option>
-                <option value='Baseball'>Baseball</option>
-                <option value='Other'>Other</option>
+            <div className='form-group'>
+                <input onChange={handleChange} type='text' text={info.name} name='name' placeholoder='Game Name' maxLength='25' required />
+            </div>
+            <div className='form-group'>
+                <select required onChange={handleChange} name='sport'>
+                <option defaultValue="" selected disabled hidden>Sport</option>
+                <option defaultValue='Football'>Football</option>
+                <option defaultValue='Soccer'>Soccer</option>
+                <option defaultValue='Golf'>Golf</option>
+                <option defaultValue='Baseball'>Baseball</option>
+                <option defaultValue='Other'>Other</option>
             </select>
-            <input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' required  />
-            <input onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' required  />
-            <input onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  />
-            <button onClick={submitGame}>Submit</button>
+            </div>
+            <div className='form-group'><input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' required  /></div>
+            <div className='form-group'><input onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' required  /></div>
+            <div className='form-group'><input onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  /></div>
+            <Modal.Footer>
+            <button onClick={submitGame}>
+                Submit Game
+            </button>
+            </Modal.Footer>
         </div>
     );
 };

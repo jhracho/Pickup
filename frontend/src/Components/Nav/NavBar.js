@@ -19,9 +19,9 @@ const NavBar = (page) =>{
                     <h2>Pickup</h2>
                 </div>
                 <ul className='links'>
-                    {authPages.map((page) => (
+                    {authPages.map((page, index) => (
                         (page===curPage ? 
-                        (<a><li key={page} className='active'>{page}</li></a>) : 
+                        (<a><li key={index} className='active'>{page}</li></a>) : 
                         (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
                         )
                     )}                    
@@ -43,9 +43,9 @@ const NavBar = (page) =>{
                 <h2>Pickup</h2>
             </div>
             <ul className='links'>
-                {pages.map((page) => (
+                {pages.map((page, index) => (
                     (page===curPage ? 
-                    (<a><li key={page} className='active'>{page}</li></a>) : 
+                    (<a><li key={index} className='active'>{page}</li></a>) : 
                     (<Link to={'/'+page.toLowerCase()} key={page}><li>{page}</li></Link>))
                     )
                 )}

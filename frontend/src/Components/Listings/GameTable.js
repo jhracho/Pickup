@@ -20,7 +20,7 @@ const GameTable = () =>{
         owner: ""   
     }]);
 
-    const user_id = 10;
+    const user_id = localStorage.getItem('athlete_id');
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/games?user='+user_id).then(res =>{
             setResult(res.data['result']);
