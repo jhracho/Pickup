@@ -21,3 +21,25 @@
     padding-bottom: 1em;
     height: 300px;
 }
+
+.card-deck {
+    padding: 5vw;
+}
+
+
+.mb-3-name{
+    font-weight: bold;
+}
+
+.btn.btn-outline-light.btn-lg {
+    border-color: #F55353;
+}
+
+.btn.btn-outline-light.btn-lg:hover {
+    background-color: #F55353;
+    color: white; 
+}
+
+.roster {
+    padding: 1vw;
+}

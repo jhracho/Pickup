@@ -218,4 +218,3 @@ def singleTeam(team_id):
             payload['result'] = 'error'
             payload['data'] = 'Team ID Not Found'
     cursor.close()
-    return payload
