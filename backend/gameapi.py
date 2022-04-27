@@ -2,8 +2,7 @@ from flask import Blueprint, request, jsonify
 from .db import Conn as conn
 from datetime import datetime
 
-#TODO: Delete this when connection is set up
-from csv import reader
+from .emailfunctions import send_game_email
 
 gameapi = Blueprint('gameapi', __name__)
 
@@ -53,11 +52,20 @@ def getGames():
     user = request.args.get('user')
     payload = {'result':'', 'data':list()}
     cursor = conn.cursor()
+    '''
     cursor.execute(
         """
         SELECT a.*, athlete.username as owner from athlete, (select game.*, CASE WHEN a.game_id IS null then 0 else 1 end as attending
         FROM game LEFT OUTER JOIN (select game_id from attending_game where athlete_id=:1) a on game.game_id = a.game_id) a
         where a.athlete_id = athlete.athlete_id
+        """, [user]
+    )
+    '''
+    cursor.execute(
+        """
+        SELECT game.*, athlete.username AS owner
+        FROM game, athlete 
+        WHERE game.athlete_id = athlete.athlete_id AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :1) 
         """, [user]
     )
     result = cursor.fetchall()
@@ -72,9 +80,9 @@ def getGames():
             time = dt[1]
             needed = row[5]
             location = row[6]
-            attending = row[7]
-            owner = row[8]
-            payload['data'].append({'id':id, 'user':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players':needed, 'loc':location, 'attending':attending, 'owner':owner})
+            #attending = row[7]
+            owner = row[7]
+            payload['data'].append({'id':id, 'user':user, 'name':name, 'sport':sport, 'date':date, 'time':time, 'players':needed, 'loc':location, 'owner':owner})
 
     return payload
 
@@ -92,7 +100,7 @@ def addGame():
     cursor = conn.cursor()
     nid = get_next_id('game')
     cursor.execute("""INSERT INTO game VALUES (:id, 10, :name, :sport, :dt, :location, :players)""", [nid, name, sport, dt, location, players])
-    
+    conn.commit()
     return {'result':'success', 'id':nid}
 
 @gameapi.route('/editGame', methods=['POST'])
@@ -112,10 +120,24 @@ def editGame():
 def joinGame():
     user_id = request.json.get('user')
     game_id = request.json.get('game')
-    
     cursor = conn.cursor()
     cursor.execute("""INSERT INTO attending_game(athlete_id, game_id) VALUES(:1, :2)""", [user_id, game_id])
+    cursor.execute("""UPDATE game SET players_needed=players_needed-1 WHERE game_id = :1""", [game_id])
+
+    # Email Portion
+    cursor.execute("""
+        SELECT a.joinee, b.username, b.email, b.game_notif, b.game_name
+        FROM (select username as joinee from athlete where athlete_id = :1) a,
+        (select * from athlete, game where athlete.athlete_id=game.athlete_id AND game.game_id = :2) b
+    """, [user_id, game_id])
     conn.commit()
+
+    row = cursor.fetchone()
+    if row[3] == 1:
+        send_game_email(row[2], row[1], row[0], row[4], game_id)
+    
+    cursor.close()
+    
     return {'result':'success'}
 
 @gameapi.route('/leaveGame', methods=['POST'])
@@ -125,7 +147,9 @@ def leaveGame():
 
     cursor = conn.cursor()
     cursor.execute("""DELETE FROM attending_game WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
+    cursor.execute("""UPDATE game SET players_needed=players_needed+1 WHERE game_id = :1""", [game_id])
     conn.commit()
+    cursor.close()
     return {'result':'success'} 
 
 # Get Location Data for a Location
@@ -136,6 +160,7 @@ def getLocation(loc_id):
     cursor.execute("""SELECT * FROM location WHERE location_id = :id""", [loc_id])
     row = cursor.fetchone()
     payload['data'] = {'id':row[0], 'name':row[1], 'addy':row[2], 'sports':row[3], 'openHour':row[4].strftime('%H:%M%p'), 'closeHour':row[5].strftime('%H:%M%p')}
+    cursor.close()
     return payload
 
 # Get Roster of people signed up for a game
@@ -146,4 +171,50 @@ def getRoster(game_id):
     cursor.execute("""SELECT athlete.username FROM athlete NATURAL JOIN attending_game WHERE attending_game.game_id = :id """, [game_id])
     for row in cursor:
         payload['data'].append(row[0])
+    cursor.close()
     return payload
+
+# Get all teams
+@gameapi.route('/teams', methods=['GET'])
+def getTeams():
+    payload = {'result':'', 'data':list()}
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT * 
+        FROM team
+        """
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'].append({'id':id, 'sport':sport, 'name':name, 'spots':spots})
+    cursor.close()
+    return payload
+
+# Get data for team by ID
+@gameapi.route('/team/<team_id>', methods=['GET'])
+def singleTeam(team_id):
+    if request.method == 'GET':
+        payload = {'result':'', 'data':dict()}
+        cursor = conn.cursor()
+        cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots
+                          FROM team
+                          WHERE team_id = :id""", [team_id])
+        row = cursor.fetchone()
+        if row:
+            payload['result'] = 'success'
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'] = {'id':id, 'sport':sport, 'name':name, 'spots':spots}
+        
+        else:
+            payload['result'] = 'error'
+            payload['data'] = 'Team ID Not Found'
+    cursor.close()
