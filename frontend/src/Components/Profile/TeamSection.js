@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import Team from "./Team";
+import TeamCard from "../Teams/TeamCard.js";
 
 const TeamSection = ({teams}) => {
     if(teams.length == 0) {
@@ -15,7 +15,7 @@ const TeamSection = ({teams}) => {
             <h1>Teams</h1>
             <Fragment>
                 {teams.map((team) => (
-                    <Team key={team.team_id} team={team} />
+                    <TeamCard key={team.team_id} team={team} />
                 ))}
             </Fragment>
         </div>
