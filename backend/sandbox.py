@@ -23,13 +23,12 @@ def main():
     print(gid('game'))
     '''
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT a.joinee, b.username, b.email, b.game_notif, b.game_name
-        FROM (select username as joinee from athlete where athlete_id = :1) a,
-        (select * from athlete, game where athlete.athlete_id=game.athlete_id AND game.game_id = :2) b
-    """, [201, 45])
-    for row in cursor.fetchall():
-        print(row)
+    cursor.execute("""SELECT game.*, athlete.username AS owner
+        FROM game, athlete 
+        WHERE game.athlete_id = athlete.athlete_id AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :1) ORDER BY game_id DESC""", [202])
+
+    for l in cursor.fetchall():
+        print(l)
     
     conn.close()
     

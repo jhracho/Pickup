@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from .db import Conn as conn
 from datetime import datetime
 
-from .emailfunctions import send_game_email
+from .emailfunctions import *
 
 gameapi = Blueprint('gameapi', __name__)
 
@@ -65,7 +65,7 @@ def getGames():
         """
         SELECT game.*, athlete.username AS owner
         FROM game, athlete 
-        WHERE game.athlete_id = athlete.athlete_id AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :1) 
+        WHERE game.athlete_id = athlete.athlete_id AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :1) ORDER BY game_id DESC
         """, [user]
     )
     result = cursor.fetchall()
@@ -89,17 +89,17 @@ def getGames():
 @gameapi.route('/addGame', methods=['POST'])
 def addGame():
     name = request.json.get('name')
+    owner = request.json.get('owner')
     sport = request.json.get('sport')
     date = request.json.get('date')
     time = request.json.get('time')
     location = request.json.get('loc')
     players = request.json.get('players')
-    
     dt = datetime.strptime(date + " " + time, "%Y-%m-%d %H:%M")
 
     cursor = conn.cursor()
     nid = get_next_id('game')
-    cursor.execute("""INSERT INTO game VALUES (:id, 10, :name, :sport, :dt, :location, :players)""", [nid, name, sport, dt, location, players])
+    cursor.execute("""INSERT INTO game VALUES (:id, :owner, :name, :sport, :dt, :location, :players)""", [nid, owner, name, sport, dt, location, players])
     conn.commit()
     return {'result':'success', 'id':nid}
 
@@ -124,13 +124,18 @@ def joinGame():
     cursor.execute("""INSERT INTO attending_game(athlete_id, game_id) VALUES(:1, :2)""", [user_id, game_id])
     cursor.execute("""UPDATE game SET players_needed=players_needed-1 WHERE game_id = :1""", [game_id])
 
+    # Leave Waitlist, if applicable
+    cursor.execute("""DELETE FROM game_waitlist WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
+
+    conn.commit()
+
     # Email Portion
     cursor.execute("""
         SELECT a.joinee, b.username, b.email, b.game_notif, b.game_name
         FROM (select username as joinee from athlete where athlete_id = :1) a,
         (select * from athlete, game where athlete.athlete_id=game.athlete_id AND game.game_id = :2) b
     """, [user_id, game_id])
-    conn.commit()
+    
 
     row = cursor.fetchone()
     if row[3] == 1:
@@ -149,6 +154,17 @@ def leaveGame():
     cursor.execute("""DELETE FROM attending_game WHERE athlete_id = :1 and game_id = :2""", [user_id, game_id])
     cursor.execute("""UPDATE game SET players_needed=players_needed+1 WHERE game_id = :1""", [game_id])
     conn.commit()
+
+    cursor.execute("""SELECT athlete.email from athlete natural join game_waitlist where game_id=:1""", [game_id])
+    result = cursor.fetchall()
+    if len(result) != 0:
+        dests = list()
+        for row in result:
+            dests.append(row[0])
+
+    cursor.execute("""SELECT game_name FROM game WHERE game_id = :1""", [game_id])
+    game_name = cursor.fetchone()[0]
+    send_waitlist_email(dests, game_name)
     cursor.close()
     return {'result':'success'} 
 
@@ -162,6 +178,18 @@ def getLocation(loc_id):
     payload['data'] = {'id':row[0], 'name':row[1], 'addy':row[2], 'sports':row[3], 'openHour':row[4].strftime('%H:%M%p'), 'closeHour':row[5].strftime('%H:%M%p')}
     cursor.close()
     return payload
+
+# Join Waitlist for a Game
+@gameapi.route('/joinWaitlist', methods=['POST'])
+def joinWaitlist():
+    user_id = request.json.get('user')
+    game_id = request.json.get('game')
+
+    cursor = conn.cursor()
+    cursor.execute("""INSERT INTO game_waitlist VALUES(:1, :2)""", [user_id, game_id])
+    conn.commit()
+    cursor.close()
+    return {'result':'success'}
 
 # Get Roster of people signed up for a game
 @gameapi.route('/roster/<game_id>', methods=['GET'])

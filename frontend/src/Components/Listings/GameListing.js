@@ -9,6 +9,9 @@ import { faFootball, faFutbol, faBasketball, faGolfBallTee, faPerson, faCalendar
 
 const GameListing = (props) =>{
     const game = props.game;
+
+    //console.log(game['id']);
+
     const type = props.type;
     const sport = game['sport'];
 
@@ -52,7 +55,6 @@ const GameListing = (props) =>{
     };
 
     function leaveGame(e) {
-        alert('leaving game...');
         e.preventDefault();
         const gameId = e.target.id;
         axios({
@@ -72,6 +74,26 @@ const GameListing = (props) =>{
           });
     };
 
+    function joinWaitlist(e){
+        e.preventDefault();
+        const gameId = e.target.id;
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:5000/api/joinWaitlist',
+            data: {
+              user: localStorage.getItem('athlete_id'),
+              game: gameId
+            }
+          }).then((res) =>{
+              alert('Joined waitlist!')
+              window.location.href = '/game/'+gameId;
+          }).catch((error) =>{
+              if (error.response){
+                  alert(error.response.status)
+              }
+          });
+    }
+
     const athlete_id = Number(localStorage.getItem('athlete_id'));
     
     let listingbutton;
@@ -86,7 +108,7 @@ const GameListing = (props) =>{
         
         case 'Join':
             if (game['players'] === 0)
-                listingbutton = <button className = 'game-link-button full-button' id={game['id']}>Full</button>
+                listingbutton = <button className = 'game-link-button full-button' id={game['id']} onClick={joinWaitlist}>Join Waitlist</button>
             else
                 listingbutton = <button className = 'game-link-button join-button' id={game['id']} onClick={joinGame}>Join Game</button>
             break;
