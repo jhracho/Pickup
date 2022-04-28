@@ -84,7 +84,24 @@ def get_profile_page_info():
             dt = row[3].strftime("%m/%d/%Y %H:%M:%S").split(' ')
             if dt[0] > begin_period and dt[0] < end_period:
                 payload['games'].append({'game_id': row[0], 'game_name': row[1], 'sport': row[2], 'date': dt[0], 'time': dt[1], 'location': row[4]})
-    cursor.close()
+    
+    cursor.execute(
+        """
+        SELECT team_id, sport, team_name, roster_spots
+        FROM team NATURAL JOIN team_comprised_of
+        WHERE athlete_id = :athlete_id
+        """, [athlete_id]
+    )
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['teams'].append({'id': id, 'sport': sport, 'name': name, 'spots': spots})
+    
+    cursor.close()    
     return payload
 
 @userapi.route('/change-password', methods=['POST'])

@@ -1,8 +1,9 @@
 import React, {Fragment} from "react";
-import Game from "./Game";
+import GameListing from "../Listings/GameListing.js";
 
 const GameSection = ({games}) => {
-    if(games.length == 0) {
+    console.log(games);
+    if(games.length === 0) {
         return(
             <div>
                 <h1>Games</h1>
@@ -15,7 +16,7 @@ const GameSection = ({games}) => {
             <h1>Games</h1>
             <Fragment>
                 {games.map((game) => (
-                    <Game key={game.game_id} game={game} />
+                    <GameListing key={game.game_id} game={game} />
                 ))}
             </Fragment>
         </div>
