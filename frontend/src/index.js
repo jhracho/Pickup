@@ -12,7 +12,7 @@ import './Styles/listings.css';
 import './Styles/teams.css';
 import './Styles/home.css';
 import './Styles/create.css';
-
+import './Styles/auth.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 

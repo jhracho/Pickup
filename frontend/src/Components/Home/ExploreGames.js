@@ -7,7 +7,7 @@ const ExploreGames = (props) =>{
     return(
         <div className='explore-games'>
             {games.length === 1 && (
-                <h2>Loading...</h2>
+                <img className='loading-icon' src={require("../../Assets/loading.gif")} alt='Loading'/>
             )}
 
             {games.length > 1 && (

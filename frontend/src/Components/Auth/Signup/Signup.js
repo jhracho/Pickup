@@ -5,7 +5,7 @@ import SignupWelcome from "./SignupWelcome.js";
 
 const Signup = () => {
     return (
-        <div>
+        <div className='signup-body-div'>
             <SignupWelcome />
             <SignupAuth />
         </div>

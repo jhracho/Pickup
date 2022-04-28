@@ -35,7 +35,7 @@ const GameForm = (props) =>{
             url: 'http://127.0.0.1:5000/api/addGame',
             data: {
               name: info.name,
-              owner: 10,
+              owner: localStorage.getItem('athlete_id'),
               sport: info.sport,
               date: info.date,
               time: info.time,

@@ -38,6 +38,9 @@ const Search = () => {
             '844ca4d7dcb21d2d03c4438bff81f623'
         );
         const index = client.initIndex('games');
+        index.setSettings({
+            hitsPerPage: 100
+        });
 
         axios.get('http://127.0.0.1:5000/api/games?user=' + athlete_id).then(res => {
             setGames(res.data['data']);
