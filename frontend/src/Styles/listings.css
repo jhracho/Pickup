@@ -1,23 +1,30 @@
 /* Listings Page */
+
+#pageDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #page-header{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3vw;
+    text-decoration: underline !important;
+    text-decoration-color: red !important;
+    text-decoration-thickness: 5vw;
+    margin-bottom: 1.5vw;
 }
 
-.table{
-    position: absolute;
-    top: 20vw;
-    left: 50%;
-    margin: auto;
-    transform: translateX(-50%);
-    height: auto;
-    width: 10vw;
-    padding: 0 4.5vw;
+.add-button{
+    background: skyblue;
 }
 
-.table-body{
-    display: block; 
+#search-input{
+    width: 80%;
+    margin-top: 1vw;
+    height: 2vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .info-field{
@@ -56,12 +63,6 @@
     background-color: gray;
 }
 
-.add-button{
-    background: skyblue;
-    position: absolute;
-    top: 13vw;
-    left: 8.85vw;
-}
 .game-poster{
     padding-left: 1em;
 }
@@ -103,52 +104,7 @@
     transform: translateX(-50%);
 }
 
-.ais-SearchBox{
-    position: absolute;
-    top: 10vw;
-    left: 50%;
-    max-width: none;
-    transform: translateX(-50%);
-}
-
-.ais-Hits{
-    position: absolute;
-    top: 15vw;
-    left: 50%;
+#search-results-div{
+    margin-top: 1vw;
     width: 80%;
-    transform: translateX(-50%);
-}
-
-.ais-Hits-list{
-    list-style-type: none !important;
-    display: block;
-    padding-left: 0;
-}
-
-/* Listings Filter Area */
-.game-filter{
-    position: absolute;
-    left: 50%;
-    top: 10vw;
-    transform: translateX(-50%);
-
-    display: flex;
-    align-content: center;
-}
-
-#add-game-button{
-   margin-bottom: 1em; 
-}
-
-#add-game-button a{
-    text-decoration: none;
-    color: white;
-}
-
-.search-field {
-    width: 40vw;
-    border: none;
-    border-radius: 100vw;
-    padding: 0.5em 1em;
-    outline: none;
 }

@@ -10,12 +10,13 @@ import CreateModal from './CreateModal';
 
 const ListingsPage = () =>{
     return(
-        <div id='pageDiv'>
+        <div>
             <NavBar active="Games"/>
-            <ListingsHeader />
-            <CreateModal />
-            <Search />
-            
+            <div id='pageDiv'>
+                <h2 id='page-header'>Games</h2>
+                <CreateModal />
+                <Search />
+            </div>
         </div>
     );
 };
