@@ -34,6 +34,13 @@ const HomePage = () =>{
         loc: ""
     }]);
 
+    const [teams, setTeams]   = useState([{
+        id: 0,
+        sport: "",
+        name: "",
+        spots: 0
+    }]);
+
     const onChangeSelect = (e) => {
         var sport = e.target.value;
         axios({
@@ -52,6 +59,7 @@ const HomePage = () =>{
         axios.get('http://127.0.0.1:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
             setGames(res.data['games']);
             setUpcoming(res.data['upcoming']);
+            setTeams(res.data['teams'])
             setFootball(res.data['selects']['football']);
             setGolf(res.data['selects']['golf']);
             setBasketball(res.data['selects']['basketball']);
@@ -70,7 +78,7 @@ const HomePage = () =>{
             <div className='home-page-body'>
                 <div className='home-cols'>
                     <UpcomingGames upcoming={upcoming} />
-                    <YourTeams />
+                    <YourTeams teams={teams}/>
                 </div>
                 <h4 className='toggle-title'>Preferences:</h4>
                 <Toggles football={football} golf={golf} basketball={basketball} soccer={soccer} other={other} onChange={onChangeSelect}/>
