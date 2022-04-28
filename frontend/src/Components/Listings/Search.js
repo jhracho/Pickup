@@ -1,10 +1,18 @@
-import algoliasearch from "algoliasearch";
-import React, { useEffect, useState } from "react";
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch/dom';
+import axios from 'axios';
+import React, {Fragment, useState, useEffect} from 'react';
 import GameListing from "./GameListing.js";
-import axios from "axios";
 
 const Search = () => {
+    const onKeyUp = () => {
+        setFilteredGames([]);
+        const input = document.getElementById('search-input').value;
+        games.forEach(game => {
+            if((game.owner.toLowerCase().includes(input.toLowerCase())) || (game.name.toLowerCase().includes(input.toLowerCase())) || (game.date.toLowerCase().includes(input.toLowerCase())) || (game.sport.toLowerCase().includes(input.toLowerCase())) || (String(game.loc).toLowerCase().includes(input.toLowerCase()))){
+                setFilteredGames(games => [...games, game])
+            }
+        });
+    };
+
     const [games, setGames]   = useState([{
         id: 0,
         user: "",
@@ -14,56 +22,49 @@ const Search = () => {
         time: "",
         players: 0,
         loc: "",
-        owner: "",
-        objectID: ""
+        owner: ""
     }]);
 
-    const searchClient = algoliasearch(
-        'GD3W1OH8LS',
-        '0ea9881140b5dd8bafe57a9e45ce823e'
-    );
-
-    const Hit = ({ hit }) => {
-        return(
-        <div className="hit">
-            <GameListing game={hit} type='Join'/>
-        </div>
-        );
-    }
+    const [filteredGames, setFilteredGames] = useState([{
+        id: 0,
+        user: "",
+        name: "",
+        sport: "",
+        date: "",
+        time: "",
+        players: 0,
+        loc: "",
+        owner: ""
+    }])
 
     useEffect(() => {
         const athlete_id = localStorage.getItem('athlete_id');
-        const client = algoliasearch(
-            'GD3W1OH8LS',
-            '844ca4d7dcb21d2d03c4438bff81f623'
-        );
-        const index = client.initIndex('games');
 
         axios.get('http://127.0.0.1:5000/api/games?user=' + athlete_id).then(res => {
             setGames(res.data['data']);
-            var algArray = [];
-            games.forEach(game => {
-                var algObj = game;
-                algObj['objectID'] = game['id'];
-                algArray.push(algObj);
-            });
-            index.saveObjects(algArray, {autoGenerateObjectIDIfNotExist: false});
+            setFilteredGames(res.data['data']);
         });
     }, []);
 
-    return (
-        <div>
-            <InstantSearch
-                indexName="games"
-                searchClient={searchClient}
-                >
-                <header className="search-header">
-                    <SearchBox translations={{placeholder: 'Search by '}}/>
-                </header>
-                <Hits hitComponent={Hit}/>
-            </InstantSearch>
-        </div>
-    );
+    return(
+        <Fragment>
+            <input type="text" placeholder="Search by game name, owner, or date" id="search-input" onKeyUp={onKeyUp}/>
+            <div id="search-results-div">
+                {filteredGames.length > 0 && (
+                    <Fragment>
+                    {filteredGames.map((game) => (
+                        <GameListing key={game.id} game={game} type='Join'/>
+                    ))}
+                    </Fragment>
+                )}
+                {filteredGames.length === 0 && (
+                    <Fragment>
+                        <h4>No games match the search criteria.</h4>
+                    </Fragment>
+                )}
+            </div>
+        </Fragment>
+    )
 };
 
 export default Search;
