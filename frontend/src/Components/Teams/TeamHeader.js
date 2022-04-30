@@ -48,10 +48,10 @@ const TeamHeader = (props) =>{
 
     
     let headerButton;
-    if (props.button === 'Join'){
+    if (props.team.on_team === 0){
         headerButton = <a className="btn btn-outline-light btn-lg" role="button" id={props.team['id']} onClick={joinTeam}>Join</a>
     }
-    else if (props.button === 'Leave'){
+    else if (props.team.on_team === 1){
         headerButton = <a className="btn btn-primary" role="button" id={props.team['id']} onClick={leaveTeam}>Leave</a>
  
     }

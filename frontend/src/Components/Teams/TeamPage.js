@@ -36,13 +36,16 @@ const TeamPage = () =>{
         // });
     }, [team_id, athlete_id]);
     console.log(team);
+
+
+
     return(
         <div>
             <NavBar active='' />
             {result==='success' ?
                 (
                 <Fragment>
-                    <TeamHeader team={team} button={'Join'}> </TeamHeader>
+                    <TeamHeader team={team}> </TeamHeader>
                     <Team team={team}/>
                 </Fragment>
                 ) :
