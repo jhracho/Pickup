@@ -16,12 +16,13 @@ const TeamsCardDeck = () => {
         roster_spots: 0
     }]);
 
+    const athlete_id = localStorage.getItem('athlete_id');
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/teams').then(res =>{
+        axios.get('http://127.0.0.1:5000/api/teams?athlete='+athlete_id).then(res =>{
             setResult(res.data['result']);
             setTeams(res.data['data']);
         });
-    }, []);
+    }, [athlete_id]);
 
     
     return (
