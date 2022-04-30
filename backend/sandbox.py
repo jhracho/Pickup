@@ -2,6 +2,7 @@ import cx_Oracle
 import datetime
 from hashlib import md5
 
+cx_Oracle.init_oracle_client('/usr/local/lib')
 conn = cx_Oracle.connect('shayden2/shayden2@172.22.132.222/xe')
 #conn = cx_Oracle.connect('jake/jake@172.22.133.101/XE')
 
@@ -22,13 +23,27 @@ def main():
     print(dt.date())
     print(gid('game'))
     '''
+    team_id = 10
+    athlete_id = 20
     cursor = conn.cursor()
-    cursor.execute("""SELECT game.*, athlete.username AS owner
-        FROM game, athlete 
-        WHERE game.athlete_id = athlete.athlete_id AND game.game_id NOT IN (SELECT game_id FROM attending_game WHERE athlete_id = :1) ORDER BY game_id DESC""", [202])
+    cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots, a.onteam
+                FROM team, (SELECT
+                CASE WHEN EXISTS
+                    (
+                        SELECT *
+                        FROM team_comprised_of
+                        WHERE team_id = :1 and athlete_id = :2 
+                    )
+                THEN 1
+                ELSE 0
+                END as onteam
+                FROM DUAL) a
+                WHERE team_id = :1
+                """, [team_id, athlete_id]
+    )
 
-    for l in cursor.fetchall():
-        print(l)
+    result = cursor.fetchone()
+    print(result)
     
     conn.close()
     

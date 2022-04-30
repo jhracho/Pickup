@@ -15,7 +15,7 @@ def get_next_id(table):
     return (nid+1)
 
 # Get all teams
-@teamapi.route('/teams', methods=['GET'])
+@teamapi.route('/allTeams', methods=['GET'])
 def getAllTeams():
     payload = {'result':'', 'data':list()}
     cursor = conn.cursor()
@@ -37,39 +37,56 @@ def getAllTeams():
     return payload
 
 # Get teams athelete is NOT on
-# @teamapi.route('/teams', methods=['GET'])
-# def getTeams():
-#     athlete = request.args.get('athlete')
-#     payload = {'result':'', 'data':list()}
-#     cursor = conn.cursor()
-#     cursor.execute(
-#         """
-#         SELECT team.id, team.sport, team.name, team.spots 
-#         team FROM NATURAL JOIN team_comprised_of
-#         WHERE team_comprised_of.athlete_id != :1
-#         """
-#     , [athlete])
-#     result = cursor.fetchall()
-#     if cursor.rowcount != 0:
-#         for row in result:
-#             id = row[0]
-#             sport = row[1]
-#             name = row[2]
-#             spots = row[3]
-#             payload['data'].append({'id':id, 'sport':sport, 'name':name, 'spots':spots})
+@teamapi.route('/teams', methods=['GET'])
+def getTeams():
+    athlete = request.args.get('athlete')
+    payload = {'result':'', 'data':list()}
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT *
+        FROM team
+        WHERE team_id NOT IN
+        (SELECT team_id
+        FROM team_comprised_of
+        WHERE athlete_id = :1)
+        ORDER BY team_name ASC
+        """, [athlete]
+    )
+    
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            id = row[0]
+            sport = row[1]
+            name = row[2]
+            spots = row[3]
+            payload['data'].append({'id':id, 'sport':sport, 'name':name, 'spots':spots})
 
-#     return payload
+    return payload
 
 
 # Get data for team by ID
-@teamapi.route('/team/<team_id>', methods=['GET'])
-def singleTeam(team_id):
+@teamapi.route('/team/<team_id>/<athlete_id>', methods=['GET'])
+def singleTeam(team_id, athlete_id):
     if request.method == 'GET':
         payload = {'result':'', 'data':dict()}
         cursor = conn.cursor()
-        cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots
-                          FROM team
-                          WHERE team_id = :id""", [team_id])
+        cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots, a.onteam
+                FROM team, (SELECT
+                CASE WHEN EXISTS
+                    (
+                        SELECT *
+                        FROM team_comprised_of
+                        WHERE team_id = :1 and athlete_id = :2 
+                    )
+                THEN 1
+                ELSE 0
+                END as onteam
+                FROM DUAL) a
+                WHERE team_id = :1
+                """, [team_id, athlete_id]
+        )
         row = cursor.fetchone()
         if row:
             payload['result'] = 'success'
@@ -77,7 +94,8 @@ def singleTeam(team_id):
             sport = row[1]
             name = row[2]
             spots = row[3]
-            payload['data'] = {'id':id, 'sport':sport, 'name':name, 'spots':spots}
+            on_team = row[4]
+            payload['data'] = {'id':id, 'sport':sport, 'name':name, 'roster_spots':spots, 'on_team':on_team}
         
         else:
             payload['result'] = 'error'
@@ -85,17 +103,17 @@ def singleTeam(team_id):
 
     return payload
 
-@teamapi.route('/team/joinTeam', methods=['POST'])
+@teamapi.route('/joinTeam', methods=['POST'])
 def joinTeam():
-    if request.method == 'POST':
-        athlete_id = request.json.get('athlete')
-        team_id = request.json.get('team')
-    
-        cursor = conn.cursor()
-        cursor.execute("""INSERT INTO team_comprised_of(athlete_id, team_id) VALUES (:1, :2)""" ,[athlete_id, team_id])
+    athlete_id = request.json.get('athlete')
+    team_id = request.json.get('team')
 
-        cursor.commit()
-        return {'result':'success'}
+    cursor = conn.cursor()
+    cursor.execute("""INSERT INTO team_comprised_of(athlete_id, team_id) VALUES (:1, :2)""" ,[athlete_id, team_id])
+    cursor.execute("""UPDATE team SET roster_spots=roster_spots-1 WHERE team_id = :1 """, [team_id])
+
+    conn.commit()
+    return {'result':'success'}
 
 @teamapi.route('/leaveTeam', methods=['POST'])
 def leaveTeam():

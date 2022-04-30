@@ -5,16 +5,14 @@ import axios from 'axios';
 import TeamImage from "../../Assets/team_img.jpeg";
 
 const TeamHeader = (props) =>{
-    
     function joinTeam(e) {
         e.preventDefault();
         const teamId = e.target.id;
-        console.log(e.target)
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/joinTeam',
             data: {
-              athlete: 16,
+              athlete: localStorage.getItem('athlete_id'),
               team: teamId
             }
           }).then((res) =>{
@@ -26,9 +24,38 @@ const TeamHeader = (props) =>{
               }
           });
     };
+
+    function leaveTeam(e) {
+        e.preventDefault();
+        const teamId = e.target.id;
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:5000/api/leaveTeam',
+            data: {
+              athlete: localStorage.getItem('athlete_id'),
+              team: teamId
+            }
+          }).then((res) =>{
+              alert('You left the team.')
+              window.location.href = '/team/'+teamId;
+          }).catch((error) =>{
+              if (error.response){
+                  alert(error.response.status)
+              }
+          });
+    };
+
+
     
-    let joinButton;
-    joinButton = <a className="btn btn-outline-light btn-lg" role="button" id={props['id']} onClick={joinTeam}>Join</a>
+    let headerButton;
+    if (props.button === 'Join'){
+        headerButton = <a className="btn btn-outline-light btn-lg" role="button" id={props.team['id']} onClick={joinTeam}>Join</a>
+    }
+    else if (props.button === 'Leave'){
+        headerButton = <a className="btn btn-primary" role="button" id={props.team['id']} onClick={leaveTeam}>Leave</a>
+ 
+    }
+    
 
     return(
         <div
@@ -39,8 +66,8 @@ const TeamHeader = (props) =>{
             <div className="d-flex justify-content-center align-items-center">
                 <div className="text-white">
                 <h1 className="mb-3-name">{props.team['name']} {props.team['sport']} Team</h1>
-                <h4 className="mb-3">Spots open: {props.team['spots']}</h4>
-                {joinButton}
+                <h4 className="mb-3">Spots open: {props.team['roster_spots']}</h4>
+                {headerButton}
                 </div>
             </div>
             </div>
