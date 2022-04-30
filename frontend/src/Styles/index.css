@@ -37,6 +37,9 @@ body{
     letter-spacing: 0.05em;
     transform: scale(1, 0.8);
     color: var(--black);
+    text-decoration: underline !important;
+    text-decoration-color: red !important;
+    text-decoration-thickness: 5vw;
 }
 
 .paragraph{
