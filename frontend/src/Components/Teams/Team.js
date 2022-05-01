@@ -1,11 +1,19 @@
 import React, {Fragment, useState, useEffect} from 'react';
 
+import AthleteCard from "./AthleteCard.js";
+
+
 import {useParams, Link} from "react-router-dom";
 import axios from 'axios';
 
 const Team = (props) =>{
     const id = props.team['id'];
-    const [athletes, setAthletes] = useState([""]);
+    console.log(props);
+    const [athletes, setAthletes] = useState([{
+        username: "",
+        first_name: "",
+        last_name: ""
+    }]);
 
     useEffect(() =>{
         if (id !== undefined){
@@ -15,16 +23,20 @@ const Team = (props) =>{
         }
     }, [id]);
 
+    console.log(athletes);
     
     return(
         <Fragment>
-            <div className="roster">
-                <h2>Team Roster</h2> 
-                <ul>
-                    {athletes.map((athlete, index) =>(
-                        <li key={index}>{athlete}</li>
+            <div className="card-deck">
+                <h2>Meet the Team</h2>
+                <br />
+                {Object.keys(athletes).length > 0 && (
+                    <Fragment>
+                    {athletes.map((athlete) => (
+                        <AthleteCard key={athlete.id} athlete={athlete} />
                     ))}
-                </ul>
+                    </Fragment>
+                )}
             </div>
         </Fragment>
     );
