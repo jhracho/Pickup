@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 
+import Form from 'react-bootstrap/Form';
+
 const TeamForm = (props) =>{
     const handleClose = props.handleClose;
 
@@ -61,11 +63,13 @@ const TeamForm = (props) =>{
                 <option defaultValue='Football'>Football</option>
                 <option defaultValue='Soccer'>Soccer</option>
                 <option defaultValue='Golf'>Golf</option>
-                <option defaultValue='Baseball'>Baseball</option>
+                <option defaultValue='Basketball'>Basketball</option>
                 <option defaultValue='Other'>Other</option>
             </select>
             </div>
-            <div className='form-group'><input onChange={handleChange} type='number' text={info.roster_spots} name='roster_spots' placeholoder='Roster Spots Available' required  /></div>
+            <div className='form-group'>
+                <input onChange={handleChange} type='number' text={info.roster_spots} name='roster_spots' placeholoder='Roster Spots Available' required  />
+            </div>
             <Modal.Footer>
             <button onClick={submitTeam}>
                 Create Team

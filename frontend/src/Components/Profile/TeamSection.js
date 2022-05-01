@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import TeamCard from "../Teams/TeamCard.js";
+import TeamCard from "../Home/TeamCard.js";
 
 const TeamSection = ({teams}) => {
     if(teams.length == 0) {
