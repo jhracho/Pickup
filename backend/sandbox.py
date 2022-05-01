@@ -26,24 +26,11 @@ def main():
     team_id = 10
     athlete_id = 20
     cursor = conn.cursor()
-    cursor.execute("""SELECT team.team_id, team.sport, team.team_name, team.roster_spots, a.onteam
-                FROM team, (SELECT
-                CASE WHEN EXISTS
-                    (
-                        SELECT *
-                        FROM team_comprised_of
-                        WHERE team_id = :1 and athlete_id = :2 
-                    )
-                THEN 1
-                ELSE 0
-                END as onteam
-                FROM DUAL) a
-                WHERE team_id = :1
-                """, [team_id, athlete_id]
+    cursor.execute("""SELECT * FROM team_comprised_of
+    """
     )
-
-    result = cursor.fetchone()
-    print(result)
+    for l in cursor.fetchall():
+        print(l)
     
     conn.close()
     

@@ -10,10 +10,13 @@
 
 .team-card-body {
     color: #F55353;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
 }
 
 .btn.btn-primary.stretched-link {
     background-color: #F55353;
+    border: none;
 }
 
 .d-flex.justify-content-center.align-items-center {

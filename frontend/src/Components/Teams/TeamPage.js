@@ -28,16 +28,8 @@ const TeamPage = () =>{
             setResult(res.data['result']);
             setTeam(res.data['data']);
         });
-
-        // axios.get('http://127.0.0.1:5000/api/team/'+team_id+'/'+athlete_id).then(res =>{
-        //     console.log(res);
-        //     setResult(res.data['result']);
-        //     setStatus(res.data['data']);
-        // });
     }, [team_id, athlete_id]);
     console.log(team);
-
-
 
     return(
         <div>
