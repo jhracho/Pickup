@@ -9,7 +9,7 @@ const GamesFilter = () =>{
                 <option value='Football'>Football</option>
                 <option value='Soccer'>Soccer</option>
                 <option value='Golf'>Golf</option>
-                <option value='Baseball'>Baseball</option>
+                <option value='Basketball'>Basketball</option>
                 <option value='Other'>Other</option>
             </select>
         </div>
