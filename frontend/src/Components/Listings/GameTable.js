@@ -27,12 +27,16 @@ const GameTable = () =>{
             setGames(res.data['data']['game']);
         });
     }, [user_id]);
-
+    
     return(
+        
         <div className = 'table'>
             <Button variant='info' id='add-game-button'><Link to='/createGame'>Add Game</Link></Button>
             <div className = 'table-body'>
-            {games.length > 0 && (
+            {games.length === 1 && games[0].name === "" &&(
+                <img className='loading-icon' src={require("../../Assets/loading.gif")} alt='Loading'/>
+            )}
+            {games.length > 0 && games[0].name !== "" &&(
                 <Fragment>
                 {games.map((game) => (
                     <GameListing key={game.id} game={game}></GameListing>

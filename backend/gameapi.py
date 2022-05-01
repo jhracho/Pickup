@@ -89,17 +89,26 @@ def getGames():
 @gameapi.route('/addGame', methods=['POST'])
 def addGame():
     name = request.json.get('name')
-    owner = request.json.get('owner')
+    owner = int(request.json.get('owner'))
     sport = request.json.get('sport')
     date = request.json.get('date')
     time = request.json.get('time')
     location = request.json.get('loc')
-    players = request.json.get('players')
+    players = int(request.json.get('players'))
     dt = datetime.strptime(date + " " + time, "%Y-%m-%d %H:%M")
+
+    if location == 'The Rock':
+        location = 0
+    elif location == 'Ricci Family Fields':
+        location = 1
+    elif location == 'Warren Golf Course':
+        location = 2
 
     cursor = conn.cursor()
     nid = get_next_id('game')
-    cursor.execute("""INSERT INTO game VALUES (:id, :owner, :name, :sport, :dt, :location, :players)""", [nid, owner, name, sport, dt, location, players])
+    
+    cursor.execute("""INSERT INTO game VALUES (:id, :owner, :name, :sport, :dt, :location, :players)""", [nid, owner, name, sport, dt, players, location])
+    cursor.execute("""INSERT INTO attending_game VALUES (:aid, :gid)""", [owner, nid])
     conn.commit()
     return {'result':'success', 'id':nid}
 
@@ -107,14 +116,39 @@ def addGame():
 def editGame():
     id = request.json.get('id')
     name = request.json.get('name')
-    owner = request.json.get('owner')
     sport = request.json.get('sport')
     date = request.json.get('date')
     time = request.json.get('time')
     location = request.json.get('loc')
     players = request.json.get('players')
-    print(f'{name}, {sport}, {date}, {time}, {location}, {players}')
-    return {'result':'success', 'id':1}
+    
+    if location == 'The Rock':
+        location = 0
+    elif location == 'Ricci Family Fields':
+        location = 1
+    elif location == 'Warren Golf Course':
+        location = 2
+    dt = datetime.strptime(date + " " + time, "%m/%d/%Y %H:%M")
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE game
+        SET game_name=:1, sport=:2, date_playing=:3, players_needed=:4, location_id=:5
+        WHERE game_id=:6
+    """, [name, sport, dt, players, location, id])
+    conn.commit()
+
+    # Email portion
+    cursor.execute("""SELECT athlete.email, athlete.game_notif FROM athlete natural join attending_game WHERE attending_game.game_id=:1"""
+    , [id])
+    results = cursor.fetchall()
+    if len(results) > 0:
+        dests = list()
+        for row in results:
+            if row[1] == 1:
+                dests.append(row[0])
+        if len(dests) > 0:
+            send_edit_email(dests, name, id)
+    return {'result':'success', 'id':id}
 
 @gameapi.route('/joinGame', methods=['POST'])
 def joinGame():
@@ -136,7 +170,6 @@ def joinGame():
         (select * from athlete, game where athlete.athlete_id=game.athlete_id AND game.game_id = :2) b
     """, [user_id, game_id])
     
-
     row = cursor.fetchone()
     if row[3] == 1:
         send_game_email(row[2], row[1], row[0], row[4], game_id)
@@ -169,6 +202,24 @@ def leaveGame():
     cursor.close()
     return {'result':'success'} 
 
+@gameapi.route('/deleteGame/<game_id>', methods=['DELETE'])
+def deleteGame(game_id):
+    cursor = conn.cursor()
+    cursor.execute("""SELECT athlete.email from athlete natural join attending_game where game_id=:1""", [game_id])
+    result = cursor.fetchall()
+    if len(result) != 0:
+        cursor.execute("""SELECT game_name FROM game WHERE game_id = :1""", [game_id])
+        game_name = cursor.fetchone()[0]
+        dests = list()
+        for row in result:
+            dests.append(row[0])
+        send_cancel_email(dests, game_name)
+
+    cursor.execute("""DELETE FROM game WHERE game_id = :1""", [game_id])
+    cursor.execute("""DELETE FROM attending_game WHERE game_id = :1""", [game_id])
+    conn.commit()
+    return {'result':'success'}
+    
 # Get Location Data for a Location
 @gameapi.route('/location/<loc_id>', methods=['GET'])
 def getLocation(loc_id):

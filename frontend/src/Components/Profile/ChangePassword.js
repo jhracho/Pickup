@@ -1,58 +1,70 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
 
-/* this guy should be a modal that pops up when the change password button is pressed on the profile page. css is included below.
+const ChangePassword = () => {
+    const [newPassword, setNewPassword] = useState({
+        old_password: '',
+        password1: '',
+        password2: ''
+    });
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-  }
+    function handleChange(e){
+        e.preventDefault();
+        const {name, value: newVal} = e.target;
+        setNewPassword({
+            ...newPassword,
+            [name]: newVal
+        });
+    };
 
-  .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; 
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; 
-}
+    function submitPassword(e){
+        console.log(newPassword);
+        e.preventDefault();
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:5000/api/change-password',
+            data: {
+                athlete_id: localStorage.getItem('athlete_id'),
+                old_password: newPassword.old_password,
+                password1: newPassword.password1,
+                password2: newPassword.password2
+            }
+        }).then((res) =>{
+            if(res.data['result'] === 'success') {
+                alert("Password successfully changed.");
+                window.location.href = '/profile';
+            }
+            else{ alert(res.data['msg']); }
+            }).catch((error) =>{
+                if (error.response){
+                    alert(error.response.status)
+            }
+        });
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+        setNewPassword({
+            old_password:"",
+            password1:"",
+            pasword2:"" 
+        });
+    }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-*/
-const ChangePassword = ({newPassword, onChange, onSubmit}) => {
     return(
-        <div id="change-password-modal" className="modal">
-            <div className="modal-content">
-                <span className="close">&times;</span>
-                <div className="card card-container"> 
-                    <div className="dome-img"></div>
-                    <form className="login-form" onSubmit={onSubmit} autoComplete="off">
-                        <input type="password" id="old-password-input" className="form-control" placeholder="Old Password" name="old_password" value={newPassword.old_password} onChange={onChange} required autoFocus/>
-                        <input type="password" id="password1-input" className="form-control" placeholder="New Password" name="password1" value={newPassword.password1} onChange={onChange} required autoFocus/>
-                        <input type="password" id="password2-input" className="form-control" placeholder="Confirm Password" name="password2" value={newPassword.password2} onChange={onChange} required autoFocus/>
-                    <button className="submit-change-button btn btn-lg btn-block" type="submit">Submit</button><br />
-                    </form>
-                </div>
+        <div id='form-div'>
+            <div className='form-group'>
+                <input onChange={handleChange} type='text' text={newPassword.old_password} name='old_password' placeholoder='Old Password' maxLength='25' required />
             </div>
+            <div className='form-group'>
+                <input onChange={handleChange} type='text' text={newPassword.password1} name='password1' placeholoder='New Password' maxLength='25' required />
+            </div>
+            <div className='form-group'>
+                <input onChange={handleChange} type='text' text={newPassword.password2} name='password2' placeholoder='Confirm Password' maxLength='25' required />
+            </div>
+            <Modal.Footer>
+            <button onClick={submitPassword}>
+                Update Password
+            </button>
+            </Modal.Footer>
         </div>
     );
 };

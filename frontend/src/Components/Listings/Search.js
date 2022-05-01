@@ -49,8 +49,11 @@ const Search = () => {
     return(
         <Fragment>
             <input type="text" placeholder="Search by game name, owner, or date" id="search-input" onKeyUp={onKeyUp}/>
+            {filteredGames.length === 1 && filteredGames[0].name === "" &&(
+                    <img className='loading-icon' src={require("../../Assets/loading.gif")} alt='Loading'/>
+            )}
             <div id="search-results-div">
-                {filteredGames.length > 0 && (
+                {filteredGames.length > 0 && filteredGames[0].name !== "" &&(
                     <Fragment>
                     {filteredGames.map((game) => (
                         <GameListing key={game.id} game={game} type='Join'/>

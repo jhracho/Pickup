@@ -1,21 +1,47 @@
 .background{
-    background-color: whitesmoke !important;
+    background-color: var(--paragraph) !important;
     background-size: cover;
 }
+
+.teams-page-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card{
+    background-color: var(--paragraph) !important;
+}
+
+.teams-header{
+    font-family: 'Bebas Neue', cursive;
+    color: var(--headline);
+    font-size: 3vw;
+    text-decoration: underline !important;
+    text-decoration-color: var(--secondary) !important;
+    text-decoration-thickness: 5vw;
+}
+
 .card-deck {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 1rem;
+    width: 95%;
+    position: absolute;
+    top: 10vw;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .team-card-body {
-    color: #F55353;
+    color: var(--background);
     padding-bottom: 2vh;
     padding-top: 2vh;
+    font-family: 'Akshar', sans-serif;
 }
 
 .btn.btn-primary.stretched-link {
-    background-color: #F55353;
+    background-color: var(--secondary);
     border: none;
 }
 
@@ -28,7 +54,6 @@
 .card-deck {
     padding: 5vw;
 }
-
 
 .mb-3-name{
     font-weight: bold;

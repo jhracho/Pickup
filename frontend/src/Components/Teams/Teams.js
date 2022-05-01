@@ -6,9 +6,10 @@ const Teams = () =>{
     return(
         <div>
             <NavBar active='Teams' />
-            <h1>Teams</h1>
-            <br />
-            <TeamsCardDeck />
+            <div className='teams-page-body'>
+                <h1 className='teams-header'>Teams</h1>
+                <TeamsCardDeck />
+            </div>
         </div>
     );
 };

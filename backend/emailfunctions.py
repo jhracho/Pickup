@@ -40,3 +40,31 @@ def send_waitlist_email(dest, game_name):
 
     <a href='https://cnn.com'>Update Notification Settings</a>
     """)
+
+def send_cancel_email(dest, game_name):
+    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag.send(dest, subject='Pickup - A game has been canceled...', contents= 
+    f"""
+    Hello,
+
+    The following game has been canceled by its' creator: {game_name}.
+
+    - Pickup Sports
+
+    <a href='https://cnn.com'>Update Notification Settings</a>
+    """)
+
+
+def send_edit_email(dest, game_name, game_id):
+    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag.send(dest, subject='Pickup - A game has been edited.', contents= 
+    f"""
+    Hello,
+
+    The following game has been edited by its' creator: {game_name}.
+    Check it out <a href='https://cnn.com'>Here</a>
+
+    - Pickup Sports
+
+    <a href='https://cnn.com'>Update Notification Settings</a>
+    """)

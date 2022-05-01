@@ -18,9 +18,6 @@ const GameForm = (props) =>{
     function handleChange(e){
         e.preventDefault();
         const {name, value: newVal} = e.target;
-        if (name === 'sport'){
-            console.log('Sport Change!');
-        }
         setInfo({
             ...info,
             [name]: newVal
@@ -28,8 +25,8 @@ const GameForm = (props) =>{
     };
 
     function submitGame(e){
-        console.log(info.time);
         e.preventDefault();
+        console.log(info.time);
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:5000/api/addGame',
@@ -81,6 +78,14 @@ const GameForm = (props) =>{
             <div className='form-group'><input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' required  /></div>
             <div className='form-group'><input onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' required  /></div>
             <div className='form-group'><input onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  /></div>
+            <div className='form-group'>
+                <select required onChange={handleChange} name='loc'>
+                <option defaultValue="" selected disabled hidden>Select Location</option>
+                <option defaultValue='0'>The Rock</option>
+                <option defaultValue='1'>Ricci Family Fields</option>
+                <option defaultValue='2'>Warren Golf Course</option>
+            </select>
+            </div>
             <Modal.Footer>
             <button onClick={submitGame}>
                 Submit Game

@@ -1,8 +1,8 @@
 import cx_Oracle
 import datetime
 from hashlib import md5
+from datetime import datetime
 
-cx_Oracle.init_oracle_client('/usr/local/lib')
 conn = cx_Oracle.connect('shayden2/shayden2@172.22.132.222/xe')
 #conn = cx_Oracle.connect('jake/jake@172.22.133.101/XE')
 
@@ -26,13 +26,11 @@ def main():
     team_id = 10
     athlete_id = 20
     cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM team_comprised_of
-    """
-    )
-    for l in cursor.fetchall():
-        print(l)
-    
-    conn.close()
+    cursor.execute("""SELECT athlete.email, athlete.game_notif FROM athlete natural join attending_game WHERE attending_game.game_id=50""")
+    for row in cursor.fetchall():
+        print(row)
+    cursor.close()
+ 
     
 
 if __name__ == '__main__':

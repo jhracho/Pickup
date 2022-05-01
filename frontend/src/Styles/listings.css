@@ -8,15 +8,17 @@
 
 #page-header{
     font-family: 'Bebas Neue', cursive;
+    color: var(--headline);
     font-size: 3vw;
     text-decoration: underline !important;
-    text-decoration-color: red !important;
+    text-decoration-color: var(--secondary) !important;
     text-decoration-thickness: 5vw;
     margin-bottom: 1.5vw;
+    margin-left: 1vw;
 }
 
 .add-button{
-    background: skyblue;
+    background: var(--secondary);
 }
 
 #search-input{
@@ -56,7 +58,7 @@
 }
 
 .leave-button{
-    background-color: var(--red);
+    background-color: var(--secondary);
 }
 
 .full-button{
@@ -84,6 +86,7 @@
 .game-card{
     margin-bottom: 0.25em;
     background-color: var(--paragraph) !important;
+    color: var(--background);
 }
 
 .game-link-button a{
