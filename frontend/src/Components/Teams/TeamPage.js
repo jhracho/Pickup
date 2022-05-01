@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 
 import Team from './Team';
-import TeamHeader from './TeamHeader'
+import TeamHeader from './TeamHeader';
 import NavBar from '../Nav/NavBar';
 
 import {useParams} from "react-router-dom";
