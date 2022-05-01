@@ -1,3 +1,5 @@
+/* Teams Page - Card Deck */
+
 .background{
     background-color: whitesmoke !important;
     background-size: cover;
@@ -6,6 +8,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 1rem;
+    padding: 5vw;
 }
 
 .team-card-body {
@@ -19,16 +22,29 @@
     border: none;
 }
 
+/* Teams Page - Create Team Button */
+
+.team-link-button{
+    border: none;
+    color: white;
+    height: 2em;
+    width: 7em;
+    margin: 0 auto;
+    border-radius: 0.8vw;
+    display: block;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    background: skyblue;
+}
+
+/* Individual Teams Page - Heading */
+
 .d-flex.justify-content-center.align-items-center {
     padding-top: 1em;
     padding-bottom: 1em;
     height: 300px;
 }
-
-.card-deck {
-    padding: 5vw;
-}
-
 
 .mb-3-name{
     font-weight: bold;
@@ -38,10 +54,18 @@
     border-color: #F55353;
 }
 
+.btn.btn-primary.btn-lg.leave {
+    background-color: #F55353;
+    color: white; 
+    border: none; 
+}
+
 .btn.btn-outline-light.btn-lg:hover {
     background-color: #F55353;
     color: white; 
 }
+
+/* Individual Teams Page - Roster List */
 
 .roster {
     padding: 1vw;
