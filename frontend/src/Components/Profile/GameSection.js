@@ -2,7 +2,6 @@ import React, {Fragment} from "react";
 import GameListing from "../Listings/GameListing.js";
 
 const GameSection = ({games}) => {
-    console.log(games);
     if(games.length === 0) {
         return(
             <div>
