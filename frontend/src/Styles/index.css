@@ -3,10 +3,17 @@
     --dark-red: #ac3b3b;
     --white: rgb(220, 220, 220);
     --black: #111;
+    --background: #0f0e17;
+    --headline: #fffffe;
+    --paragraph: #c0c0c0;
+    --stroke: black;
+    --secondary: #f25f4c;
+    --tertiary: #efcb68;
+    --lightgrey: #e1efe6;
+    --darkgrey: #aeb7b3;
 }
 
 body{
-    background-color: var(--white);
     font-family: 'Akshar', sans-serif;
     padding: 0;
     margin: 0;
@@ -22,8 +29,9 @@ body{
     transform: translateX(-50%);
     filter: grayscale(100%);
    -webkit-filter: grayscale(100%);
-   -webkit-mask-image:-webkit-gradient(linear, left bottom, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
    mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+   mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)), linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)),;
+   mix-blend-mode: overlay;
 }
 
 .title-text{
@@ -36,14 +44,15 @@ body{
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 0.05em;
     transform: scale(1, 0.8);
-    color: var(--black);
+    color: var(--headline);
     text-decoration: underline !important;
-    text-decoration-color: red !important;
+    text-decoration-color: var(--secondary) !important;
     text-decoration-thickness: 5vw;
 }
 
 .paragraph{
     position: absolute;
+    color: var(--paragraph);
     left: 10vw;
     top: 15vw;
     width: 40%;
@@ -71,7 +80,7 @@ body{
 }
 
 .learn{
-    background-color: var(--black);
+    background-color: var(--tertiary);
 }
 
 .learn:hover{
@@ -79,7 +88,7 @@ body{
 }
 
 .create{
-    background-color: var(--red);
+    background-color: var(--secondary);
     margin-left: 0.5em;
 }
 

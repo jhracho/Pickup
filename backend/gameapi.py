@@ -155,16 +155,17 @@ def leaveGame():
     cursor.execute("""UPDATE game SET players_needed=players_needed+1 WHERE game_id = :1""", [game_id])
     conn.commit()
 
+    cursor.execute("""SELECT game_name FROM game WHERE game_id = :1""", [game_id])
+    game_name = cursor.fetchone()[0]
+
     cursor.execute("""SELECT athlete.email from athlete natural join game_waitlist where game_id=:1""", [game_id])
     result = cursor.fetchall()
     if len(result) != 0:
         dests = list()
         for row in result:
             dests.append(row[0])
+        send_waitlist_email(dests, game_name)
 
-    cursor.execute("""SELECT game_name FROM game WHERE game_id = :1""", [game_id])
-    game_name = cursor.fetchone()[0]
-    send_waitlist_email(dests, game_name)
     cursor.close()
     return {'result':'success'} 
 

@@ -17,6 +17,7 @@
     padding-top: 2vw;
     padding-bottom: 0.5vw;
     margin: 0 0.8em;
+    color: var(--headline);
 }
 
 .navbar .links{
@@ -26,7 +27,7 @@
 }
 
 .navbar a{
-    color: var(--black);
+    color: var(--headline);
     font-weight: 600;
     text-decoration: none;
 }
@@ -38,7 +39,7 @@
 
 .active{
     text-decoration: underline !important;
-    text-decoration-color: red !important;
+    text-decoration-color: var(--secondary) !important;
     text-decoration-thickness: 5vw;
     pointer-events: none;
 }
@@ -50,10 +51,12 @@
 .navbar .logo{
     width: 4vw;
     height: 4vw;
+    filter: invert(88%) sepia(0%) saturate(4157%) hue-rotate(210deg) brightness(771%) contrast(109%);
+    margin-bottom: 0.5vw;
 }
 
 .navbar .logo-text{
-    color: var(--black);
+    color: var(--headline);
     font-size: 4.5vw;
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 0.05em;
@@ -62,7 +65,7 @@
 
 .line{
     display: fixed;
-    border-bottom: 1px solid #565a5c;
+    border-bottom: 1px solid var(--paragraph);
     position: absolute;
     top: 4.75vw;
     left: 50%;

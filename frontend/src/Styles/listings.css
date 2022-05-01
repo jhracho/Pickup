@@ -83,7 +83,7 @@
 
 .game-card{
     margin-bottom: 0.25em;
-    background-color: var(--white) !important;
+    background-color: var(--paragraph) !important;
 }
 
 .game-link-button a{
