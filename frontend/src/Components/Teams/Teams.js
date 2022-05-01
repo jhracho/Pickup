@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import NavBar from '../Nav/NavBar';
-import TeamsCardDeck from "./TeamsCardDeck.js";
 import AddTeamModal from "./AddTeamModal.js";
+import SearchTeams from "./SearchTeams";
 
 const Teams = () =>{
     return(
@@ -11,7 +11,7 @@ const Teams = () =>{
             <br />
             <AddTeamModal />
             <br />
-            <TeamsCardDeck />
+            <SearchTeams />
         </div>
     );
 };

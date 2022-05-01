@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {Fragment, useState, useEffect} from 'react';
 import GameListing from "./GameListing.js";
 
-const Search = () => {
+const SearchGames = () => {
     const onKeyUp = () => {
         setFilteredGames([]);
         const input = document.getElementById('search-input').value;
@@ -48,7 +48,7 @@ const Search = () => {
 
     return(
         <Fragment>
-            <input type="text" placeholder="Search by game name, owner, or date" id="search-input" onKeyUp={onKeyUp}/>
+            <input type="text" placeholder="Search by game name, owner, sport, or date" id="search-input" onKeyUp={onKeyUp}/>
             <div id="search-results-div">
                 {filteredGames.length > 0 && (
                     <Fragment>
@@ -67,4 +67,4 @@ const Search = () => {
     )
 };
 
-export default Search;
+export default SearchGames;

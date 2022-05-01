@@ -4,7 +4,7 @@ import React from 'react';
 import NavBar from '../Nav/NavBar';
 import ListingsHeader from './Header';
 import GamesFilter from './Filter';
-import Search from './Search';
+import SearchGames from './SearchGames';
 import GameTable from './GameTable';
 import CreateModal from './CreateModal';
 
@@ -15,7 +15,7 @@ const ListingsPage = () =>{
             <div id='pageDiv'>
                 <h2 id='page-header'>Games</h2>
                 <CreateModal />
-                <Search />
+                <SearchGames />
             </div>
         </div>
     );
