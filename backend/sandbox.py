@@ -23,14 +23,20 @@ def main():
     print(dt.date())
     print(gid('game'))
     '''
-    team_id = 10
-    athlete_id = 20
+    nid = 30
+    creator = 203
     cursor = conn.cursor()
     cursor.execute("""SELECT athlete.email, athlete.game_notif FROM athlete natural join attending_game WHERE attending_game.game_id=50""")
     for row in cursor.fetchall():
         print(row)
     cursor.close()
  
+    cursor.execute("""INSERT INTO team_comprised_of VALUES (:creator, :id)""", [creator, nid])
+    cursor.execute("""SELECT * FROM team_comprised_of""") 
+    for l in cursor.fetchall():
+        print(l)
+    
+    conn.close()
     
 
 if __name__ == '__main__':

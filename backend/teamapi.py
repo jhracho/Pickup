@@ -122,6 +122,8 @@ def leaveTeam():
 
     cursor = conn.cursor()
     cursor.execute("""DELETE FROM team_comprised_of WHERE athlete_id = :1 and team_id = :2""", [athlete_id, team_id])
+    cursor.execute("""UPDATE team SET roster_spots=roster_spots+1 WHERE team_id = :1 """, [team_id])
+ 
     conn.commit()
     return {'result':'success'}
 
@@ -133,6 +135,28 @@ def getRoster(team_id):
     cursor.execute("""SELECT athlete.username, athlete.first_name, athlete.last_name FROM athlete, team_comprised_of WHERE athlete.athlete_id = team_comprised_of.athlete_id and team_comprised_of.team_id = :id """, [team_id])
 
     #cursor.execute("""SELECT athlete.username FROM athlete NATURAL JOIN team_comprised_of WHERE team_comprised_of.team_id = :id """, [team_id])
-    for row in cursor:
-        payload['data'].append(row[0])
+    result = cursor.fetchall()
+    if cursor.rowcount != 0:
+        for row in result:
+            username = row[0]
+            first_name = row[1]
+            last_name = row[2]
+            payload['data'].append({'username':username, 'first_name':first_name, 'last_name':last_name})
+    
+    conn.commit()
+    
     return payload 
+
+@teamapi.route('/addTeam', methods=['POST'])
+def addTeam():
+    sport = request.json.get('sport')
+    name = request.json.get('name')
+    roster_spots = request.json.get('roster_spots')
+    creator = request.json.get('creator')
+
+    cursor = conn.cursor()
+    nid = get_next_id('team')
+    cursor.execute("""INSERT INTO team VALUES (:id, :sport, :name, :roster_spots)""", [nid, sport, name, roster_spots])
+    cursor.execute("""INSERT INTO team_comprised_of VALUES (:creator, :id)""", [creator, nid])
+    conn.commit()
+    return {'result':'success', 'id':nid}

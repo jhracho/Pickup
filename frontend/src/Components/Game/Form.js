@@ -71,7 +71,7 @@ const GameForm = (props) =>{
                 <option defaultValue='Football'>Football</option>
                 <option defaultValue='Soccer'>Soccer</option>
                 <option defaultValue='Golf'>Golf</option>
-                <option defaultValue='Baseball'>Baseball</option>
+                <option defaultValue='Basketball'>Basketball</option>
                 <option defaultValue='Other'>Other</option>
             </select>
             </div>

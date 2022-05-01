@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {Fragment, useState, useEffect} from 'react';
 import GameListing from "./GameListing.js";
 
-const Search = () => {
+const SearchGames = () => {
     const onKeyUp = () => {
         setFilteredGames([]);
         const input = document.getElementById('search-input').value;
@@ -70,4 +70,4 @@ const Search = () => {
     )
 };
 
-export default Search;
+export default SearchGames;

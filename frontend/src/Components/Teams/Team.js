@@ -2,13 +2,13 @@ import React, {Fragment, useState, useEffect} from 'react';
 
 import AthleteCard from "./AthleteCard.js";
 
-
 import {useParams, Link} from "react-router-dom";
 import axios from 'axios';
 
 const Team = (props) =>{
     const id = props.team['id'];
-    console.log(props);
+
+    const [result, setResult] = useState("");
     const [athletes, setAthletes] = useState([{
         username: "",
         first_name: "",
@@ -18,18 +18,25 @@ const Team = (props) =>{
     useEffect(() =>{
         if (id !== undefined){
             axios.get('http://127.0.0.1:5000/api/teamRoster/'+id).then(res =>{
+                setResult(res.data['result']);
                 setAthletes(res.data['data']);
             });
         }
     }, [id]);
 
+    console.log("ATHLETES:");
     console.log(athletes);
+
+    const atleteExists = 0;
+    if (athletes[0].username === ''){
+        console.log("no athlete");
+    }
     
     return(
         <Fragment>
+            {/* TODO: ADD ONE PLAYER TO EACH TEAM */}
+            <h2>Meet the Team</h2>
             <div className="card-deck">
-                <h2>Meet the Team</h2>
-                <br />
                 {Object.keys(athletes).length > 0 && (
                     <Fragment>
                     {athletes.map((athlete) => (
