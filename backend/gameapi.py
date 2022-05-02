@@ -91,6 +91,8 @@ def addGame():
     name = request.json.get('name')
     owner = int(request.json.get('owner'))
     sport = request.json.get('sport')
+    if sport == 'Other' or sport == '':
+        sport = str.title(request.json.get('other'))
     date = request.json.get('date')
     time = request.json.get('time')
     location = request.json.get('loc')
