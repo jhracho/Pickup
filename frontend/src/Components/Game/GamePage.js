@@ -24,7 +24,7 @@ const GamePage = () =>{
     }]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/game/'+game_id).then(res =>{
+        axios.get('http://52.87.107.120:5000/api/game/'+game_id).then(res =>{
             setResult(res.data['result']);
             setGame(res.data['data']);
         });

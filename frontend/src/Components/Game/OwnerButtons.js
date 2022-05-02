@@ -17,7 +17,7 @@ const OwnerButtons = (props) =>{
         e.preventDefault();
         axios({
             method: 'DELETE',
-            url: 'http://127.0.0.1:5000/api/deleteGame/'+props.game.id,
+            url: 'http://52.87.107.120:5000/api/deleteGame/'+props.game.id,
           }).then((res) =>{
               window.location.href = '/games/';
           }).catch((error) =>{

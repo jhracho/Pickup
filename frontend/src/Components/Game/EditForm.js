@@ -29,7 +29,7 @@ const EditForm = (props) =>{
         console.log(info.loc);
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/editGame',
+            url: 'http://52.87.107.120:5000/api/editGame',
             data: {
               id: props.game.id,
               name: info.name,

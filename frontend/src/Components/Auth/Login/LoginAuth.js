@@ -18,7 +18,7 @@ const LoginAuth = () => {
             setCheck(false);
             axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:5000/api/login',
+                url: 'http://52.87.107.120:5000/api/login',
                 data: {
                   username: user.username,
                   password: user.password
@@ -27,7 +27,7 @@ const LoginAuth = () => {
                 const isAuth = res.data['auth'];
                 if (isAuth){
                     localStorage.setItem("athlete_id", res.data['athlete_id']);
-                    window.location.href = '/home';
+                    window.location.href = 'http://52.87.107.120:8802/home';
                 }
                 else{ alert(res.data['msg']); }
               }).catch((error) =>{

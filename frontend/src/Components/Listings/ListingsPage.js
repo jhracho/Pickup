@@ -1,11 +1,6 @@
 import React from 'react';
-
-
 import NavBar from '../Nav/NavBar';
-import ListingsHeader from './Header';
-import GamesFilter from './Filter';
 import SearchGames from './SearchGames';
-import GameTable from './GameTable';
 import CreateModal from './CreateModal';
 
 const ListingsPage = () =>{

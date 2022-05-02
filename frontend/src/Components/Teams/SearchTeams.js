@@ -30,7 +30,7 @@ const SearchTeams = () => {
     useEffect(() => {
         const athlete_id = localStorage.getItem('athlete_id');
 
-        axios.get('http://127.0.0.1:5000/api/teams?athlete=' + athlete_id).then(res => {
+        axios.get('http://52.87.107.120:5000/api/teams?athlete=' + athlete_id).then(res => {
             setTeams(res.data['data']);
             setFilteredTeams(res.data['data']);
         });
@@ -38,7 +38,7 @@ const SearchTeams = () => {
 
     return(
         <Fragment>
-            <input type="text" placeholder="Search by team name or sport" id="search-input" onKeyUp={onKeyUp}/>
+            <input className='team-search-bar' type="text" placeholder="Search by team name or sport" id="search-input" onKeyUp={onKeyUp}/>
             {filteredTeams.length > 0 && (
                 <Fragment>
                     <TeamsCardDeck teams={filteredTeams} />

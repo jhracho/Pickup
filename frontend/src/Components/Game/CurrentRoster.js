@@ -7,7 +7,7 @@ const CurrentRoster = (props) =>{
 
     useEffect(() =>{
         if (id !== undefined){
-            axios.get('http://127.0.0.1:5000/api/roster/'+id).then(res =>{
+            axios.get('http://52.87.107.120:5000/api/roster/'+id).then(res =>{
                 setUsers(res.data['data']);
             });
         }

@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import button from 'react-bootstrap/button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFootball, faFutbol, faBasketball, faGolfBallTee, faPerson, faCalendar } from '@fortawesome/free-solid-svg-icons'
@@ -39,7 +38,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/joinGame',
+            url: 'http://52.87.107.120:5000/api/joinGame',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId
@@ -59,7 +58,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/leaveGame',
+            url: 'http://52.87.107.120:5000/api/leaveGame',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId
@@ -79,7 +78,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/joinWaitlist',
+            url: 'http://52.87.107.120:5000/api/joinWaitlist',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId

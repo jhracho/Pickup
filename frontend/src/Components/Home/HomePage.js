@@ -45,7 +45,7 @@ const HomePage = () =>{
         var sport = e.target.value;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/toggle-select',
+            url: 'http://52.87.107.120:8802/api/toggle-select',
             data: {
                 athlete_id: localStorage.getItem('athlete_id'),
                 select: sport
@@ -56,7 +56,7 @@ const HomePage = () =>{
     }
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
+        axios.get('http://52.87.107.120:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
             setGames(res.data['games']);
             setUpcoming(res.data['upcoming']);
             setTeams(res.data['teams'])

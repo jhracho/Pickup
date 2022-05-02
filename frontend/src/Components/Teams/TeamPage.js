@@ -24,22 +24,21 @@ const TeamPage = () =>{
     const athlete_id = localStorage.getItem('athlete_id');
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/team/'+team_id+'/'+athlete_id).then(res =>{
+        axios.get('http://52.87.107.120:5000/api/team/'+team_id+'/'+athlete_id).then(res =>{
             setResult(res.data['result']);
             setTeam(res.data['data']);
         });
     }, [team_id, athlete_id]);
-    console.log(team);
 
     return(
         <div>
             <NavBar active='' />
             {result==='success' ?
                 (
-                <Fragment>
+                <div className='teams-page-body'>
                     <TeamHeader team={team}> </TeamHeader>
                     <Team team={team}/>
-                </Fragment>
+                </div>
                 ) :
 
                 (<div>

@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
-
 import axios from 'axios';
-
 import TeamImage from "../../Assets/team_img.jpeg";
 
 const TeamHeader = (props) =>{
@@ -10,7 +8,7 @@ const TeamHeader = (props) =>{
         const teamId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/joinTeam',
+            url: 'http://52.87.107.120:8802/api/joinTeam',
             data: {
               athlete: localStorage.getItem('athlete_id'),
               team: teamId
@@ -30,7 +28,7 @@ const TeamHeader = (props) =>{
         const teamId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/leaveTeam',
+            url: 'http://52.87.107.120:5000/api/leaveTeam',
             data: {
               athlete: localStorage.getItem('athlete_id'),
               team: teamId
@@ -49,16 +47,15 @@ const TeamHeader = (props) =>{
     
     let headerButton;
     if (props.team.on_team === 0){
-        headerButton = <a className="btn btn-outline-light btn-lg" role="button" id={props.team['id']} onClick={joinTeam}>Join</a>
+        headerButton = <button className="team-button join" id={props.team['id']} onClick={joinTeam}>Join</button>
     }
     else if (props.team.on_team === 1){
-        headerButton = <a className="btn btn-primary btn-lg leave" role="button" id={props.team['id']} onClick={leaveTeam}>Leave</a>
+        headerButton = <button className="team-button leave" id={props.team['id']} onClick={leaveTeam}>Leave</button>
  
     }
     
-
-    return(
-        <div
+    /*
+    <div
             className="bg-image"
             style={{backgroundImage: `url(${TeamImage})`, height: '300px', textAlign: 'center'}}>
             
@@ -70,6 +67,15 @@ const TeamHeader = (props) =>{
                 {headerButton}
                 </div>
             </div>
+            </div>
+        </div>
+    */
+    return(
+        <div className='team-header-area'>
+            <div className='team-header-info'>
+                <h1 className="mb-3-name">{props.team['name']} {props.team['sport']} Team</h1>
+                <h4 className="mb-3">Spots open: {props.team['roster_spots']}</h4>
+                {headerButton}
             </div>
         </div>
 

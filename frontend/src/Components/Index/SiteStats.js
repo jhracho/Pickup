@@ -9,7 +9,7 @@ const SitewideStats = () =>{
     });
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/landingStats').then(res =>{
+        axios.get('http://52.87.107.120:5000/api/landingStats').then(res =>{
             setStats(res.data['data']);
         });
     }, []);

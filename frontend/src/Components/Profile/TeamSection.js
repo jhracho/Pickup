@@ -4,15 +4,15 @@ import TeamCard from "../Home/TeamCard.js";
 const TeamSection = ({teams}) => {
     if(teams.length == 0) {
         return(
-            <div>
-                <h1>Teams</h1>
-                <h3>You are not a member of any teams.</h3>
+            <div className='team-section'>
+                <h1 className='profile-header'>Teams</h1>
+                <h3 className='profile-desc'>You are not a member of any teams.</h3>
             </div>
         )
     }
     return(
-        <div>
-            <h1>Teams</h1>
+        <div className='team-section'>
+            <h1 className='profile-header'>Teams</h1>
             <Fragment>
                 {teams.map((team) => (
                     <TeamCard key={team.team_id} team={team} />

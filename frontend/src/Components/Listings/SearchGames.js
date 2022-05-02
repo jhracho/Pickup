@@ -40,7 +40,7 @@ const SearchGames = () => {
     useEffect(() => {
         const athlete_id = localStorage.getItem('athlete_id');
 
-        axios.get('http://127.0.0.1:5000/api/games?user=' + athlete_id).then(res => {
+        axios.get('http://52.87.107.120:5000/api/games?user=' + athlete_id).then(res => {
             setGames(res.data['data']);
             setFilteredGames(res.data['data']);
         });

@@ -17,25 +17,16 @@ const Team = (props) =>{
 
     useEffect(() =>{
         if (id !== undefined){
-            axios.get('http://127.0.0.1:5000/api/teamRoster/'+id).then(res =>{
+            axios.get('http://52.87.107.120:5000/api/teamRoster/'+id).then(res =>{
                 setResult(res.data['result']);
                 setAthletes(res.data['data']);
             });
         }
     }, [id]);
-
-    console.log("ATHLETES:");
-    console.log(athletes);
-
-    const atleteExists = 0;
-    if (athletes[0].username === ''){
-        console.log("no athlete");
-    }
-    
+   
     return(
         <Fragment>
-            {/* TODO: ADD ONE PLAYER TO EACH TEAM */}
-            <h2>Meet the Team</h2>
+            <h2 className='profile-header'>Meet the Team</h2>
             <div className="card-deck">
                 {Object.keys(athletes).length > 0 && (
                     <Fragment>
