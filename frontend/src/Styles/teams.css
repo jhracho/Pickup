@@ -13,6 +13,9 @@
 
 .card{
     background-color: var(--paragraph) !important;
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
 }
 
 .teams-header{
@@ -35,6 +38,7 @@
     transform: translateX(-50%);
     margin-top: 5vw;
     padding-top: 0 !important;
+    margin: auto;
 }
 
 .team-card-body {
@@ -102,10 +106,10 @@
     padding: 1vw;
 }
 
-.roster-card{
+/* .roster-card{
     margin-left: 0;
     margin-right: 0;
-}
+} */
 
 .team-button{
     border: none;

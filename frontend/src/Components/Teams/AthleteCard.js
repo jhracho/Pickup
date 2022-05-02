@@ -1,12 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-// // Stateless child component which shows individual event
-// // The stateful parent component will be the full CardDeck
-
-
 const AthleteCard = (athlete) => {
     return (
-        <div className="roster-card card text-primary text-center shadow-sm bg-white mb-3" style={{maxWidth: '12rem'}}>
+        <div className="card roster-card text-primary text-center shadow-sm bg-white mb-3" style={{maxWidth: '12rem'}}>
             <img className="card-img-top" src="https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" alt="Filler profile image"></img>
             <div className="team-card-body">
                 <h5 className="card-title">{athlete.athlete["first_name"]} {athlete.athlete["last_name"]}</h5>
