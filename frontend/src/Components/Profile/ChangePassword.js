@@ -23,7 +23,7 @@ const ChangePassword = () => {
         e.preventDefault();
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/change-password',
+            url: 'http://52.87.107.120:8802/api/change-password',
             data: {
                 athlete_id: localStorage.getItem('athlete_id'),
                 old_password: newPassword.old_password,

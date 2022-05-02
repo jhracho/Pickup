@@ -34,7 +34,7 @@ const CreateModal = () =>{
         e.preventDefault();
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/addGame',
+            url: 'http://52.87.107.120:8802/api/addGame',
             data: {
               name: info.name,
               owner: localStorage.getItem('athlete_id'),
