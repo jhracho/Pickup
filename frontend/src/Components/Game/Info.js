@@ -22,7 +22,7 @@ const Info = (props) =>{
 
     useEffect(() =>{
         if (location !== undefined){
-            axios.get('http://52.87.107.120:8802/api/location/'+location).then(res =>{
+            axios.get('http://52.87.107.120:5000/api/location/'+location).then(res =>{
                 setLoc(res.data['data']);
             });
         }

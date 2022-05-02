@@ -34,7 +34,7 @@ const ProfilePage = () =>{
         var notif = e.target.value;
         axios({
             method: 'POST',
-            url: 'http://52.87.107.120:8802/api/toggle-notif',
+            url: 'http://52.87.107.120:5000/api/toggle-notif',
             data: {
                 athlete_id: localStorage.getItem('athlete_id'),
                 notif: notif

@@ -4,7 +4,7 @@ import axios from "axios";
 const Logout = () => {
     axios({
         method: 'GET',
-        url: 'http://52.87.107.120:8802/api/logout'
+        url: 'http://52.87.107.120:5000/api/logout'
     }).then((res) => {
         localStorage.removeItem('athlete_id');
         window.location.href = '/';
