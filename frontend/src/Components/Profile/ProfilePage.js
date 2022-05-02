@@ -34,7 +34,7 @@ const ProfilePage = () =>{
         var notif = e.target.value;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/toggle-notif',
+            url: 'http://52.87.107.120:8802/api/toggle-notif',
             data: {
                 athlete_id: localStorage.getItem('athlete_id'),
                 notif: notif
@@ -45,7 +45,7 @@ const ProfilePage = () =>{
     };
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/get-profile-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
+        axios.get('http://52.87.107.120:8802/api/get-profile-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
             setAthlete(res.data['athlete']);
             setGames(res.data['games']);
             setTeams(res.data['teams']);

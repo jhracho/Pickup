@@ -38,7 +38,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/joinGame',
+            url: 'http://52.87.107.120:8802/api/joinGame',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId
@@ -58,7 +58,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/leaveGame',
+            url: 'http://52.87.107.120:8802/api/leaveGame',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId
@@ -78,7 +78,7 @@ const GameListing = (props) =>{
         const gameId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/joinWaitlist',
+            url: 'http://52.87.107.120:8802/api/joinWaitlist',
             data: {
               user: localStorage.getItem('athlete_id'),
               game: gameId
