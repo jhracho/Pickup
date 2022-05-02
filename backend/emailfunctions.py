@@ -47,7 +47,7 @@ def send_cancel_email(dest, game_name):
     f"""
     Hello,
 
-    The following game has been canceled by its' creator: {game_name}.
+    The following game has been canceled by its creator: {game_name}.
 
     - Pickup Sports
 
@@ -61,7 +61,7 @@ def send_edit_email(dest, game_name, game_id):
     f"""
     Hello,
 
-    The following game has been edited by its' creator: {game_name}.
+    The following game has been edited by its creator: {game_name}.
     Check it out <a href='http://52.87.107.120:8802/game/{game_id}'>Here</a>
 
     - Pickup Sports
