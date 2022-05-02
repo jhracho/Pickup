@@ -27,7 +27,7 @@ const LoginAuth = () => {
                 const isAuth = res.data['auth'];
                 if (isAuth){
                     localStorage.setItem("athlete_id", res.data['athlete_id']);
-                    window.location.href = 'http://52.87.107.120:8802/home';
+                    window.location.href = '/home';
                 }
                 else{ alert(res.data['msg']); }
               }).catch((error) =>{

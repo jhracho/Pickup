@@ -24,22 +24,6 @@
     font-size: 2vw;
 }
 
-.password-button{
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    font-size: 1.25vw;
-    padding: 0.5vw 1vw;
-    border-radius: 10px;
-    background-color: var(--tertiary);
-    margin: 0.5vw 0.5vw;
-    width: 12vw;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .game-section{
     margin-top: 2.5vw;
     text-align: center;
@@ -49,4 +33,38 @@
     margin-top: 2.5vw;
     text-align: center;
     width: 80%;
+}
+
+.profile-preferences{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.password-button{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.25vw;
+    font-family: 'Akshar', sans-serif;
+    padding: 0.5vw 1vw;
+    border-radius: 10px;
+    background-color: var(--tertiary);
+    width: 11vw;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+}
+
+.profile-preferences label{
+    color: var(--paragraph);
+    font-family: 'Akshar', sans-serif;
+    font-size: 1.25vw;
+    margin-right: 2vw;
+    margin-left: 0.25vw;
+}
+
+.profile-checkbox:checked + label:after{
+    background-color: green;
 }

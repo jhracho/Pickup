@@ -71,7 +71,7 @@ const TeamForm = (props) =>{
                 <input onChange={handleChange} type='number' text={info.roster_spots} name='roster_spots' placeholoder='Roster Spots Available' required  />
             </div>
             <Modal.Footer>
-            <button onClick={submitTeam}>
+            <button className='modal-footer-button' onClick={submitTeam}>
                 Create Team
             </button>
             </Modal.Footer>

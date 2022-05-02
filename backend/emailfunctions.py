@@ -6,11 +6,11 @@ def send_game_email(dest, username, joinee, game_name, game_id):
     f"""
     Hello {username},
 
-    {joinee} has joined your game: <a href={game_id}>{game_name}</a>
+    {joinee} has joined your game: <a href=http://52.87.107.120:8802/game/{game_id}>{game_name}</a>
 
     - Pickup Sports
 
-    <a href='https://cnn.com'>Update Notification Settings</a>
+    <a href='http://52.87.107.120:8802/profile'>Update Notification Settings</a>
     """)
 
 def send_team_email(dest, username, joinee, team_name, team_id):
@@ -23,7 +23,7 @@ def send_team_email(dest, username, joinee, team_name, team_id):
 
     - Pickup Sports
 
-    <a href='https://cnn.com'>Update Notification Settings</a>
+    <a href='http://52.87.107.120:8802/profile'>Update Notification Settings</a>
     """)
 
 def send_waitlist_email(dest, game_name):
@@ -34,11 +34,11 @@ def send_waitlist_email(dest, game_name):
 
     A spot has opened up for the following game: {game_name} 
     
-    Click <a href='https://cnn.com'>here</a> to log in and snag a spot!
+    Click <a href='http://52.87.107.120:8802/games'>here</a> to log in and snag a spot!
 
     - Pickup Sports
 
-    <a href='https://cnn.com'>Update Notification Settings</a>
+    <a href='http://52.87.107.120:8802/profile'>Update Notification Settings</a>
     """)
 
 def send_cancel_email(dest, game_name):
@@ -51,7 +51,7 @@ def send_cancel_email(dest, game_name):
 
     - Pickup Sports
 
-    <a href='https://cnn.com'>Update Notification Settings</a>
+    <a href='http://52.87.107.120:8802/profile'>Update Notification Settings</a>
     """)
 
 
@@ -62,9 +62,9 @@ def send_edit_email(dest, game_name, game_id):
     Hello,
 
     The following game has been edited by its' creator: {game_name}.
-    Check it out <a href='https://cnn.com'>Here</a>
+    Check it out <a href='http://52.87.107.120:8802/game/{game_id}'>Here</a>
 
     - Pickup Sports
 
-    <a href='https://cnn.com'>Update Notification Settings</a>
+    <a href='http://52.87.107.120:8802/profile'>Update Notification Settings</a>
     """)
