@@ -57,11 +57,19 @@ const ProfilePage = () =>{
     return(
         <div>
             <NavBar />
-            <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
+            {athlete && (
+                <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
+            )}
             <PasswordModal />
+            {games && (
             <GameSection games={games} />
+            )}
+            {teams && (
             <TeamSection teams={teams} />
+            )}
+            {gameNotif && teamNotif &&(
             <Preferences game={gameNotif} team={teamNotif} onChange={onChangeSelect} />
+            )}
         </div>
     );
 };
