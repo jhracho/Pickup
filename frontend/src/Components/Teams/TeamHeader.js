@@ -28,7 +28,7 @@ const TeamHeader = (props) =>{
         const teamId = e.target.id;
         axios({
             method: 'POST',
-            url: 'http://52.87.107.120:8802/api/leaveTeam',
+            url: 'http://52.87.107.120:5000/api/leaveTeam',
             data: {
               athlete: localStorage.getItem('athlete_id'),
               team: teamId

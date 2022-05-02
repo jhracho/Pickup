@@ -17,7 +17,7 @@ const Team = (props) =>{
 
     useEffect(() =>{
         if (id !== undefined){
-            axios.get('http://52.87.107.120:8802/api/teamRoster/'+id).then(res =>{
+            axios.get('http://52.87.107.120:5000/api/teamRoster/'+id).then(res =>{
                 setResult(res.data['result']);
                 setAthletes(res.data['data']);
             });
