@@ -20,6 +20,21 @@ def toggle_select():
     cursor.close()
     return {'result': 'success'}
 
+@userapi.route('/toggle-notif', methods=['POST'])
+def toggle_notif():
+    athlete_id = request.json.get('athlete_id')
+    notif = request.json.get('notif')
+    cursor = conn.cursor()
+    sql = f'SELECT {notif}_notif FROM athlete WHERE athlete_id = {athlete_id}'
+    cursor.execute(sql)
+    select = cursor.fetchone()[0]
+    select = (select + 1) % 2
+    sql = f'UPDATE athlete SET {notif}_notif = {select} WHERE athlete_id = {athlete_id}'
+    cursor.execute(sql)
+    conn.commit()
+    cursor.close()
+    return {'result': 'success'}
+
 @userapi.route('/get-athlete-from-id', methods=['GET'])
 def get_athlete_from_id():
     athlete_id = request.args.get('athlete_id')
@@ -52,9 +67,10 @@ def get_profile_page_info():
         'result': 'success',
         'athlete': {},
         'games': [],
-        'teams': []
+        'teams': [],
+        'notifs': {}
     }
-    sql = f'SELECT first_name, last_name, username FROM athlete WHERE athlete_id = {athlete_id}'
+    sql = f'SELECT first_name, last_name, username, game_notif, team_notif FROM athlete WHERE athlete_id = {athlete_id}'
     cursor.execute(sql)
     row = cursor.fetchone()
     if row:
@@ -63,6 +79,8 @@ def get_profile_page_info():
             'last_name': row[1],
             'username': row[2]
         }
+        payload['notifs']['game'] = row[3]
+        payload['notifs']['team'] = row[4]
     else:
         cursor.close()
         return {'result': 'error'}
