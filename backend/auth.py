@@ -66,9 +66,9 @@ def signup():
     id = get_next_id('athlete')
     cursor = conn.cursor()
     if phone == '':
-        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select, game_notif) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{password1}', 1, 1, 1, 1, 1, 1, 1)"
+        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select, game_notif, team_notif) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{password1}', 1, 1, 1, 1, 1, 1, 1)"
     else:
-        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, phone, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select, team_notif) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{phone}', '{password1}', 1, 1, 1, 1, 1, 1, 1)"
+        sql = f"INSERT INTO athlete (athlete_id, first_name, last_name, username, email, phone, password_hash, football_select, golf_select, basketball_select, soccer_select, other_select,game_notif, team_notif) VALUES ({id}, '{first_name}', '{last_name}', '{username}', '{email}', '{phone}', '{password1}', 1, 1, 1, 1, 1, 1, 1)"
     cursor.execute(sql)
     conn.commit()
     return {'auth': True, 'athlete_id': id}
