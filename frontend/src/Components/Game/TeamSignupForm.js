@@ -30,7 +30,7 @@ const TeamSignupForm = (props) =>{
         e.preventDefault();
         axios({
             method: 'POST',
-            url: 'http://127.0.0.1:5000/api/signupTeam',
+            url: 'http://52.87.107.120:5000/api/signupTeam',
             data: {
               team: signteam.team,
               game_id: props.game.id,
