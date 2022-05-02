@@ -14,29 +14,19 @@ import ProfilePage from './Profile/ProfilePage.js';
 import{BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 const Components = () =>{
-    if(localStorage.athlete_id != null) {
-        return(
-            <BrowserRouter>
-                <Switch>
-                    <Route path='/home' exact component={HomePage} />
-                    <Route path='/games' exact component={ListingsPage} />
-                    <Route path='/game/:id' exact component={GamePage} />
-                    <Route path='/teams' exact component={Teams} />
-                    <Route path='/team/:id' exact component={TeamPage} /> 
-                    <Route path='/profile' exact component={ProfilePage} />
-                    <Redirect to='/home' />
-                </Switch>
-            </BrowserRouter>
-        )
-    }
-
     return(
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={IndexPage} />
                 <Route path='/login' exact component={Login} />
                 <Route path='/signup' exact component={Signup} />
-                <Redirect to='/' />
+                <Route path='/home' exact component={HomePage} />
+                <Route path='/games' exact component={ListingsPage} />
+                <Route path='/game/:id' exact component={GamePage} />
+                <Route path='/teams' exact component={Teams} />
+                <Route path='/team/:id' exact component={TeamPage} /> 
+                <Route path='/profile' exact component={ProfilePage} />
+                <Redirect to='/home' />
             </Switch>
         </BrowserRouter>
     );
