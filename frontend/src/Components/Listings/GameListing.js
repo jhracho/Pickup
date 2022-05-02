@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import button from 'react-bootstrap/button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFootball, faFutbol, faBasketball, faGolfBallTee, faPerson, faCalendar } from '@fortawesome/free-solid-svg-icons'
