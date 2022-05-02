@@ -20,7 +20,7 @@ const SignupAuth = () => {
             setAdd(false);
             axios({
                 method: 'POST',
-                url: 'http://127.0.0.1:5000/api/signup',
+                url: 'http://52.87.107.120:5000/api/signup',
                 data: {
                     username: newUser.username,
                     password1: newUser.password,
