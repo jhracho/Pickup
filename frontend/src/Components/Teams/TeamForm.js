@@ -29,7 +29,7 @@ const TeamForm = (props) =>{
         e.preventDefault();
         axios({
             method: 'POST',
-            url: 'http://52.87.107.120:8802/api/addTeam',
+            url: 'http://52.87.107.120:5000/api/addTeam',
             data: {
               sport: info.sport,
               name: info.name,

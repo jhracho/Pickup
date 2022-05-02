@@ -1,7 +1,7 @@
 import yagmail
 
 def send_game_email(dest, username, joinee, game_name, game_id):
-    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag = yagmail.SMTP('pickupsports22@gmail.com', 'thep@ssword123')
     yag.send(dest, subject='Pickup - A user has joined your game!', contents= 
     f"""
     Hello {username},
@@ -14,7 +14,7 @@ def send_game_email(dest, username, joinee, game_name, game_id):
     """)
 
 def send_team_email(dest, username, joinee, team_name, team_id):
-    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag = yagmail.SMTP('pickupsports22@gmail.com', 'thep@ssword123')
     yag.send(dest, subject='Pickup - A spot has opened up!', contents= 
     f"""
     Hello {username},
@@ -27,7 +27,7 @@ def send_team_email(dest, username, joinee, team_name, team_id):
     """)
 
 def send_waitlist_email(dest, game_name):
-    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag = yagmail.SMTP('pickupsports22@gmail.com', 'thep@ssword123')
     yag.send(dest, subject='Pickup - A spot opened from your waitlist!', contents= 
     f"""
     Hello,
@@ -42,7 +42,7 @@ def send_waitlist_email(dest, game_name):
     """)
 
 def send_cancel_email(dest, game_name):
-    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag = yagmail.SMTP('pickupsports22@gmail.com', 'thep@ssword123')
     yag.send(dest, subject='Pickup - A game has been canceled...', contents= 
     f"""
     Hello,
@@ -56,7 +56,7 @@ def send_cancel_email(dest, game_name):
 
 
 def send_edit_email(dest, game_name, game_id):
-    yag = yagmail.SMTP('pickupsports22@gmail.com')
+    yag = yagmail.SMTP('pickupsports22@gmail.com', 'thep@ssword123')
     yag.send(dest, subject='Pickup - A game has been edited.', contents= 
     f"""
     Hello,
