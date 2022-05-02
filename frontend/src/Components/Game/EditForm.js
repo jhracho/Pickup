@@ -54,10 +54,12 @@ const EditForm = (props) =>{
     return(
         <div id='form-div'>
             <div className='form-group'>
-                <input onChange={handleChange} type='text' text={info.name} name='name' placeholoder='Game Name' defaultValue={props.game.name} maxLength='25' required />
+                <label htmlFor="name-input">Game Name</label>
+                <input onChange={handleChange} type='text' text={info.name} id='name-input' name='name' placeholoder='Game Name' defaultValue={props.game.name} maxLength='25' required />
             </div>
             <div className='form-group'>
-            <select required onChange={handleChange} name='sport'>
+            <label htmlFor="sport-dropdown">Sport</label>
+            <select required onChange={handleChange} id='sport-dropdown' name='sport'>
                 {props.game.sport === 'Football' ?
                     <option value='Football' selected='selected'>Football</option> :
                     <option value='Football'>Football</option>
@@ -77,20 +79,24 @@ const EditForm = (props) =>{
             </select>
             </div>
             <div className='form-group'>
+                <label htmlFor="date-select">Date</label>
                 {props.game.date &&
-                <input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' defaultValue={props.game.date.substring(6, 10) + '-' + props.game.date.substring(0,2) + '-' + props.game.date.substring(3, 5)} required />
+                <input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' id='date-select' defaultValue={props.game.date.substring(6, 10) + '-' + props.game.date.substring(0,2) + '-' + props.game.date.substring(3, 5)} required />
                 }
             </div>
             <div className='form-group'>
+                <label htmlFor="time-select">Time</label>
                 {props.game.time &&
-                <input onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' defaultValue={props.game.time.substring(0,5)+props.game.time.substring(8,9)} required  />    
+                <input onChange={handleChange} type='time' text={info.time} name='time' id='time-select' placeholoder='Time' defaultValue={props.game.time.substring(0,5)+props.game.time.substring(8,9)} required  />    
                 }
             </div>
             <div className='form-group'>
-                <input onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  />
+                <label htmlFor="players-select">Players Needed</label>
+                <input onChange={handleChange} type='number' text={info.players} id='players-select' name='players' placeholoder='Players Required' required  />
             </div>
             <div className='form-group'>
-                <select required onChange={handleChange} name='loc'>
+                <label htmlFor="players-select" id='location-dropdown'>Location</label>
+                <select required onChange={handleChange} name='loc' id='location-dropdown' className='edit-location-select'>
                     {props.game.sport === 'The Rock' ?
                         <option value='The Rock' selected='selected'>The Rock</option> :
                         <option value='The Rock'>The Rock</option>
@@ -106,7 +112,7 @@ const EditForm = (props) =>{
                 </select>
             </div>
             <Modal.Footer>
-                <button onClick={editGame}>
+                <button className='modal-footer-button' onClick={editGame}>
                     Edit Game
                 </button>
             </Modal.Footer>

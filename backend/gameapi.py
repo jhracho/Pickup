@@ -255,3 +255,33 @@ def getRoster(game_id):
         payload['data'].append(row[0])
     cursor.close()
     return payload
+
+@gameapi.route('/signupTeam', methods=['POST'])
+def signUpTeamForGame():
+    payload = {'result':"", 'msg':""}
+    team_name  = request.json.get('team')
+    game_id    = request.json.get('game_id')
+    game_spots = request.json.get('game_spots')
+
+    cursor = conn.cursor()
+    cursor.execute("""SELECT team_id, roster_spots from team where team_name=:1""", [team_name])
+    result = cursor.fetchone()
+    team_spots = result[1]
+    team_id = result[0]
+    if game_spots < team_spots:
+        payload['result'] = 'error'
+        payload['msg'] = 'There are not enough needed players to fit your team.'
+        return payload
+
+    cursor.execute("""SELECT athlete_id FROM team_comprised_of WHERE team_id=:1""", [team_id])
+    athletes = list()
+    for row in cursor.fetchall():
+        athletes.append((row[0], game_id))
+    
+    cursor.executemany("""INSERT INTO attending_game(athlete_id, game_id) VALUES(:1, :2)""", athletes)
+    cursor.execute("""UPDATE game SET players_needed=players_needed-:1 WHERE game_id = :2""", [team_spots, game_id])
+    conn.commit()
+
+    payload['result'] = 'success'
+    payload['msg'] = 'Your team has been signed up!'
+    return payload

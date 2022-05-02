@@ -11,7 +11,12 @@
     border-radius: 4px;
 }
 
-.form-group:nth-child(6){
+.form-group label{
+    font-family: 'Akshar', sans-serif;
+    font-size: 1vw;
+}
+
+.form-group:nth-child(7){
     margin-bottom: 1vw;
 }
 
@@ -23,4 +28,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center; 
+}
+
+.edit-location-select{
+    margin-bottom: 1vw;
 }

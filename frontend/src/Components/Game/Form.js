@@ -87,11 +87,13 @@ const GameForm = (props) =>{
     return(
         <div id='form-div'>
             <div className='form-group'>
-                <input onChange={handleChange} type='text' text={info.name} name='name' placeholder='Game Name' maxLength='25' required />
+                <label htmlFor="name-input">Game Name</label>
+                <input onChange={handleChange} type='text' text={info.name} name='name'  id='name-input' maxLength='25' required />
             </div>
             <div className='form-group'>
+                <label htmlFor="sport-dropdown">Sport</label>
                 <select required onChange={handleChange} name='sport' id='sport-dropdown'>
-                <option defaultValue="" selected disabled hidden>Sport</option>
+                <option defaultValue="" selected disabled hidden>--</option>
                 <option defaultValue='Football'>Football</option>
                 <option defaultValue='Soccer'>Soccer</option>
                 <option defaultValue='Golf'>Golf</option>
@@ -100,19 +102,30 @@ const GameForm = (props) =>{
             </select>
             </div>
             <div className='form-group' id='sport-input-div'></div>
-            <div className='form-group'><input onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' required  /></div>
-            <div className='form-group'><input onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' required  /></div>
-            <div className='form-group'><input onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  /></div>
+            
             <div className='form-group'>
-                <select required onChange={handleChange} name='loc'>
-                <option defaultValue="" selected disabled hidden>Select Location</option>
+                <label className='form-label' htmlFor="date-input">Date</label>
+                <input id='date-input' onChange={handleChange} type='date' text={info.date} name='date' placeholoder='Date' required  />
+            </div>
+            <div className='form-group'>
+                <label htmlFor="time-input">Time</label>
+                <input id='time-input' onChange={handleChange} type='time' text={info.time} name='time' placeholoder='Time' required  />
+            </div>
+            <div className='form-group'>
+                <label htmlFor="player-input">Players Needed</label>
+                <input id='player-input' onChange={handleChange} type='number' text={info.players} name='players' placeholoder='Players Required' required  />
+            </div>
+            <div className='form-group'>
+                <label htmlFor="location-dropdown">Location</label>
+                <select required onChange={handleChange} name='loc' id='location-dropdown'>
+                <option defaultValue="" selected disabled hidden>--</option>
                 <option defaultValue='0'>The Rock</option>
                 <option defaultValue='1'>Ricci Family Fields</option>
                 <option defaultValue='2'>Warren Golf Course</option>
             </select>
             </div>
             <Modal.Footer>
-            <button onClick={submitGame}>
+            <button className='modal-footer-button' onClick={submitGame}>
                 Submit Game
             </button>
             </Modal.Footer>

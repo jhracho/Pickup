@@ -25,18 +25,11 @@ def main():
     '''
     nid = 30
     creator = 203
+    payload = {'result':'success', 'data': []}
     cursor = conn.cursor()
-    cursor.execute("""SELECT athlete.email, athlete.game_notif FROM athlete natural join attending_game WHERE attending_game.game_id=50""")
-    for row in cursor.fetchall():
-        print(row)
-    cursor.close()
- 
-    cursor.execute("""INSERT INTO team_comprised_of VALUES (:creator, :id)""", [creator, nid])
-    cursor.execute("""SELECT * FROM team_comprised_of""") 
-    for l in cursor.fetchall():
-        print(l)
+    cursor.execute("""SELECT team_id, roster_spots from team where team_name=:1""", ['Akron Rubberducks'])
+    print(cursor.fetchone())
     
-    conn.close()
     
 
 if __name__ == '__main__':

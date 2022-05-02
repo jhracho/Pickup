@@ -100,13 +100,15 @@ body{
     align-items: center;
     position: absolute;
     left: 50%;
-    top: 47vw;
+    top: 45vw;
     transform: translateX(-50%);
 }
 
 .stat{
     text-align: center;
     margin: 0 5em;
+    color: var(--headline);
+    font-family: 'Akshar', sans-serif;
 }
 
 .stat h1{

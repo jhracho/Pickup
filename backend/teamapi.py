@@ -147,6 +147,22 @@ def getRoster(team_id):
     
     return payload 
 
+# Get all teams that a user is on
+@teamapi.route('/teams/<athlete_id>', methods=['GET'])
+def getUserTeams(athlete_id):
+    payload = {'result':'success', 'data': []}
+    cursor = conn.cursor()
+    cursor.execute("SELECT team.* FROM team, team_comprised_of tco WHERE tco.team_id = team.team_id AND tco.athlete_id=:1", [athlete_id])
+    result = cursor.fetchall()
+    if len(result) > 0:
+        for row in result:
+            payload['data'].append({'id':row[0], 'sport':row[1], 'name':row[2], 'spots':row[3]})
+    else:
+        payload['result'] = 'error'
+        payload['data'].append('none')
+
+    return payload
+
 @teamapi.route('/addTeam', methods=['POST'])
 def addTeam():
     sport = request.json.get('sport')
