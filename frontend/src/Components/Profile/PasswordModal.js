@@ -9,7 +9,7 @@ const PasswordModal = () =>{
 
     return(
         <Fragment>
-            <h5><button id="pswd-modal-button" onClick={handleShow}>Change Password</button></h5>
+            <h5><button id="pswd-modal-button" className='password-button' onClick={handleShow}>Change Password</button></h5>
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                 <Modal.Title>Change Password</Modal.Title>

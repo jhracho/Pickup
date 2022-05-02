@@ -13,6 +13,7 @@ import './Styles/teams.css';
 import './Styles/home.css';
 import './Styles/create.css';
 import './Styles/auth.css';
+import './Styles/profile.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 

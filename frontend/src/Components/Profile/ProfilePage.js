@@ -35,10 +35,12 @@ const ProfilePage = () =>{
     return(
         <div>
             <NavBar />
-            <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
-            <PasswordModal />
-            <GameSection games={games}/>
-            <TeamSection teams={teams}/>
+            <div className='profile-page-div'>
+                <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
+                <PasswordModal />
+                <GameSection games={games}/>
+                <TeamSection teams={teams}/>
+            </div>
         </div>
     );
 };

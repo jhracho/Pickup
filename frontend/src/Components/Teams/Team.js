@@ -23,19 +23,10 @@ const Team = (props) =>{
             });
         }
     }, [id]);
-
-    console.log("ATHLETES:");
-    console.log(athletes);
-
-    const atleteExists = 0;
-    if (athletes[0].username === ''){
-        console.log("no athlete");
-    }
-    
+   
     return(
         <Fragment>
-            {/* TODO: ADD ONE PLAYER TO EACH TEAM */}
-            <h2>Meet the Team</h2>
+            <h2 className='profile-header'>Meet the Team</h2>
             <div className="card-deck">
                 {Object.keys(athletes).length > 0 && (
                     <Fragment>

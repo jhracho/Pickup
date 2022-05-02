@@ -29,17 +29,16 @@ const TeamPage = () =>{
             setTeam(res.data['data']);
         });
     }, [team_id, athlete_id]);
-    console.log(team);
 
     return(
         <div>
             <NavBar active='' />
             {result==='success' ?
                 (
-                <Fragment>
+                <div className='teams-page-body'>
                     <TeamHeader team={team}> </TeamHeader>
                     <Team team={team}/>
-                </Fragment>
+                </div>
                 ) :
 
                 (<div>

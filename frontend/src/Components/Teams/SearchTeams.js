@@ -38,7 +38,7 @@ const SearchTeams = () => {
 
     return(
         <Fragment>
-            <input type="text" placeholder="Search by team name or sport" id="search-input" onKeyUp={onKeyUp}/>
+            <input className='team-search-bar' type="text" placeholder="Search by team name or sport" id="search-input" onKeyUp={onKeyUp}/>
             {filteredTeams.length > 0 && (
                 <Fragment>
                     <TeamsCardDeck teams={filteredTeams} />
