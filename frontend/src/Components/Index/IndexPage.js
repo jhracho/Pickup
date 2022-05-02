@@ -11,10 +11,10 @@ const IndexPage = () =>{
             <h1>Welcome to Pickup</h1>
         </div>
         <div className="paragraph">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Pickup is a Notre Dame-based website for students to arrange sporting events and various athletic activities around campus.
+                Athletes can create accounts based on their Notre Dame email and immediately jump into the action by joining games at different locations on campus.
+                You can also create and join teams to make it easier for you and your friends to play together and meet other groups of students through sports.
+                Log in or sign up to get active today!</p>
         </div>
         <div className="button-area">
             <button className="bottom-button learn">Learn More</button>
