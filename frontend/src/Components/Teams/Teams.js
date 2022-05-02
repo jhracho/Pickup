@@ -7,11 +7,11 @@ const Teams = () =>{
     return(
         <div>
             <NavBar active='Teams' />
-            <h1>Teams</h1>
-            <br />
-            <AddTeamModal />
-            <br />
-            <SearchTeams />
+            <div  className='teams-page-body'>
+                <h1 className='teams-header'>Teams</h1>
+                <AddTeamModal />
+                <SearchTeams />
+            </div>
         </div>
     );
 };

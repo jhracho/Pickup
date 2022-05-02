@@ -31,8 +31,8 @@ const TeamCard = (props) => {
 
     
     return(
-        <Card className='game-card'>
-            <Card.Header as ='h5' className='game-header'>{icon} {team["name"]} {team['sport']} Team </Card.Header>
+        <Card className='game-card team'>
+            <Card.Header as ='h5' className='game-header team-header'>{icon} {team["name"]} {team['sport']} Team </Card.Header>
             <Card.Body className='game-body'>
                 <div className = 'info-field'>
                     <a href={'/team/' + team['id']}><button className ="game-link-button team-info-button" id={team['id']}>View Team Page</button></a>

@@ -56,7 +56,7 @@ const HomePage = () =>{
     }
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
+        axios.get('http://52.87.107.120:5000/api/get-home-page-info?athlete_id=' + localStorage.athlete_id).then(res => {
             setGames(res.data['games']);
             setUpcoming(res.data['upcoming']);
             setTeams(res.data['teams'])

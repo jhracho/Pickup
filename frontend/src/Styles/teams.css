@@ -30,10 +30,11 @@
     grid-gap: 1rem;
     width: 95%;
     position: absolute;
-    top: 10vw;
+    top: 12vw;
     left: 50%;
     transform: translateX(-50%);
-    padding: 5vw;
+    margin-top: 5vw;
+    padding-top: 0 !important;
 }
 
 .team-card-body {
@@ -61,7 +62,7 @@
     justify-content: center;
     align-items: center; 
     text-align: center;
-    background: skyblue;
+    background: var(--secondary);
 }
 
 /* Individual Teams Page - Heading */
@@ -70,10 +71,6 @@
     padding-top: 1em;
     padding-bottom: 1em;
     height: 300px;
-}
-
-.card-deck {
-    padding: 5vw;
 }
 
 .mb-3-name{
@@ -95,8 +92,65 @@
     color: white; 
 }
 
+.team-search-bar{
+    margin-bottom: 1vw;
+}
+
 /* Individual Teams Page - Roster List */
 
 .roster {
     padding: 1vw;
+}
+
+.roster-card{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.team-button{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.25vw;
+    padding: 0.5vw 1vw;
+    border-radius: 10px;
+    margin: 0.5vw 0.5vw;
+    width: 5vw;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Akshar', sans-serif;
+}
+
+.join{
+    background-color: var(--secondary);
+}
+
+.leave{
+    background-color: var(--tertiary);
+}
+
+.team-header-area{
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.568), rgba(0, 0, 0, 0.568)), url('../Assets/team_img.jpeg') no-repeat top center ;
+    width: 65vw;
+    height: 15vw;
+}
+
+.team-header-info{
+    margin-top: 2.5vw;
+    text-align: center;
+    color: var(--headline);
+}
+
+.team-header-info h1{
+    font-family: 'Bebas Neue', cursive;
+}
+
+.team-header-info h4{
+    font-family: 'Akshar', sans-serif;
+}
+
+.card-deck{
+    margin-top: 15vw;
 }
