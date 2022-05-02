@@ -27,19 +27,16 @@ const Info = (props) =>{
             });
         }
     }, [location]);
-
-    var currentUser = Number(localStorage.getItem('athlete_id'));
     
     return(
         <div>
             <div className="title">
                 <h1 className="title-card">{props.game.name}: Details</h1>
             </div>
-            {currentUser === props.game.owner &&(
             <div className='owner-buttons-area'>
                 <OwnerButtons game={props.game}/>
             </div>
-            )}
+            
             <div className="information-area">
                 <div className="column">
                     <h2 className="location-title">Location</h2>

@@ -4,7 +4,6 @@ import NavBar from '../Nav/NavBar';
 import ProfileInfo from './ProfileInfo';
 import GameSection from './GameSection';
 import TeamSection from './TeamSection';
-import PasswordModal from './PasswordModal';
 import Preferences from './Preferences';
 
 const ProfilePage = () =>{
@@ -54,8 +53,8 @@ const ProfilePage = () =>{
         });
     }, []);
 
-    return(
-        <div>
+    /*
+    <div>
             <NavBar />
             {athlete && (
                 <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
@@ -70,6 +69,18 @@ const ProfilePage = () =>{
             {gameNotif && teamNotif &&(
             <Preferences game={gameNotif} team={teamNotif} onChange={onChangeSelect} />
             )}
+        </div>
+    */
+
+    return(
+        <div>
+            <NavBar />
+            <div className='profile-page-div'>
+                <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
+                <Preferences game={gameNotif} team={teamNotif} onChange={onChangeSelect} />  
+                <GameSection games={games} />
+                <TeamSection teams={teams} />
+            </div>
         </div>
     );
 };

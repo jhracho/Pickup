@@ -39,6 +39,11 @@
     display: inline-flex;
     justify-content: center;
     align-items: center; 
+    font-family: 'Akshar', sans-serif;
+}
+
+.game-page-button.team-signup{
+    width: auto;
 }
 
 .column li{
@@ -82,4 +87,8 @@
     text-decoration: underline !important;
     text-decoration-color: var(--secondary) !important;
     text-decoration-thickness: 5vw;
+}
+
+#team-dropdown{
+    margin-bottom: 1vw;
 }
