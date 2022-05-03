@@ -96,6 +96,7 @@ const GameListing = (props) =>{
     const athlete_id = Number(localStorage.getItem('athlete_id'));
     
     let listingbutton;
+    var showOwner = true;
     switch(type){
         case 'Owner':
             listingbutton = <Link to={'/editGame/'+game['id']}><button variant="warning" className = 'game-edit-button' id={game['id']}>Edit Game</button></Link>
@@ -112,6 +113,10 @@ const GameListing = (props) =>{
                 listingbutton = <button className = 'game-link-button join-button' id={game['id']} onClick={joinGame}>Join Game</button>
             break;
 
+        case 'Profile':
+            showOwner = false;
+            break;
+
         default:
             break;
     }
@@ -121,9 +126,11 @@ const GameListing = (props) =>{
         <Card className='game-card'>
             <Card.Header as='h5' className='game-header'>{icon} {game['sport']} - <cite>{game['name']}</cite></Card.Header>
             <Card.Body className='game-body'>
+                {showOwner &&(
                 <div className = 'game-poster'>
                     <h5>Posted by: {game['owner']}</h5>
                 </div>
+                )}   
                 <div className = 'info-field'>
                     <h5><FontAwesomeIcon icon={faPerson} /> : {game['players']}</h5> 
                     <h5><FontAwesomeIcon icon={faCalendar} /> : {game['date']} {game['time']}</h5>

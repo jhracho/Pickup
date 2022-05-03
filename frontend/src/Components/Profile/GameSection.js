@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import GameListing from "../Listings/GameListing.js";
 
 const GameSection = ({games}) => {
+    console.log(games);
     if(games.length === 0) {
         return(
             <div className='game-section'>
@@ -15,7 +16,7 @@ const GameSection = ({games}) => {
             <h1 className='profile-header'>Hosted Games</h1>
             <Fragment>
                 {games.map((game) => (
-                    <GameListing key={game.game_id} game={game} />
+                    <GameListing key={game.id} game={game} type='Profile'/>
                 ))}
             </Fragment>
         </div>
