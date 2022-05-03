@@ -24,12 +24,15 @@ def toggle_select():
 def toggle_notif():
     athlete_id = request.json.get('athlete_id')
     notif = request.json.get('notif')
+    print(notif)
     cursor = conn.cursor()
     sql = f'SELECT {notif}_notif FROM athlete WHERE athlete_id = {athlete_id}'
+    print(sql)
     cursor.execute(sql)
     select = cursor.fetchone()[0]
     select = (select + 1) % 2
     sql = f'UPDATE athlete SET {notif}_notif = {select} WHERE athlete_id = {athlete_id}'
+    print(sql)
     cursor.execute(sql)
     conn.commit()
     cursor.close()
