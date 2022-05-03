@@ -31,15 +31,18 @@ const ProfilePage = () =>{
     const [teamNotif, setTeamNotif] = useState(-1);
 
     const onChangeSelect = (e) => {
-        var notif = e.target.value;
+        var type = e.target.name;
+        console.log(e.target.name);
         axios({
             method: 'POST',
             url: 'http://52.87.107.120:5000/api/toggle-notif',
             data: {
                 athlete_id: localStorage.getItem('athlete_id'),
-                notif: notif
+                notif: type
             }
         }).then(res => {
+            window.location.reload();
+        }).catch(error => {
             window.location.reload();
         });
     };
