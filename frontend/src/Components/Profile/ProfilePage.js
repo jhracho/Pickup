@@ -13,12 +13,13 @@ const ProfilePage = () =>{
         username: ""
     }]);
     const [games, setGames] = useState([{
-        game_id: -1,
-        game_name: "",
+        id: 0,
+        name: "",
         sport: "",
         date: "",
         time: "",
-        location: ""
+        loc: "",
+        players: 0
     }]);
     const [teams, setTeams] = useState([{
         id: -1,
