@@ -35,7 +35,7 @@ body{
 
 .title-text{
     text-align: center;
-    margin-top: 2.5vw;
+    margin-top: 1.25vw;
 }
 
 .title-text h1{
@@ -53,15 +53,15 @@ body{
     position: absolute;
     color: var(--paragraph);
     left: 10vw;
-    top: 15vw;
-    width: 40%;
+    top: 13vw;
+    width: 50%;
     font-size: 1.75vw;
 }
 
 .button-area{
     position: absolute;
     left: 10vw;
-    top: 42vw;
+    top: 36vw;
 }
 
 .bottom-button{
@@ -100,7 +100,7 @@ body{
     align-items: center;
     position: absolute;
     left: 50%;
-    top: 45vw;
+    top: 40vw;
     transform: translateX(-50%);
 }
 

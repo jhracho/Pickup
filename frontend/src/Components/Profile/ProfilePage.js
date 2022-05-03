@@ -79,7 +79,6 @@ const ProfilePage = () =>{
                 <ProfileInfo first_name={athlete['first_name']} last_name={athlete['last_name']} username={athlete['username']}/>
                 <Preferences game={gameNotif} team={teamNotif} onChange={onChangeSelect} />  
                 <GameSection games={games} />
-                <TeamSection teams={teams} />
             </div>
         </div>
     );

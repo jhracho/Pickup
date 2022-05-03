@@ -88,10 +88,9 @@ def get_profile_page_info():
     cursor.execute(
         """
         SELECT game.game_id, game.game_name, game.sport, game.date_playing, location.name
-        FROM game, attending_game, location
-        WHERE attending_game.athlete_id = :athlete_id
-        AND game.game_id = attending_game.game_id
-        AND game.location_id = location.location_id
+        FROM game, location
+        WHERE game.location_id = location.location_id
+        AND game.athlete_id = :1
         """, [athlete_id]
     )
     results = cursor.fetchall()

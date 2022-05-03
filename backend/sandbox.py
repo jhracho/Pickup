@@ -27,8 +27,12 @@ def main():
     creator = 203
     payload = {'result':'success', 'data': []}
     cursor = conn.cursor()
-    cursor.execute("""SELECT team_id, roster_spots from team where team_name=:1""", ['Akron Rubberducks'])
-    print(cursor.fetchone())
+    cursor.execute("""SELECT game.game_id, game.game_name, game.sport, game.date_playing, location.name
+        FROM game, location
+        WHERE game.location_id = location.location_id
+        AND game.athlete_id = :1""", [201])
+    for row in cursor.fetchall():
+        print(row)
     
     
 

@@ -52,16 +52,19 @@ const ChangePassword = () => {
     return(
         <div id='form-div'>
             <div className='form-group'>
-                <input onChange={handleChange} type='text' text={newPassword.old_password} name='old_password' placeholoder='Old Password' maxLength='25' required />
+                <label htmlFor="old-pass-input">Old Password</label>
+                <input onChange={handleChange} id='old-pass-input' type='text' text={newPassword.old_password} name='old_password' placeholoder='Old Password' maxLength='25' required />
             </div>
             <div className='form-group'>
-                <input onChange={handleChange} type='text' text={newPassword.password1} name='password1' placeholoder='New Password' maxLength='25' required />
+                <label htmlFor="new-pass-input">New Password</label>
+                <input onChange={handleChange} id='new-pass-input' type='text' text={newPassword.password1} name='password1' placeholoder='New Password' maxLength='25' required />
             </div>
             <div className='form-group'>
-                <input onChange={handleChange} type='text' text={newPassword.password2} name='password2' placeholoder='Confirm Password' maxLength='25' required />
+                <label htmlFor="confirm-pass-input">Confirm Password</label>
+                <input onChange={handleChange} id='confirm-pass-input' type='text' text={newPassword.password2} name='password2' placeholoder='Confirm Password' maxLength='25' required />
             </div>
             <Modal.Footer>
-            <button onClick={submitPassword}>
+            <button id='password-modal-footer' className='modal-footer-button pass-modal' onClick={submitPassword}>
                 Update Password
             </button>
             </Modal.Footer>

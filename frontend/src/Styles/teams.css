@@ -33,7 +33,7 @@
     grid-gap: 1rem;
     width: 95%;
     position: absolute;
-    top: 12vw;
+    top: 17vw;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 5vw;
@@ -155,6 +155,12 @@
     font-family: 'Akshar', sans-serif;
 }
 
-.card-deck{
-    margin-top: 15vw;
+/* Misc */
+
+#confirm-pass-input{
+    margin-bottom: 1vw;
+}
+
+#password-modal-footer{
+    width: 12vw !important;
 }
