@@ -12,7 +12,8 @@ const Team = (props) =>{
     const [athletes, setAthletes] = useState([{
         username: "",
         first_name: "",
-        last_name: ""
+        last_name: "",
+        phone: ""
     }]);
 
     useEffect(() =>{

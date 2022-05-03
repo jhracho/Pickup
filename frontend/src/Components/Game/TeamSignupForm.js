@@ -13,6 +13,7 @@ const TeamSignupForm = (props) =>{
         spots: 0
     }]);
 
+    console.log(teams);
     const [signteam, setSignTeam] = useState({
         team: ""
     });
@@ -48,7 +49,7 @@ const TeamSignupForm = (props) =>{
     };
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/teams/'+curUser).then(res =>{
+        axios.get('http://52.87.107.120:5000/api/teams/'+curUser).then(res =>{
             setResult(res.data['result']);
             if (res.data['result'] === 'error')
                 return;
