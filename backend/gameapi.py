@@ -124,13 +124,25 @@ def editGame():
     location = request.json.get('loc')
     players = request.json.get('players')
     
+    if '/' in date:
+        try:
+            dt = datetime.strptime(date + " " + time, "%m/%d/%Y %H:%M")
+        except ValueError:
+            dt = datetime.strptime(date + " " + time, "%m/%d/%Y %H:%M%p")
+
+    elif '-' in date:
+        try:
+            dt = datetime.strptime(date + " " + time, "%Y-%m-%d %H:%M")
+        except ValueError:
+            dt = datetime.strptime(date + " " + time, "%Y-%m-%d %H:%M%p")
+
     if location == 'The Rock':
         location = 0
     elif location == 'Ricci Family Fields':
         location = 1
     elif location == 'Warren Golf Course':
         location = 2
-    dt = datetime.strptime(date + " " + time, "%m/%d/%Y %H:%M")
+   
     cursor = conn.cursor()
     cursor.execute("""
         UPDATE game
