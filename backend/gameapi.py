@@ -137,9 +137,9 @@ def editGame():
             dt = datetime.strptime(date + " " + time, "%Y-%m-%d %H:%M%p")
 
     if location == 'The Rock':
-        location = 1
-    elif location == 'Ricci Family Fields':
         location = 0
+    elif location == 'Ricci Family Fields':
+        location = 1
     elif location == 'Warren Golf Course':
         location = 2
    

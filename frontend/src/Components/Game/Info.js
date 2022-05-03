@@ -8,8 +8,6 @@ import OwnerButtons from './OwnerButtons';
 
 const Info = (props) =>{
     const location = props.game.location;
-    const url = "https://google.com/maps?q='"+location+"'";
-    const image = "../../../Assets/"+ location +".jpg";
     
     const [loc, setLoc] = useState({
         id: 0,
@@ -28,6 +26,8 @@ const Info = (props) =>{
         }
     }, [location]);
     
+    const url = "https://google.com/maps?q='"+loc.name+"'";
+
     const photo1 = <img className='loc-image' src={require("../../Assets/Ricci Family Fields.jpg")}/>;
     const photo2 = <img className='loc-image' src={require("../../Assets/The Rock.jpg")}/>;
     const photo3 = <img className='loc-image' src={require("../../Assets/Warren Golf Course.jpg")}/>
@@ -35,10 +35,10 @@ const Info = (props) =>{
     let photo;
     switch (location){
         case 0:
-            photo = photo1;
+            photo = photo2;
             break;
         case 1:
-            photo = photo2;
+            photo = photo1;
             break;
         case 2:
             photo = photo3;
