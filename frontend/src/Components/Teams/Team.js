@@ -28,7 +28,7 @@ const Team = (props) =>{
     return(
         <Fragment>
             <h2 className='profile-header'>Meet the Team</h2>
-            <div className="card-deck">
+            <div className="card-deck profile">
                 {Object.keys(athletes).length > 0 && (
                     <Fragment>
                     {athletes.map((athlete) => (

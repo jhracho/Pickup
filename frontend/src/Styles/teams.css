@@ -164,3 +164,7 @@
 #password-modal-footer{
     width: 12vw !important;
 }
+
+.card-deck.profile{
+    margin-top: 10vw;
+}
