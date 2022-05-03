@@ -28,6 +28,25 @@ const Info = (props) =>{
         }
     }, [location]);
     
+    const photo1 = <img className='loc-image' src={require("../../Assets/Ricci Family Fields.jpg")}/>;
+    const photo2 = <img className='loc-image' src={require("../../Assets/The Rock.jpg")}/>;
+    const photo3 = <img className='loc-image' src={require("../../Assets/Warren Golf Course.jpg")}/>
+
+    let photo;
+    switch (location){
+        case 0:
+            photo = photo1;
+            break;
+        case 1:
+            photo = photo2;
+            break;
+        case 2:
+            photo = photo3;
+            break;
+        default:
+            photo = photo1;
+            break;
+    }
     return(
         <div>
             <div className="title">
@@ -40,7 +59,7 @@ const Info = (props) =>{
             <div className="information-area">
                 <div className="column">
                     <h2 className="location-title">Location</h2>
-                    <img  className='loc-image' src={require("../../Assets/Ricci Family Fields.jpg")}/>
+                    {photo}
                     <ul>
                         <li>{loc.name}</li>
                         <li>Hours: {loc.openHour} - {loc.closeHour}</li>
