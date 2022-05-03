@@ -87,7 +87,7 @@ def get_profile_page_info():
 
     cursor.execute(
         """
-        SELECT game.game_id, game.game_name, game.sport, game.date_playing, location.name
+        SELECT game.game_id, game.game_name, game.sport, game.date_playing, location.name, game.players_needed
         FROM game, location
         WHERE game.location_id = location.location_id
         AND game.athlete_id = :1
@@ -96,11 +96,11 @@ def get_profile_page_info():
     results = cursor.fetchall()
     if cursor.rowcount != 0:
         for row in results:
-            begin_period = datetime.datetime.today().date().strftime("%m/%d/%Y")
-            end_period = (datetime.datetime.today().date() + datetime.timedelta(days=5)).strftime("%m/%d/%Y")
+            #begin_period = datetime.datetime.today().date().strftime("%m/%d/%Y")
+            #end_period = (datetime.datetime.today().date() + datetime.timedelta(days=5)).strftime("%m/%d/%Y")
             dt = row[3].strftime("%m/%d/%Y %H:%M:%S").split(' ')
-            if dt[0] > begin_period and dt[0] < end_period:
-                payload['games'].append({'game_id': row[0], 'game_name': row[1], 'sport': row[2], 'date': dt[0], 'time': dt[1], 'location': row[4]})
+            #if dt[0] > begin_period and dt[0] < end_period:
+            payload['games'].append({'game_id': row[0], 'game_name': row[1], 'sport': row[2], 'date': dt[0], 'time': dt[1], 'location': row[4], 'needed': row[5]})
     
     cursor.execute(
         """
