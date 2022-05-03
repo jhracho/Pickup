@@ -7,6 +7,7 @@ const AthleteCard = (athlete) => {
             <div className="team-card-body">
                 <h5 className="card-title">{athlete.athlete["first_name"]} {athlete.athlete["last_name"]}</h5>
                 <p className="card-text">{athlete.athlete["username"]}</p>
+                <p className="card-text">{athlete.athlete["phone"]}</p>
             </div>
         </div>
     );

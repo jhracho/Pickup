@@ -132,7 +132,7 @@ def leaveTeam():
 def getRoster(team_id):
     payload = {'result':'success', 'data':[]}
     cursor = conn.cursor()
-    cursor.execute("""SELECT athlete.username, athlete.first_name, athlete.last_name FROM athlete, team_comprised_of WHERE athlete.athlete_id = team_comprised_of.athlete_id and team_comprised_of.team_id = :id """, [team_id])
+    cursor.execute("""SELECT athlete.username, athlete.first_name, athlete.last_name, athlete.phone FROM athlete, team_comprised_of WHERE athlete.athlete_id = team_comprised_of.athlete_id and team_comprised_of.team_id = :id """, [team_id])
 
     #cursor.execute("""SELECT athlete.username FROM athlete NATURAL JOIN team_comprised_of WHERE team_comprised_of.team_id = :id """, [team_id])
     result = cursor.fetchall()
@@ -141,7 +141,8 @@ def getRoster(team_id):
             username = row[0]
             first_name = row[1]
             last_name = row[2]
-            payload['data'].append({'username':username, 'first_name':first_name, 'last_name':last_name})
+            phone = row[3]
+            payload['data'].append({'username':username, 'first_name':first_name, 'last_name':last_name, 'phone':phone})
     
     conn.commit()
     
