@@ -1,4 +1,4 @@
-# TinderForSports
+# Pickup
 
 ### venv Instructions (to ensure continuity)
 Setup - From a bash terminal and the root directory of the project, run the following:
