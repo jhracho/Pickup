@@ -11,7 +11,7 @@ const UpcomingGames = (props) =>{
 
     return(
         <div className='upcoming-games homeCol'>
-            <h2>My Upcoming Games</h2>
+            <h2>Your Upcoming Games</h2>
             {upcoming.length === 1 && upcoming[0].name === '' &&(
                 <img className='loading-icon' src={require("../../Assets/loading.gif")} alt='Loading'/>
             )}

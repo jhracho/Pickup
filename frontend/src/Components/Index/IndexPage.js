@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import NavBar from '../Nav/NavBar';
 import SitewideStats from './SiteStats';
+import { Link } from 'react-router-dom';
 
 const IndexPage = () =>{
     return(
@@ -17,8 +18,7 @@ const IndexPage = () =>{
                 Log in or sign up to get active today!</p>
         </div>
         <div className="button-area">
-            <button className="bottom-button learn">Learn More</button>
-            <button className="bottom-button create">Get Started</button>
+            <Link to={'/signup'}><button className="bottom-button learn">Get Started</button></Link>
         </div>
             <SitewideStats />
 
