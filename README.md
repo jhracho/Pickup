@@ -11,8 +11,8 @@ For our semester project, we designed a web app that works to connect Notre Dame
 ### Stack
 Frontend: React, HTML, CSS
 
-Backend: Flask
+Backend: Flask, Oracle DB XE
 
-Infrastructure: Apache2 on Amazon Linux 2, Oracle DB XE
+Deployment: Apache2 on Amazon Linux 2
 
 ### Demo
