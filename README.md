@@ -16,3 +16,4 @@ Backend: Flask, Oracle DB XE
 Deployment: Apache2 on Amazon Linux 2
 
 ### Demo
+[![Demo Video Link](https://img.youtube.com/vi/3z0MGrMwb6o/0.jpg)](https://www.youtube.com/watch?v=3z0MGrMwb6o)
